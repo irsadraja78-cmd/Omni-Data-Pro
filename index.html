@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,74 +12,109 @@
 
 </head>
 
+
 <body>
 
-<div id="app">
 
 <!-- LOGIN -->
 
 <section id="loginSection" class="auth">
 
 <h1>Omni Data Pro</h1>
-<p>Freelancer Workspace</p>
+
+<p>Freelancer Workspace Platform</p>
+
 
 <input id="loginEmail" type="email" placeholder="Email">
 
 <input id="loginPassword" type="password" placeholder="Password">
 
-<button onclick="login()">Login</button>
+
+<button onclick="login()">
+Login
+</button>
+
 
 <p>
 <a onclick="showSignup()">Create Account</a>
 </p>
 
+
 <p>
 <a onclick="showForgot()">Forgot Password?</a>
 </p>
 
+
 </section>
+
+
+
 
 
 
 <!-- SIGNUP -->
 
+
 <section id="signupSection" class="auth hidden">
 
-<h2>Create Account</h2>
+
+<h2>Create Freelancer Account</h2>
+
 
 <input id="name" placeholder="Full Name">
 
+
 <input id="email" type="email" placeholder="Email">
+
 
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="signup()">Sign Up</button>
+
+<button onclick="signup()">
+Sign Up
+</button>
+
 
 <p>
-<a onclick="showLogin()">Back Login</a>
+<a onclick="showLogin()">Back To Login</a>
 </p>
+
 
 </section>
 
 
 
-<!-- FORGOT -->
+
+
+
+
+<!-- FORGOT PASSWORD -->
+
 
 <section id="forgotSection" class="auth hidden">
 
-<h2>Reset Password</h2>
 
-<input id="resetEmail" placeholder="Email">
+<h2>Forgot Password</h2>
+
+
+<input id="resetEmail" placeholder="Registered Email">
+
 
 <button onclick="forgotPassword()">
-Reset
+Reset Password
 </button>
 
+
 <p>
-<a onclick="showLogin()">Back Login</a>
+<a onclick="showLogin()">Back To Login</a>
 </p>
 
+
 </section>
+
+
+
+
 
 
 
@@ -85,62 +122,145 @@ Reset
 
 <!-- DASHBOARD -->
 
+
 <section id="dashboard" class="hidden">
+
 
 
 <aside>
 
+
 <h2>ODP</h2>
+
 
 <button onclick="openPage('home')">
 Dashboard
 </button>
 
+
 <button onclick="openPage('work')">
 My Work
 </button>
 
+
 <button onclick="openPage('files')">
 Files
 </button>
+
+
+<button onclick="openPage('profile')">
+Profile
+</button>
+
+
+<button onclick="logout()">
+Logout
+</button>
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+<main>
+
+
+
+
+
+<!-- HOME -->
+
+
+<div id="home" class="page">
+
+
 <h1>
-Welcome To Omni Data Pro
+Freelancer Dashboard
 </h1>
+
+
 
 <div class="cards">
 
+
 <div class="card">
-<h3>Total Tasks</h3>
-<p id="totalTasks">0</p>
+
+<h3>Tasks</h3>
+
+<p id="totalTasks">
+0
+</p>
+
 </div>
 
 
+
 <div class="card">
-<h3>Completed Work</h3>
-<p id="completedTasks">0</p>
+
+<h3>Completed</h3>
+
+<p>
+0
+</p>
+
 </div>
 
 
+
 <div class="card">
+
 <h3>Files</h3>
-<p id="totalFiles">0</p>
-</div>
+
+<p id="totalFiles">
+0
+</p>
 
 </div>
 
+
+
 </div>
 
 
 
-<!-- MY WORK -->
+</div>
+
+
+
+
+
+
+
+
+
+<!-- WORKSPACE -->
+
 
 <div id="work" class="page hidden">
 
-<h2>My Work</h2>
 
-<input id="workTitle" placeholder="Work Title">
+<h2>
+My Workspace
+</h2>
 
-<textarea id="workDetails" placeholder="Write your work details"></textarea>
+
+<input 
+id="workTitle"
+placeholder="Work Title">
+
+
+
+<textarea 
+id="workDetails"
+placeholder="Write your work here...">
+</textarea>
+
 
 
 <button onclick="saveWork()">
@@ -148,7 +268,23 @@ Save Work
 </button>
 
 
-<div id="workList"></div>
+
+<button onclick="clearWork()">
+New Work
+</button>
+
+
+
+
+<h3>
+Saved Work
+</h3>
+
+
+<div id="workList">
+
+</div>
+
 
 
 </div>
@@ -157,11 +293,19 @@ Save Work
 
 
 
+
+
+
+
 <!-- FILES -->
+
 
 <div id="files" class="page hidden">
 
-<h2>My Files</h2>
+
+<h2>
+My Files
+</h2>
 
 
 <input type="file" id="fileInput">
@@ -172,10 +316,17 @@ Add File
 </button>
 
 
-<div id="fileList"></div>
+
+<div id="fileList">
+
+</div>
 
 
 </div>
+
+
+
+
 
 
 
@@ -183,76 +334,49 @@ Add File
 
 <!-- PROFILE -->
 
+
 <div id="profile" class="page hidden">
 
-<h2>My Profile</h2>
+
+<h2>
+My Profile
+</h2>
 
 
-<p>Name:
+<p>
+Name:
 <span id="profileName"></span>
 </p>
 
 
-<p>Email:
+<p>
+Email:
 <span id="profileEmail"></span>
 </p>
 
 
-</div>
-<button onclick="openPage('profile')">
-Profile
-</button>
-
-<button onclick="logout()">
-Logout
-</button>
-
-
-</aside>
-
-
-
-
-<main>
-
-
-<div id="home" class="page">
-
-<h1>
-Welcome To Omni Data Pro
-</h1>
-
-<div class="cards">
-
-<div>
-<h3>Tasks</h3>
-<p>0</p>
-</div>
-
-<div>
-<h3>Completed</h3>
-<p>0</p>
-</div>
-
-
-<div>
-<h3>Files</h3>
-<p>0</p>
-</div>
-
 
 </div>
 
-</div>
+
+
+
+
+
+
 </main>
+
+
 
 </section>
 
 
-</div>
+
+
 
 
 <script src="script.js"></script>
+
 
 </body>
 
