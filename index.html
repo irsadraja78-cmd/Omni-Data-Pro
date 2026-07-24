@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,181 +10,142 @@
 
 </head>
 
-
 <body>
 
+<div id="app">
 
-<div class="container">
+<!-- LOGIN -->
 
-
-<!-- LOGIN BOX -->
-
-<div class="auth-box" id="loginBox">
-
+<section id="loginSection" class="auth">
 
 <h1>Omni Data Pro</h1>
+<p>Freelancer Workspace</p>
 
-<p>Freelancer Workspace Platform</p>
+<input id="loginEmail" type="email" placeholder="Email">
 
+<input id="loginPassword" type="password" placeholder="Password">
 
-<input 
-id="loginEmail"
-type="email"
-placeholder="Email Address">
-
-
-<input 
-id="loginPassword"
-type="password"
-placeholder="Password">
-
-
-
-<button onclick="loginUser()">
-Login
-</button>
-
-
-<div class="links">
-
-<a onclick="showSignup()">
-Create Account
-</a>
-
-
-<a onclick="showForgot()">
-Forgot Password?
-</a>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- SIGNUP BOX -->
-
-<div class="auth-box hidden" id="signupBox">
-
-
-<h2>Create Freelancer Account</h2>
-
-
-<input
-id="signupName"
-placeholder="Full Name">
-
-
-<input
-id="signupEmail"
-type="email"
-placeholder="Email">
-
-
-<input
-id="signupPassword"
-type="password"
-placeholder="Create Password">
-
-
-<button onclick="registerUser()">
-Sign Up
-</button>
-
-
-<div class="links">
-
-<a onclick="showLogin()">
-Already have account?
-</a>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- FORGOT PASSWORD -->
-
-<div class="auth-box hidden" id="forgotBox">
-
-
-<h2>Password Reset</h2>
-
-
-<input
-id="forgotEmail"
-type="email"
-placeholder="Registered Email">
-
-
-
-<button onclick="resetPassword()">
-Reset Password
-</button>
-
-
-
-<div class="links">
-
-<a onclick="showLogin()">
-Back To Login
-</a>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- DASHBOARD PLACEHOLDER -->
-
-<div class="hidden" id="dashboard">
-
-
-<h2>
-Welcome To Omni Data Pro
-</h2>
-
+<button onclick="login()">Login</button>
 
 <p>
-Freelancer Dashboard Loading...
+<a onclick="showSignup()">Create Account</a>
 </p>
 
+<p>
+<a onclick="showForgot()">Forgot Password?</a>
+</p>
 
-<button onclick="logoutUser()">
+</section>
+
+
+
+<!-- SIGNUP -->
+
+<section id="signupSection" class="auth hidden">
+
+<h2>Create Account</h2>
+
+<input id="name" placeholder="Full Name">
+
+<input id="email" type="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+
+<p>
+<a onclick="showLogin()">Back Login</a>
+</p>
+
+</section>
+
+
+
+<!-- FORGOT -->
+
+<section id="forgotSection" class="auth hidden">
+
+<h2>Reset Password</h2>
+
+<input id="resetEmail" placeholder="Email">
+
+<button onclick="forgotPassword()">
+Reset
+</button>
+
+<p>
+<a onclick="showLogin()">Back Login</a>
+</p>
+
+</section>
+
+
+
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="hidden">
+
+
+<aside>
+
+<h2>ODP</h2>
+
+<button onclick="openPage('home')">
+Dashboard
+</button>
+
+<button onclick="openPage('work')">
+My Work
+</button>
+
+<button onclick="openPage('files')">
+Files
+</button>
+
+<button onclick="openPage('profile')">
+Profile
+</button>
+
+<button onclick="logout()">
 Logout
 </button>
 
 
+</aside>
+
+
+
+
+<main>
+
+
+<div id="home" class="page">
+
+<h1>
+Welcome To Omni Data Pro
+</h1>
+
+<div class="cards">
+
+<div>
+<h3>Tasks</h3>
+<p>0</p>
+</div>
+
+<div>
+<h3>Completed</h3>
+<p>0</p>
 </div>
 
 
-
+<div>
+<h3>Files</h3>
+<p>0</p>
 </div>
 
 
+</div>
 
-
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
+</div>
