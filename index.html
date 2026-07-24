@@ -103,7 +103,102 @@ My Work
 <button onclick="openPage('files')">
 Files
 </button>
+<h1>
+Welcome To Omni Data Pro
+</h1>
 
+<div class="cards">
+
+<div class="card">
+<h3>Total Tasks</h3>
+<p id="totalTasks">0</p>
+</div>
+
+
+<div class="card">
+<h3>Completed Work</h3>
+<p id="completedTasks">0</p>
+</div>
+
+
+<div class="card">
+<h3>Files</h3>
+<p id="totalFiles">0</p>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- MY WORK -->
+
+<div id="work" class="page hidden">
+
+<h2>My Work</h2>
+
+<input id="workTitle" placeholder="Work Title">
+
+<textarea id="workDetails" placeholder="Write your work details"></textarea>
+
+
+<button onclick="saveWork()">
+Save Work
+</button>
+
+
+<div id="workList"></div>
+
+
+</div>
+
+
+
+
+
+<!-- FILES -->
+
+<div id="files" class="page hidden">
+
+<h2>My Files</h2>
+
+
+<input type="file" id="fileInput">
+
+
+<button onclick="saveFile()">
+Add File
+</button>
+
+
+<div id="fileList"></div>
+
+
+</div>
+
+
+
+
+
+<!-- PROFILE -->
+
+<div id="profile" class="page hidden">
+
+<h2>My Profile</h2>
+
+
+<p>Name:
+<span id="profileName"></span>
+</p>
+
+
+<p>Email:
+<span id="profileEmail"></span>
+</p>
+
+
+</div>
 <button onclick="openPage('profile')">
 Profile
 </button>
@@ -149,3 +244,16 @@ Welcome To Omni Data Pro
 </div>
 
 </div>
+</main>
+
+</section>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
