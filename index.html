@@ -17,14 +17,16 @@
 <body>
 
 
-<!-- WELCOME / LOGIN SYSTEM START -->
-
+<!-- WELCOME PAGE -->
 
 <section id="welcomePage" class="auth-page">
 
+
 <div class="auth-box">
 
-<h1>Welcome To OmniDataPro</h1>
+<h1>
+Welcome To OmniDataPro
+</h1>
 
 <p>
 Freelancer Work Management Platform
@@ -37,11 +39,12 @@ Login
 
 
 <button onclick="showSignup()">
-Create Account
+Sign Up
 </button>
 
 
 </div>
+
 
 </section>
 
@@ -49,24 +52,28 @@ Create Account
 
 
 
-<!-- LOGIN -->
 
+
+<!-- LOGIN PAGE -->
 
 <section id="loginPage" class="auth-page hidden">
+
 
 <div class="auth-box">
 
 
-<h2>Login</h2>
+<h2>
+Login
+</h2>
 
 
 <input 
 id="loginEmail"
 type="email"
-placeholder="Email Address">
+placeholder="Email">
 
 
-<input 
+<input
 id="loginPassword"
 type="password"
 placeholder="Password">
@@ -84,12 +91,14 @@ Forgot Password?
 </p>
 
 
+
 <p onclick="showSignup()">
-Create New Account
+Create Account
 </p>
 
 
 </div>
+
 
 </section>
 
@@ -99,8 +108,8 @@ Create New Account
 
 
 
-<!-- SIGNUP -->
 
+<!-- SIGNUP PAGE -->
 
 <section id="signupPage" class="auth-page hidden">
 
@@ -108,45 +117,48 @@ Create New Account
 <div class="auth-box">
 
 
-<h2>Create Freelancer Account</h2>
+<h2>
+Create Account
+</h2>
 
 
 
-<input 
+<input
 id="signupName"
 placeholder="Full Name">
 
 
 
-<input 
+<input
 id="signupEmail"
 type="email"
-placeholder="Email Address">
+placeholder="Email">
 
 
 
-<input 
+<input
 id="signupPassword"
 type="password"
-placeholder="Create Password">
+placeholder="Password">
 
 
 
 <button onclick="signup()">
-Sign Up
+Create Account
 </button>
 
 
 
 <p onclick="showLogin()">
-Already have account? Login
+Already have account?
 </p>
+
 
 
 </div>
 
-
 </section>
+
 
 
 
@@ -156,51 +168,61 @@ Already have account? Login
 
 <!-- FORGOT PASSWORD -->
 
-
 <section id="forgotPage" class="auth-page hidden">
 
 
 <div class="auth-box">
 
 
-<h2>Forgot Password</h2>
-
+<h2>
+Forgot Password
+</h2>
 
 
 <input
 id="forgotEmail"
-placeholder="Registered Email">
+placeholder="Email">
 
 
 
 <button onclick="forgotPassword()">
-Reset Password
+Reset
 </button>
 
 
-
 <p onclick="showLogin()">
-Back To Login
+Back Login
 </p>
 
 
 </div>
-<!-- MAIN APP -->
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- MAIN APPLICATION -->
 
 
 <section id="app" class="hidden">
 
 
 
-<!-- TOP HEADER -->
-
+<!-- HEADER -->
 
 <header class="app-header">
 
 
 <div class="brand">
 
-<button onclick="goBack()" class="back-btn">
+
+<button onclick="goBack()">
 ←
 </button>
 
@@ -214,12 +236,13 @@ OmniDataPro
 
 
 
-<div class="user-area" onclick="openPage('profile')">
+
+<div class="user-area"
+onclick="openPage('profile')">
 
 
 <img 
-src="https://via.placeholder.com/40"
-class="profile-image">
+src="https://via.placeholder.com/40">
 
 
 <span id="userName">
@@ -230,6 +253,7 @@ User
 </div>
 
 
+
 </header>
 
 
@@ -238,24 +262,15 @@ User
 
 
 
-<!-- APP BODY -->
 
 
 <div class="app-container">
 
 
 
-
-
 <!-- SIDEBAR -->
 
-
 <aside class="sidebar">
-
-
-<h3>
-Menu
-</h3>
 
 
 <button onclick="openPage('dashboard')">
@@ -263,19 +278,11 @@ Menu
 </button>
 
 
-<button onclick="openPage('projects')">
-📁 Projects
+
+<button onclick="openPage('mywork')">
+📝 My Work
 </button>
 
-
-<button onclick="openPage('workspace')">
-📝 Workspace
-</button>
-
-
-<button onclick="openPage('tasks')">
-✅ Tasks
-</button>
 
 
 <button onclick="openPage('files')">
@@ -283,9 +290,11 @@ Menu
 </button>
 
 
-<button onclick="openPage('calendar')">
-📅 Calendar
+
+<button onclick="openPage('tasks')">
+✅ Tasks
 </button>
+
 
 
 <button onclick="openPage('notes')">
@@ -293,19 +302,17 @@ Menu
 </button>
 
 
-<button onclick="openPage('reports')">
-📊 Reports
-</button>
-
 
 <button onclick="openPage('profile')">
 👤 Profile
 </button>
 
 
+
 <button onclick="openPage('settings')">
 ⚙ Settings
 </button>
+
 
 
 <button onclick="logout()">
@@ -320,20 +327,9 @@ Menu
 
 
 
+<!-- CONTENT START -->
 
-
-<!-- CONTENT AREA -->
-
-
-<main class="content">
-
-
-
-
-
-
-<!-- DASHBOARD -->
-
+<main class="content"><!-- DASHBOARD -->
 
 <div id="dashboard" class="page">
 
@@ -349,261 +345,188 @@ Select your work category
 
 
 
-
-
 <div class="work-grid">
 
 
 
-<label class="work-card">
+<div class="work-card" onclick="openWork('Basic Data Entry')">
+☑ Basic Data Entry
+</div>
 
-<input type="checkbox">
 
-<span>
-Basic Data Entry
-</span>
 
-</label>
+<div class="work-card" onclick="openWork('Copy Writing')">
+☑ Copy Writing
+</div>
 
 
 
+<div class="work-card" onclick="openWork('Typing Work')">
+☑ Typing Work
+</div>
 
-<label class="work-card">
 
-<input type="checkbox">
 
-<span>
-Copy Writing
-</span>
+<div class="work-card" onclick="openWork('Excel Data Work')">
+☑ Excel Data Work
+</div>
 
-</label>
 
 
+<div class="work-card" onclick="openWork('Medical Data Entry')">
+☑ Medical Data Entry
+</div>
 
 
 
-<label class="work-card">
+<div class="work-card" onclick="openWork('PDF Work')">
+☑ PDF Work
+</div>
 
-<input type="checkbox">
 
-<span>
-Typing Work
-</span>
 
-</label>
+<div class="work-card" onclick="openWork('Web Research')">
+☑ Web Research
+</div>
 
 
 
+<div class="work-card" onclick="openWork('Data Cleaning')">
+☑ Data Cleaning
+</div>
 
 
-<label class="work-card">
 
-<input type="checkbox">
+<div class="work-card" onclick="openWork('Data Processing')">
+☑ Data Processing
+</div>
 
-<span>
-Excel Data Work
-</span>
 
-</label>
 
+<div class="work-card" onclick="openWork('Document Formatting')">
+☑ Document Formatting
+</div>
 
 
 
+<div class="work-card" onclick="openWork('Virtual Assistant')">
+☑ Virtual Assistant
+</div>
 
-<label class="work-card">
 
-<input type="checkbox">
 
-<span>
-Medical Data Entry
-</span>
+<div class="work-card" onclick="openWork('Reporting Work')">
+☑ Reporting Work
+</div>
 
-</label>
 
 
+<div class="work-card" onclick="openWork('Custom Work')">
+☑ Custom Work
+</div>
 
 
 
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-PDF Work
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Web Research
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Data Cleaning
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Data Processing
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Document Formatting
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Virtual Assistant
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Reporting Work
-</span>
-
-</label>
-
-
-
-
-
-<label class="work-card">
-
-<input type="checkbox">
-
-<span>
-Custom Work
-</span>
-
-</label>
-
+</div>
 
 
 </div>
 
 
 
-</div>
-  
-<!-- PROJECTS -->
 
 
-<div id="projects" class="page hidden">
 
-<h2>
-My Projects
+
+
+<!-- MY WORK / WORKSPACE -->
+
+
+<div id="mywork" class="page hidden">
+
+
+<h2 id="workHeading">
+My Work
 </h2>
 
-
-<button>
-+ New Project
-</button>
 
 
 <div class="card">
 
-<h3>
-Project List
-</h3>
 
-<p>
-Your projects will appear here.
-</p>
-
-</div>
+<label>
+Project Name
+</label>
 
 
-</div>
+<input id="projectName"
+placeholder="Enter Project Name">
 
 
 
 
 
+<label>
+Work Details
+</label>
+
+
+<textarea id="workDetails"
+placeholder="Write your work here">
+</textarea>
 
 
 
-<!-- WORKSPACE -->
 
 
-<div id="workspace" class="page hidden">
-
-
-<h2>
-Work Sheet
-</h2>
+<label>
+Upload File
+</label>
 
 
 <input 
-id="workTitle"
-placeholder="Work Title">
+type="file"
+id="workFile">
 
 
 
-<textarea 
-id="workDescription"
-placeholder="Write your work here...">
+
+
+<label>
+Notes
+</label>
+
+
+<textarea id="workNotes"
+placeholder="Add notes">
 </textarea>
 
 
 
-<textarea
-placeholder="Instructions">
-</textarea>
+
+
+
+<select id="workStatus">
+
+
+<option>
+Pending
+</option>
+
+
+<option>
+Working
+</option>
+
+
+<option>
+Completed
+</option>
+
+
+</select>
+
+
 
 
 
@@ -613,10 +536,84 @@ Save Work
 
 
 
-<div id="savedWork">
+</div>
+
 
 </div>
 
+
+
+
+
+
+
+
+<!-- PROJECT FOLDER -->
+
+
+<div id="folder" class="page hidden">
+
+
+<h2>
+Project Folder
+</h2>
+
+
+
+<div class="card">
+
+
+<h3 id="folderTitle">
+Folder Name
+</h3>
+
+
+
+<div id="folderFiles">
+
+No Files Added
+
+</div>
+
+
+
+</div>
+
+
+</div><!-- FILE MANAGER -->
+
+<div id="files" class="page hidden">
+
+
+<h2>
+File Manager
+</h2>
+
+
+<div class="card">
+
+
+<input 
+type="file"
+id="fileUpload">
+
+
+
+<button onclick="addFile()">
+Upload File
+</button>
+
+
+
+<div id="fileList">
+
+No Files
+
+</div>
+
+
+
+</div>
 
 
 </div>
@@ -630,7 +627,6 @@ Save Work
 
 <!-- TASKS -->
 
-
 <div id="tasks" class="page hidden">
 
 
@@ -639,86 +635,30 @@ Tasks
 </h2>
 
 
+<div class="card">
+
+
 <input
-placeholder="Task Name">
+id="taskInput"
+placeholder="New Task">
 
 
-
-<button>
+<button onclick="addTask()">
 Add Task
 </button>
 
 
-<div class="card">
+<div id="taskList">
 
-No Tasks Added
+</div>
+
+
 
 </div>
 
 
 </div>
 
-
-
-
-
-
-
-<!-- FILES -->
-
-
-<div id="files" class="page hidden">
-
-
-<h2>
-File Manager
-</h2>
-
-
-<input 
-type="file">
-
-
-
-<button>
-Upload File
-</button>
-
-
-<div class="card">
-
-Files will appear here.
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- CALENDAR -->
-
-
-<div id="calendar" class="page hidden">
-
-
-<h2>
-Calendar
-</h2>
-
-
-<div class="card">
-
-Work Schedule
-
-</div>
-
-
-</div>
 
 
 
@@ -728,7 +668,6 @@ Work Schedule
 
 <!-- NOTES -->
 
-
 <div id="notes" class="page hidden">
 
 
@@ -737,43 +676,32 @@ Notes
 </h2>
 
 
-<textarea
-placeholder="Write your notes">
+<div class="card">
+
+
+<textarea 
+id="noteInput"
+placeholder="Write Note">
 </textarea>
 
 
-<button>
+
+<button onclick="saveNote()">
 Save Note
 </button>
 
 
-</div>
 
-
-
-
-
-
-
-<!-- REPORTS -->
-
-
-<div id="reports" class="page hidden">
-
-
-<h2>
-Reports
-</h2>
-
-
-<div class="card">
-
-Work Progress Report
+<div id="noteList">
 
 </div>
 
 
 </div>
+
+
+</div>
+
 
 
 
@@ -788,20 +716,26 @@ Work Progress Report
 
 
 <h2>
-User Profile
+Profile
 </h2>
+
+
+<div class="card">
 
 
 <p>
 Name:
-<span id="profileName"></span>
+<span id="profileName">
+</span>
 </p>
 
 
 <p>
 Email:
-<span id="profileEmail"></span>
+<span id="profileEmail">
+</span>
 </p>
+
 
 
 <button>
@@ -810,6 +744,10 @@ Edit Profile
 
 
 </div>
+
+
+</div>
+
 
 
 
@@ -830,7 +768,22 @@ Settings
 
 <div class="card">
 
+
+<p>
 Account Settings
+</p>
+
+
+<p>
+Theme Settings
+</p>
+
+
+<p>
+Security
+</p>
+
+
 
 </div>
 
@@ -849,9 +802,6 @@ Account Settings
 </div>
 
 
-</div>
-
-
 </section>
 
 
@@ -864,9 +814,3 @@ Account Settings
 </body>
 
 </html>
-</section>
-
-
-
-
-
