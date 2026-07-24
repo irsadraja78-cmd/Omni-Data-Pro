@@ -1,171 +1,97 @@
+/* Omni Data Pro - Complete Style */
 
-/* Omni Data Pro - Main Style */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
 
-body {
+body{
 
-    min-height: 100vh;
-    background: linear-gradient(
+    min-height:100vh;
+
+    background:linear-gradient(
         135deg,
         #0f172a,
-        #1e40af
+        #2563eb
     );
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
+    padding:20px;
 
 }
 
 
+/* Login Container */
 
-/* Main Container */
+.container{
 
-.container {
+    max-width:420px;
 
-    width: 100%;
-    max-width: 420px;
+    margin:auto;
 
-    background: rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.12);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:blur(10px);
 
-    border-radius: 25px;
+    padding:25px;
 
-    padding: 25px;
+    border-radius:25px;
 
-    color: white;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.3);
+    color:white;
 
 }
-
 
 
 /* Logo */
 
-.logo-section {
+.logo{
 
-    text-align: center;
-
-}
-
-
-.logo {
-
-    width: 80px;
-    height: 80px;
-
-    margin: auto;
-
-    border-radius: 50%;
-
-    background: white;
-
-    color: #1e40af;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    font-size:28px;
-    font-weight:bold;
-
-}
-
-
-
-.logo-section h1 {
-
-    margin-top:15px;
-    font-size:30px;
-
-}
-
-
-.logo-section p {
-
-    margin-top:8px;
-    opacity:0.8;
-
-}
-
-
-
-
-/* Profile Card */
-
-.profile-card {
-
-    background:white;
-
-    color:#222;
-
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    text-align:center;
-
-}
-
-
-
-.profile-image img {
-
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
 
     border-radius:50%;
 
-    object-fit:cover;
+    background:white;
+
+    color:#2563eb;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    margin:auto;
 
 }
 
 
-
-.profile-card h2 {
-
-    margin-top:10px;
-
-}
-
-
-
-/* Login */
-
-.login-box {
-
-    margin-top:25px;
+.logo-section{
 
     text-align:center;
 
 }
 
 
+.logo-section h1{
 
-.login-box h2 {
-
-    margin-bottom:15px;
+    margin-top:15px;
 
 }
 
 
 
-input {
+
+
+/* Inputs */
+
+input{
 
     width:100%;
 
@@ -177,19 +103,17 @@ input {
 
     border-radius:12px;
 
-    outline:none;
-
 }
 
 
 
-button {
+
+
+button{
 
     width:100%;
 
     padding:14px;
-
-    margin-top:15px;
 
     border:none;
 
@@ -199,25 +123,16 @@ button {
 
     color:white;
 
-    font-size:16px;
-
     font-weight:bold;
 
     cursor:pointer;
 
-}
-
-
-
-button:hover {
-
-    opacity:0.9;
+    margin-top:10px;
 
 }
 
 
-
-.signup {
+.signup{
 
     background:#16a34a;
 
@@ -225,28 +140,179 @@ button:hover {
 
 
 
-a {
 
-    color:white;
+/* Dashboard */
 
-    text-decoration:none;
+.dashboard-container{
 
-    font-size:14px;
+    max-width:1000px;
+
+    margin:auto;
 
 }
 
 
 
 
-/* AI Section */
+.dashboard-header{
 
-.ai-section {
+    background:white;
 
-    margin-top:25px;
+    padding:15px;
 
-    text-align:center;
+    border-radius:20px;
 
-    background:rgba(255,255,255,0.15);
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+.dashboard-header .logo{
+
+    width:55px;
+
+    height:55px;
+
+    font-size:20px;
+
+    margin:0;
+
+}
+
+
+.dashboard-header p{
+
+    color:#555;
+
+}
+
+
+
+
+
+.profile{
+
+    font-size:30px;
+
+}
+
+
+
+
+/* User Card */
+
+.user-card{
+
+    background:white;
+
+    color:#222;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    margin-top:20px;
+
+}
+
+
+
+
+/* Search */
+
+.search-box{
+
+    margin:20px 0;
+
+}
+
+
+
+
+
+/* AI Card */
+
+.ai-card{
+
+    background:white;
+
+    color:#222;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+
+.ai-logo{
+
+    width:65px;
+
+    height:65px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+
+
+/* Services */
+
+.section-title{
+
+    color:white;
+
+    margin:25px 0 15px;
+
+}
+
+
+
+.services{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:15px;
+
+}
+
+
+
+.service{
+
+    background:white;
+
+    color:#222;
 
     padding:20px;
 
@@ -256,48 +322,62 @@ a {
 
 
 
-.ai-logo {
+.service button{
 
-    width:60px;
-
-    height:60px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:white;
-
-    color:#2563eb;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:24px;
-
-    font-weight:bold;
+    background:#2563eb;
 
 }
 
 
 
-/* Mobile Adjustment */
+/* Bottom Menu */
 
-@media(max-width:480px){
+.bottom-menu{
 
-    .container{
+    position:fixed;
 
-        padding:20px;
+    bottom:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:90%;
+
+    max-width:500px;
+
+    background:white;
+
+    color:#2563eb;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+    .services{
+
+        grid-template-columns:1fr;
 
     }
 
 
-    .logo-section h1{
+    .dashboard-header h2{
 
-        font-size:25px;
+        font-size:18px;
 
     }
 
