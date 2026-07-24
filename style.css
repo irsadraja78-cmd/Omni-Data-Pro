@@ -1,98 +1,103 @@
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
 body{
-
-background:#f4f7fb;
-min-height:100vh;
-
+    background:#f1f5f9;
+    min-height:100vh;
 }
-
 
 
 .hidden{
-
-display:none!important;
-
+    display:none !important;
 }
-
 
 
 /* AUTH */
 
 .auth{
-
-width:380px;
-margin:80px auto;
-background:white;
-padding:35px;
-border-radius:15px;
-box-shadow:0 10px 30px #0002;
-text-align:center;
-
+    width:380px;
+    max-width:90%;
+    background:#ffffff;
+    margin:70px auto;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    text-align:center;
 }
 
 
 .auth h1{
-
-color:#2563eb;
-margin-bottom:10px;
-
+    color:#2563eb;
+    margin-bottom:10px;
 }
 
+
+.auth h2{
+    color:#1e293b;
+    margin-bottom:20px;
+}
 
 
 .auth p{
-
-margin:15px 0;
-color:#555;
-
+    color:#64748b;
+    margin:15px 0;
 }
 
 
-input,textarea{
+input, textarea{
 
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ddd;
-border-radius:8px;
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:15px;
 
 }
-
 
 
 textarea{
-
-height:120px;
-resize:none;
-
+    min-height:180px;
+    resize:vertical;
 }
 
+
+
+input:focus,
+textarea:focus{
+
+    outline:none;
+    border-color:#2563eb;
+
+}
 
 
 
 button{
 
-padding:12px 20px;
-border:0;
-border-radius:8px;
-background:#2563eb;
-color:white;
-cursor:pointer;
-margin:5px;
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
 
 }
 
 
+
 button:hover{
 
-background:#1d4ed8;
+    background:#1d4ed8;
 
 }
 
@@ -100,12 +105,10 @@ background:#1d4ed8;
 
 a{
 
-color:#2563eb;
-cursor:pointer;
+    color:#2563eb;
+    cursor:pointer;
 
 }
-
-
 
 
 
@@ -114,8 +117,8 @@ cursor:pointer;
 
 #dashboard{
 
-display:flex;
-min-height:100vh;
+    display:flex;
+    min-height:100vh;
 
 }
 
@@ -125,11 +128,10 @@ min-height:100vh;
 
 aside{
 
-width:230px;
-background:#111827;
-color:white;
-padding:25px;
-
+    width:240px;
+    background:#111827;
+    padding:25px;
+    color:white;
 
 }
 
@@ -137,7 +139,7 @@ padding:25px;
 
 aside h2{
 
-margin-bottom:30px;
+    margin-bottom:30px;
 
 }
 
@@ -145,17 +147,15 @@ margin-bottom:30px;
 
 aside button{
 
-width:100%;
-background:#1f2937;
-text-align:left;
+    background:#1f2937;
+    text-align:left;
 
 }
 
 
-
 aside button:hover{
 
-background:#2563eb;
+    background:#2563eb;
 
 }
 
@@ -165,8 +165,8 @@ background:#2563eb;
 
 main{
 
-flex:1;
-padding:30px;
+    flex:1;
+    padding:30px;
 
 }
 
@@ -177,7 +177,7 @@ padding:30px;
 .page h1,
 .page h2{
 
-margin-bottom:20px;
+    margin-bottom:20px;
 
 }
 
@@ -190,9 +190,9 @@ margin-bottom:20px;
 
 .cards{
 
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
 
 }
 
@@ -200,32 +200,54 @@ gap:20px;
 
 .card{
 
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px #0001;
-margin-bottom:15px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:15px;
 
 }
-
 
 
 .card h3{
 
-color:#2563eb;
+    color:#2563eb;
+    margin-bottom:10px;
+
+}
+
+
+.card p{
+
+    font-size:28px;
 
 }
 
 
 
 
-/* WORK AREA */
+
+/* WORKSPACE */
+
+
+#work,
+#files,
+#profile{
+
+    background:white;
+    padding:25px;
+    border-radius:15px;
+
+}
+
+
+
 
 
 #workList,
 #fileList{
 
-margin-top:20px;
+    margin-top:20px;
 
 }
 
@@ -233,25 +255,14 @@ margin-top:20px;
 
 
 
-.dashboard-header{
 
-background:white;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-
-}
+/* PROFILE */
 
 
+#profile p{
 
-
-
-.profile-card{
-
-background:white;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
+    margin:15px 0;
+    font-size:18px;
 
 }
 
@@ -259,6 +270,9 @@ margin-bottom:20px;
 
 
 
+
+
+/* MOBILE */
 
 
 @media(max-width:700px){
@@ -266,21 +280,28 @@ margin-bottom:20px;
 
 #dashboard{
 
-flex-direction:column;
+    flex-direction:column;
 
 }
 
 
 aside{
 
-width:100%;
+    width:100%;
+
+}
+
+
+main{
+
+    padding:15px;
 
 }
 
 
 .auth{
 
-width:90%;
+    margin:30px auto;
 
 }
 
