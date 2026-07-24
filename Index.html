@@ -6,64 +6,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Omni Data Pro - Commercial Dashboard</title>
+<title>Omni Data Pro</title>
+
+<link rel="stylesheet" href="style.css">
 
 </head>
+
 
 <body>
 
 
 <!-- LOGIN SYSTEM -->
 
-<div id="loginPage">
+<div id="loginScreen" class="screen">
+
+<div class="login-card">
 
 <h1>Omni Data Pro</h1>
 
 <p>Commercial Data Management Platform</p>
 
 
-<input id="loginEmail" type="email" placeholder="Email">
+<input 
+id="email"
+type="email"
+placeholder="Enter Email">
 
 
-<input id="loginPassword" type="password" placeholder="Password">
+<input 
+id="password"
+type="password"
+placeholder="Enter Password">
 
 
-<button onclick="loginUser()">
+
+<div class="login-options">
+
+<label>
+<input type="checkbox">
+Remember Me
+</label>
+
+
+<a href="#" onclick="showForgot()">
+Forgot Password?
+</a>
+
+
+</div>
+
+
+
+<button onclick="login()">
 Login
 </button>
 
 
-<button onclick="showForgotPassword()">
-Forgot Password?
-</button>
-
-
 </div>
-
-
-
-
-
-<!-- FORGOT PASSWORD -->
-
-<div id="forgotPage" style="display:none;">
-
-
-<h2>Password Recovery</h2>
-
-
-<input id="recoverEmail" placeholder="Enter Email">
-
-
-<button onclick="recoverPassword()">
-Send Recovery
-</button>
-
-
-<button onclick="backToLogin()">
-Back Login
-</button>
-
 
 </div>
 
@@ -72,50 +71,129 @@ Back Login
 
 
 
-<!-- MAIN APP -->
 
-<div id="appPage" style="display:none;">
+<!-- FORGOT PASSWORD SYSTEM -->
+
+
+<div id="forgotScreen" class="screen hidden">
+
+
+<div class="login-card">
+
+
+<h2>
+Forgot Password
+</h2>
+
+
+<p>
+Enter your registered email
+</p>
+
+
+<input
+id="resetEmail"
+type="email"
+placeholder="Email Address">
+
+
+
+<button onclick="resetPassword()">
+Reset Password
+</button>
+
+
+
+<button onclick="backLogin()">
+Back To Login
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- MAIN APPLICATION -->
+
+
+<div id="app" class="hidden">
+
+
 
 
 
 <!-- SIDEBAR -->
 
-<aside id="sidebar">
 
+<aside class="sidebar">
+
+
+<div class="brand">
 
 <h2>
 ODP
 </h2>
 
+<p>
+Omni Data Pro
+</p>
 
-<button onclick="openSection('dashboard')">
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<button onclick="openTab('dashboard')">
 Dashboard
 </button>
 
 
-<button onclick="openSection('files')">
+
+<button onclick="openTab('files')">
 File Manager
 </button>
 
 
-<button onclick="openSection('clients')">
+
+<button onclick="openTab('clients')">
 Clients
 </button>
 
 
-<button onclick="openSection('services')">
+
+<button onclick="openTab('services')">
 Services
 </button>
 
 
-<button onclick="openSection('settings')">
+
+<button onclick="openTab('settings')">
 Settings
 </button>
 
 
-<button onclick="logoutUser()">
+
+<button onclick="logout()">
 Logout
 </button>
+
+
+</nav>
+
 
 
 </aside>
@@ -124,59 +202,592 @@ Logout
 
 
 
-<!-- MAIN CONTENT -->
-
-<main>
 
 
-<header>
-
-<h1>
-Omni Data Pro Dashboard
-</h1>
 
 
-<p>
-Professional Business Management System
-</p>
+<!-- MAIN CONTENT AREA -->
 
 
-</header>
+<main class="main-content">
 
 
-<!-- Dashboard Section -->
+<header class="topbar">
 
 
-<section id="dashboard" class="section">
-
+<div>
 
 <h2>
-Dashboard Overview
+Omni Data Pro Dashboard
 </h2>
 
 
-<div>
+<p>
+Business Management System
+</p>
 
-<h3>Total Projects</h3>
-<p id="projectCount">0</p>
 
 </div>
 
 
-<div>
 
-<h3>Active Files</h3>
-<p id="fileCount">0</p>
+<div class="profile-box">
+
+👤 Admin
 
 </div>
 
 
-<div>
 
-<h3>Clients</h3>
-<p id="clientCount">0</p>
+</header>
+<!-- DASHBOARD SECTION -->
+
+<section id="dashboard" class="content-section">
+
+
+<div class="dashboard-grid">
+
+
+<div class="dashboard-card">
+
+<h3>
+Total Projects
+</h3>
+
+<h1 id="projectTotal">
+0
+</h1>
+
+<p>
+Active Business Projects
+</p>
+
+</div>
+
+
+
+
+
+<div class="dashboard-card">
+
+<h3>
+Total Clients
+</h3>
+
+<h1 id="clientTotal">
+0
+</h1>
+
+<p>
+Registered Clients
+</p>
+
+</div>
+
+
+
+
+
+<div class="dashboard-card">
+
+<h3>
+Total Files
+</h3>
+
+<h1 id="fileTotal">
+0
+</h1>
+
+<p>
+Managed Documents
+</p>
+
+</div>
+
+
+
+
+
+<div class="dashboard-card">
+
+<h3>
+Completed Tasks
+</h3>
+
+<h1 id="taskTotal">
+0
+</h1>
+
+<p>
+Finished Work
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="business-panel">
+
+
+<h2>
+Business Overview
+</h2>
+
+
+<p>
+Manage your clients, projects, files and services from one place.
+</p>
+
 
 </div>
 
 
 </section>
+
+
+
+
+
+
+
+
+
+<!-- FILE MANAGEMENT SYSTEM -->
+
+
+<section id="files" class="content-section hidden">
+
+
+<h2>
+File Management System
+</h2>
+
+
+
+
+<div class="file-toolbar">
+
+
+<button>
+Upload File
+</button>
+
+
+<button>
+Create Folder
+</button>
+
+
+<input 
+type="search"
+placeholder="Search Files">
+
+
+</div>
+
+
+
+
+
+<div class="file-list">
+
+
+<div class="file-item">
+
+<span>
+📄 Project Document
+</span>
+
+<span>
+Active
+</span>
+
+</div>
+
+
+
+
+<div class="file-item">
+
+<span>
+📁 Client Data Folder
+</span>
+
+<span>
+Secure
+</span>
+
+</div>
+
+
+
+
+<div class="file-item">
+
+<span>
+📊 Reports File
+</span>
+
+<span>
+Completed
+</span>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- CLIENT MANAGEMENT SYSTEM -->
+
+
+<section id="clients" class="content-section hidden">
+
+
+<h2>
+Client Management
+</h2>
+
+
+
+<div class="client-box">
+
+
+<input 
+placeholder="Client Name">
+
+
+<input 
+placeholder="Client Email">
+
+
+<button>
+Add Client
+</button>
+
+
+
+</div>
+
+
+
+
+
+<div class="client-list">
+
+
+<div class="client-card">
+
+<h3>
+Demo Client
+</h3>
+
+<p>
+Project Status: Active
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+<!-- SERVICES SYSTEM -->
+
+<section id="services" class="content-section hidden">
+
+
+<h2>
+Service Management
+</h2>
+
+
+
+<div class="service-grid">
+
+
+
+<div class="service-card">
+
+<h3>
+Basic Data Entry
+</h3>
+
+<p>
+Professional data processing service
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Online Data Entry
+</h3>
+
+<p>
+Online information management
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+E-Commerce Catalog
+</h3>
+
+<p>
+Product listing and management
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Image To Text
+</h3>
+
+<p>
+Convert images into digital data
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Web Research
+</h3>
+
+<p>
+Professional research service
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Data Mining
+</h3>
+
+<p>
+Business data collection
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Data Cleaning
+</h3>
+
+<p>
+Data correction and formatting
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+HDD & Memory
+</h3>
+
+<p>
+Storage management service
+</p>
+
+<button>
+Request Service
+</button>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SETTINGS SYSTEM -->
+
+
+<section id="settings" class="content-section hidden">
+
+
+<h2>
+Settings
+</h2>
+
+
+
+<div class="settings-card">
+
+
+<label>
+Company Name
+</label>
+
+
+<input value="Omni Data Pro">
+
+
+
+<label>
+Account Email
+</label>
+
+
+<input value="admin@omnidatapro.com">
+
+
+
+<button>
+Save Settings
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- NOTIFICATION PANEL -->
+
+
+<section class="notification-panel">
+
+
+<h3>
+Notifications
+</h3>
+
+
+<div>
+New project request received
+</div>
+
+
+<div>
+File processing completed
+</div>
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
