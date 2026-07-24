@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HDD & Memory Service - Omni Data Pro</title>
+<title>Omni Data Pro</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,10 +17,51 @@
 <body>
 
 
-<div class="dashboard-container">
+<!-- Login Section -->
+
+<section id="login-section" class="page">
 
 
-<header class="dashboard-header">
+<div class="login-box">
+
+<h1>Omni Data Pro</h1>
+
+<p>Professional Data Services</p>
+
+
+<input 
+type="text" 
+id="username" 
+placeholder="Enter Username">
+
+
+<input 
+type="password" 
+id="password" 
+placeholder="Enter Password">
+
+
+<button onclick="login()">
+Login
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- Dashboard Section -->
+
+<section id="dashboard-section" class="page hidden">
+
+
+<header class="header">
+
 
 <div class="logo">
 ODP
@@ -28,12 +69,19 @@ ODP
 
 
 <div>
-<h2>HDD & Memory Service</h2>
-<p>Omni Data Pro Service</p>
+
+<h2>
+Omni Data Pro
+</h2>
+
+<p>
+Dashboard
+</p>
+
 </div>
 
 
-<div class="profile">
+<div>
 👤
 </div>
 
@@ -44,77 +92,17 @@ ODP
 
 
 
-<div class="user-card">
 
-<h2>
-HDD & Memory Management
-</h2>
-
-<p>
-Professional storage device management, data handling and memory solutions.
-</p>
-
-</div>
-
-
-
-
-
-
-
-<div class="ai-card">
-
-<div class="ai-logo">
-💾
-</div>
-
-
-<div>
-
-<h2>
-Service Overview
-</h2>
-
-<p>
-We provide storage management, memory solutions and data support services.
-</p>
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-<div class="service mining">
+<div class="welcome-card">
 
 
 <h2>
-Our Services
+Welcome
 </h2>
 
 
 <p>
-✔ HDD Data Management
-</p>
-
-<p>
-✔ Memory Storage Solutions
-</p>
-
-<p>
-✔ Storage Device Support
-</p>
-
-<p>
-✔ Data Organization
-</p>
-
-<p>
-✔ File Management
+Select your required service
 </p>
 
 
@@ -126,97 +114,127 @@ Our Services
 
 
 
-<div class="service online">
+<!-- Services -->
 
 
-<h2>
-Working Process
-</h2>
+<div class="services-container">
 
+
+
+
+
+<div class="service-card">
+
+<h3>
+Basic Data Entry
+</h3>
 
 <p>
-1. Analyze storage requirements
+Professional data entry solutions
 </p>
 
-<p>
-2. Manage files and data
-</p>
-
-<p>
-3. Check storage performance
-</p>
-
-<p>
-4. Provide final solution
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="service research">
-
-
-<h2>
-Why Choose Us
-</h2>
-
-
-<p>
-✔ Reliable Data Handling</p>
-
-<p>
-✔ Organized Storage</p>
-
-<p>
-✔ Professional Support</p>
-
-<p>
-✔ Secure Processing</p>
-
-
-</div>
-
-
-
-
-
-
-
-<button onclick="alert('HDD & Memory Service Request Submitted')">
-
-Request Service
-
+<button onclick="showService('Basic Data Entry')">
+Open
 </button>
 
+</div>
 
 
 
 
-<br><br>
 
+<div class="service-card">
 
+<h3>
+Online Data Entry
+</h3>
 
+<p>
+Online data processing services
+</p>
 
-<button onclick="window.location.href='dashboard.html'">
-
-Back To Dashboard
-
+<button onclick="showService('Online Data Entry')">
+Open
 </button>
-
-
-
-
-
 
 </div>
 
 
-</body>
 
-</html>
+
+
+<div class="service-card">
+
+<h3>
+E-Commerce Catalog
+</h3>
+
+<p>
+Product listing and management
+</p>
+
+<button onclick="showService('E-Commerce Catalog')">
+Open
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Image To Text
+</h3>
+
+<p>
+Convert images into editable data
+</p>
+
+<button onclick="showService('Image To Text')">
+Open
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Web Research
+</h3>
+
+<p>
+Internet research and data collection
+</p>
+
+<button onclick="showService('Web Research')">
+Open
+</button>
+
+</div>
+
+
+
+
+
+<div class="service-card">
+
+<h3>
+Data Mining
+</h3>
+
+<p>
+Data collection and analysis
+</p>
+
+<button onclick="showService('Data Mining')">
+Open
+</button>
+
+</div>
