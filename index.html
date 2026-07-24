@@ -17,20 +17,16 @@
 <body>
 
 
-<!-- WELCOME PAGE -->
+<!-- WELCOME -->
 
 <section id="welcomePage" class="auth-page">
 
 
 <div class="auth-box">
 
-<h1>
-Welcome To OmniDataPro
-</h1>
+<h1>Welcome To OmniDataPro</h1>
 
-<p>
-Freelancer Work Management Platform
-</p>
+<p>Freelancer Work Management Platform</p>
 
 
 <button onclick="showLogin()">
@@ -54,7 +50,7 @@ Sign Up
 
 
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <section id="loginPage" class="auth-page hidden">
 
@@ -62,21 +58,13 @@ Sign Up
 <div class="auth-box">
 
 
-<h2>
-Login
-</h2>
+<h2>Login</h2>
 
 
-<input 
-id="loginEmail"
-type="email"
-placeholder="Email">
+<input id="loginEmail" placeholder="Email">
 
 
-<input
-id="loginPassword"
-type="password"
-placeholder="Password">
+<input id="loginPassword" type="password" placeholder="Password">
 
 
 
@@ -85,11 +73,9 @@ Login
 </button>
 
 
-
 <p onclick="showForgot()">
 Forgot Password?
 </p>
-
 
 
 <p onclick="showSignup()">
@@ -108,8 +94,7 @@ Create Account
 
 
 
-
-<!-- SIGNUP PAGE -->
+<!-- SIGNUP -->
 
 <section id="signupPage" class="auth-page hidden">
 
@@ -117,29 +102,16 @@ Create Account
 <div class="auth-box">
 
 
-<h2>
-Create Account
-</h2>
+<h2>Create Account</h2>
 
 
-
-<input
-id="signupName"
-placeholder="Full Name">
+<input id="signupName" placeholder="Full Name">
 
 
-
-<input
-id="signupEmail"
-type="email"
-placeholder="Email">
+<input id="signupEmail" placeholder="Email">
 
 
-
-<input
-id="signupPassword"
-type="password"
-placeholder="Password">
+<input id="signupPassword" type="password" placeholder="Password">
 
 
 
@@ -148,14 +120,13 @@ Create Account
 </button>
 
 
-
 <p onclick="showLogin()">
-Already have account?
+Back To Login
 </p>
 
 
-
 </div>
+
 
 </section>
 
@@ -165,8 +136,7 @@ Already have account?
 
 
 
-
-<!-- FORGOT PASSWORD -->
+<!-- FORGOT -->
 
 <section id="forgotPage" class="auth-page hidden">
 
@@ -174,15 +144,10 @@ Already have account?
 <div class="auth-box">
 
 
-<h2>
-Forgot Password
-</h2>
+<h2>Forgot Password</h2>
 
 
-<input
-id="forgotEmail"
-placeholder="Email">
-
+<input id="forgotEmail" placeholder="Email">
 
 
 <button onclick="forgotPassword()">
@@ -191,7 +156,7 @@ Reset
 
 
 <p onclick="showLogin()">
-Back Login
+Back
 </p>
 
 
@@ -206,25 +171,19 @@ Back Login
 
 
 
-
-<!-- MAIN APPLICATION -->
-
+<!-- APP -->
 
 <section id="app" class="hidden">
 
 
 
-<!-- HEADER -->
-
 <header class="app-header">
 
 
-<div class="brand">
-
-
-<button onclick="goBack()">
-←
+<button class="menu-btn" onclick="toggleSidebar()">
+☰
 </button>
+
 
 
 <h2>
@@ -232,19 +191,12 @@ OmniDataPro
 </h2>
 
 
-</div>
 
-
-
-
-<div class="user-area"
+<div class="profile-box"
 onclick="openPage('profile')">
 
 
-<img 
-src="https://via.placeholder.com/40">
-
-
+👤
 <span id="userName">
 User
 </span>
@@ -255,22 +207,9 @@ User
 
 
 </header>
-
-
-
-
-
-
-
-
-
-<div class="app-container">
-
-
-
 <!-- SIDEBAR -->
 
-<aside class="sidebar">
+<div id="sidebar" class="sidebar">
 
 
 <button onclick="openPage('dashboard')">
@@ -278,11 +217,9 @@ User
 </button>
 
 
-
 <button onclick="openPage('mywork')">
 📝 My Work
 </button>
-
 
 
 <button onclick="openPage('files')">
@@ -290,11 +227,9 @@ User
 </button>
 
 
-
 <button onclick="openPage('tasks')">
 ✅ Tasks
 </button>
-
 
 
 <button onclick="openPage('notes')">
@@ -302,11 +237,9 @@ User
 </button>
 
 
-
 <button onclick="openPage('profile')">
 👤 Profile
 </button>
-
 
 
 <button onclick="openPage('settings')">
@@ -314,22 +247,26 @@ User
 </button>
 
 
-
 <button onclick="logout()">
 🚪 Logout
 </button>
 
 
-
-</aside>
-
+</div>
 
 
 
 
-<!-- CONTENT START -->
 
-<main class="content"><!-- DASHBOARD -->
+
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+
+
+<!-- DASHBOARD -->
 
 <div id="dashboard" class="page">
 
@@ -439,13 +376,12 @@ Select your work category
 
 
 
-<!-- MY WORK / WORKSPACE -->
-
+<!-- WORKSPACE -->
 
 <div id="mywork" class="page hidden">
 
 
-<h2 id="workHeading">
+<h2 id="workTitle">
 My Work
 </h2>
 
@@ -454,79 +390,36 @@ My Work
 <div class="card">
 
 
-<label>
-Project Name
-</label>
-
-
 <input id="projectName"
-placeholder="Enter Project Name">
+placeholder="Project Name">
 
-
-
-
-
-<label>
-Work Details
-</label>
 
 
 <textarea id="workDetails"
-placeholder="Write your work here">
+placeholder="Write your work details">
 </textarea>
 
 
 
+<input type="file" id="workFile">
 
-
-<label>
-Upload File
-</label>
-
-
-<input 
-type="file"
-id="workFile">
-
-
-
-
-
-<label>
-Notes
-</label>
 
 
 <textarea id="workNotes"
-placeholder="Add notes">
+placeholder="Notes">
 </textarea>
-
-
-
 
 
 
 <select id="workStatus">
 
+<option>Pending</option>
 
-<option>
-Pending
-</option>
+<option>Working</option>
 
-
-<option>
-Working
-</option>
-
-
-<option>
-Completed
-</option>
-
+<option>Completed</option>
 
 </select>
-
-
 
 
 
@@ -535,52 +428,11 @@ Save Work
 </button>
 
 
-
 </div>
 
 
 </div>
-
-
-
-
-
-
-
-
-<!-- PROJECT FOLDER -->
-
-
-<div id="folder" class="page hidden">
-
-
-<h2>
-Project Folder
-</h2>
-
-
-
-<div class="card">
-
-
-<h3 id="folderTitle">
-Folder Name
-</h3>
-
-
-
-<div id="folderFiles">
-
-No Files Added
-
-</div>
-
-
-
-</div>
-
-
-</div><!-- FILE MANAGER -->
+<!-- FILE MANAGER -->
 
 <div id="files" class="page hidden">
 
@@ -593,10 +445,7 @@ File Manager
 <div class="card">
 
 
-<input 
-type="file"
-id="fileUpload">
-
+<input type="file" id="fileUpload">
 
 
 <button onclick="addFile()">
@@ -607,10 +456,7 @@ Upload File
 
 <div id="fileList">
 
-No Files
-
 </div>
-
 
 
 </div>
@@ -638,9 +484,9 @@ Tasks
 <div class="card">
 
 
-<input
-id="taskInput"
+<input id="taskInput"
 placeholder="New Task">
+
 
 
 <button onclick="addTask()">
@@ -648,17 +494,16 @@ Add Task
 </button>
 
 
+
 <div id="taskList">
 
 </div>
 
 
-
 </div>
 
 
 </div>
-
 
 
 
@@ -667,6 +512,7 @@ Add Task
 
 
 <!-- NOTES -->
+
 
 <div id="notes" class="page hidden">
 
@@ -679,8 +525,7 @@ Notes
 <div class="card">
 
 
-<textarea 
-id="noteInput"
+<textarea id="noteInput"
 placeholder="Write Note">
 </textarea>
 
@@ -720,27 +565,22 @@ Profile
 </h2>
 
 
+
 <div class="card">
 
 
 <p>
 Name:
-<span id="profileName">
-</span>
+<span id="profileName"></span>
 </p>
+
 
 
 <p>
 Email:
-<span id="profileEmail">
-</span>
+<span id="profileEmail"></span>
 </p>
 
-
-
-<button>
-Edit Profile
-</button>
 
 
 </div>
@@ -768,21 +608,17 @@ Settings
 
 <div class="card">
 
-
 <p>
 Account Settings
 </p>
-
-
-<p>
-Theme Settings
-</p>
-
 
 <p>
 Security
 </p>
 
+<p>
+Theme
+</p>
 
 
 </div>
@@ -797,9 +633,6 @@ Security
 
 
 </main>
-
-
-</div>
 
 
 </section>
