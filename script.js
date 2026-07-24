@@ -1,4 +1,4 @@
-// LOGIN FUNCTION
+// LOGIN SYSTEM
 function login(){
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -28,17 +28,15 @@ function resetPassword(){
         alert("Password reset link sent to your email");
         backLogin();
     } else {
-        alert("Enter your email");
+        alert("Please enter your email");
     }
 }
 
-// SIDEBAR SECTION SWITCH
-function openTab(section){
+// TAB SWITCHING
+function openTab(sectionId){
     let sections = document.querySelectorAll(".content-section");
-    sections.forEach(function(item){
-        item.classList.add("hidden");
-    });
-    document.getElementById(section).classList.remove("hidden");
+    sections.forEach(sec => sec.classList.add("hidden"));
+    document.getElementById(sectionId).classList.remove("hidden");
 }
 
 // LOGOUT
@@ -47,49 +45,32 @@ function logout(){
     document.getElementById("loginScreen").classList.remove("hidden");
 }
 
-// DEMO DATA COUNTER & SYSTEM INIT
-document.addEventListener("DOMContentLoaded", function(){
-    let projects = document.getElementById("projectTotal");
-    let clients = document.getElementById("clientTotal");
-    let files = document.getElementById("fileTotal");
-    let tasks = document.getElementById("taskTotal");
-
-    if(projects) projects.innerHTML = "25";
-    if(clients) clients.innerHTML = "120";
-    if(files) files.innerHTML = "560";
-    if(tasks) tasks.innerHTML = "340";
-});
-
-// REAL-TIME CLIENT ADDING FUNCTION
+// ADD CLIENT DYNAMICALLY
 function addNewClient() {
     let name = document.getElementById("clientNameInput").value;
     let email = document.getElementById("clientEmailInput").value;
     let container = document.getElementById("clientContainer");
 
     if(name !== "" && email !== "") {
-        let card = document.createElement("div");
-        card.className = "client-card";
-        card.innerHTML = `<div><h3>${name}</h3><p>Email: ${email}</p></div><span>Active</span>`;
-        
-        container.appendChild(card);
-        
+        let div = document.createElement("div");
+        div.className = "item-card";
+        div.innerHTML = `<div><h3>${name}</h3><p>${email}</p></div><span>Active</span>`;
+        container.appendChild(div);
+
         document.getElementById("clientNameInput").value = "";
         document.getElementById("clientEmailInput").value = "";
-        
-        alert("Client added successfully to the system!");
+        alert("Client added successfully!");
     } else {
-        alert("Please fill in both client name and email.");
+        alert("Please fill in both fields");
     }
 }
 
-// REAL-TIME SETTINGS SAVE FUNCTION
+// SAVE SETTINGS
 function saveCompanySettings() {
-    let compName = document.getElementById("companyNameInput").value;
-    let compEmail = document.getElementById("companyEmailInput").value;
-
-    if(compName !== "" && compEmail !== "") {
-        alert("Settings updated successfully for " + compName);
+    let name = document.getElementById("companyNameInput").value;
+    if(name !== "") {
+        alert("Settings saved successfully for " + name);
     } else {
-        alert("Fields cannot be empty!");
+        alert("Company name cannot be empty");
     }
 }
