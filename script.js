@@ -1,45 +1,42 @@
+// PAGE SWITCH
 
-// SHOW LOGIN
+function showSection(id){
+
+document.querySelectorAll(".auth").forEach(e=>{
+e.classList.add("hidden");
+});
+
+document.getElementById(id).classList.remove("hidden");
+
+}
+
+
 
 function showLogin(){
 
-    document.getElementById("loginBox").classList.remove("hidden");
-
-    document.getElementById("signupBox").classList.add("hidden");
-
-    document.getElementById("forgotBox").classList.add("hidden");
+document.getElementById("loginSection").classList.remove("hidden");
+document.getElementById("signupSection").classList.add("hidden");
+document.getElementById("forgotSection").classList.add("hidden");
 
 }
 
 
-
-
-
-// SHOW SIGNUP
 
 function showSignup(){
 
-    document.getElementById("loginBox").classList.add("hidden");
-
-    document.getElementById("signupBox").classList.remove("hidden");
-
-    document.getElementById("forgotBox").classList.add("hidden");
+document.getElementById("loginSection").classList.add("hidden");
+document.getElementById("signupSection").classList.remove("hidden");
+document.getElementById("forgotSection").classList.add("hidden");
 
 }
 
 
-
-
-
-// SHOW FORGOT PASSWORD
 
 function showForgot(){
 
-    document.getElementById("loginBox").classList.add("hidden");
-
-    document.getElementById("signupBox").classList.add("hidden");
-
-    document.getElementById("forgotBox").classList.remove("hidden");
+document.getElementById("loginSection").classList.add("hidden");
+document.getElementById("signupSection").classList.add("hidden");
+document.getElementById("forgotSection").classList.remove("hidden");
 
 }
 
@@ -47,43 +44,28 @@ function showForgot(){
 
 
 
+// SIGNUP
 
-
-// REGISTER USER
-
-function registerUser(){
-
-
-let name = document.getElementById("signupName").value;
-
-let email = document.getElementById("signupEmail").value;
-
-let password = document.getElementById("signupPassword").value;
-
-
-
-if(name==="" || email==="" || password===""){
-
-    alert("Please fill all fields");
-
-    return;
-
-}
-
-
-
+function signup(){
 
 let user={
 
-    name:name,
+name:document.getElementById("name").value,
 
-    email:email,
+email:document.getElementById("email").value,
 
-    password:password
+password:document.getElementById("password").value
 
 };
 
 
+if(!user.name || !user.email || !user.password){
+
+alert("Fill all details");
+
+return;
+
+}
 
 
 localStorage.setItem(
@@ -92,12 +74,10 @@ JSON.stringify(user)
 );
 
 
-
-alert("Account created successfully");
+alert("Account Created");
 
 
 showLogin();
-
 
 
 }
@@ -108,11 +88,9 @@ showLogin();
 
 
 
+// LOGIN
 
-
-// LOGIN USER
-
-function loginUser(){
+function login(){
 
 
 let email=document.getElementById("loginEmail").value;
@@ -120,82 +98,262 @@ let email=document.getElementById("loginEmail").value;
 let password=document.getElementById("loginPassword").value;
 
 
-
-let savedUser=localStorage.getItem("odpUser");
-
-
-
-if(!savedUser){
-
-    alert("Account not found. Please Sign Up");
-
-    return;
-
-}
+let user=JSON.parse(
+localStorage.getItem("odpUser")
+);
 
 
 
-
-let user=JSON.parse(savedUser);
-
-
-
-
-
-if(email===user.email && password===user.password){
-
+if(user && user.email===email && user.password===password){
 
 
 localStorage.setItem(
-"odpSession",
-"active"
+"odpLogin",
+"true"
 );
-
 
 
 openDashboard();
 
 
-
 }
-
 else{
 
 
-alert("Wrong email or password");
+alert("Invalid Login");
+
+
+}
 
 
 }
 
 
 
-}
 
 
 
 
 
-
-
-
-
-// OPEN DASHBOARD
+// DASHBOARD
 
 function openDashboard(){
 
 
-document.getElementById("loginBox").classList.add("hidden");
+document.getElementById("loginSection").classList.add("hidden");
 
-document.getElementById("signupBox").classList.add("hidden");
+document.getElementById("signupSection").classList.add("hidden");
 
-document.getElementById("forgotBox").classList.add("hidden");
+document.getElementById("forgotSection").classList.add("hidden");
 
 
 document.getElementById("dashboard").classList.remove("hidden");
 
 
+
+let user=JSON.parse(
+localStorage.getItem("odpUser")
+);
+
+
+if(user){
+
+document.getElementById("profileName").innerHTML=user.name;
+
+document.getElementById("profileEmail").innerHTML=user.email;
+
 }
 
+
+}
+
+
+
+
+
+
+
+
+// SIDEBAR
+
+function openPage(page){
+
+
+document.querySelectorAll(".page").forEach(e=>{
+
+e.classList.add("hidden");
+
+});
+
+
+document.getElementById(page).classList.remove("hidden");
+
+
+}
+
+
+
+
+
+
+
+// WORK SAVE
+
+
+function saveWork(){
+
+
+let title=document.getElementById("workTitle").value;
+
+let detail=document.getElementById("workDetails").value;
+
+
+let works=
+JSON.parse(localStorage.getItem("works")) || [];
+
+
+
+works.push({
+
+title:title,
+
+detail:detail
+
+});
+
+
+
+localStorage.setItem(
+"works",
+JSON.stringify(works)
+);
+
+
+
+loadWorks();
+
+
+}
+
+
+
+
+
+function loadWorks(){
+
+
+let box=document.getElementById("workList");
+
+
+if(!box)return;
+
+
+box.innerHTML="";
+
+
+let works=
+JSON.parse(localStorage.getItem("works")) || [];
+
+
+
+works.forEach(w=>{
+
+
+box.innerHTML +=
+`
+<div class="card">
+<h3>${w.title}</h3>
+<p>${w.detail}</p>
+</div>
+`;
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+// FILE SAVE
+
+
+function saveFile(){
+
+
+let file=
+document.getElementById("fileInput").files[0];
+
+
+if(!file){
+
+alert("Select File");
+
+return;
+
+}
+
+
+
+let files=
+JSON.parse(localStorage.getItem("files")) || [];
+
+
+files.push(file.name);
+
+
+localStorage.setItem(
+"files",
+JSON.stringify(files)
+);
+
+
+
+loadFiles();
+
+
+}
+
+
+
+
+
+
+function loadFiles(){
+
+
+let box=document.getElementById("fileList");
+
+
+if(!box)return;
+
+
+box.innerHTML="";
+
+
+let files=
+JSON.parse(localStorage.getItem("files")) || [];
+
+
+
+files.forEach(f=>{
+
+
+box.innerHTML+=
+`
+<div class="card">
+${f}
+</div>
+`;
+
+});
+
+
+}
 
 
 
@@ -206,38 +364,23 @@ document.getElementById("dashboard").classList.remove("hidden");
 
 // FORGOT PASSWORD
 
-function resetPassword(){
+
+function forgotPassword(){
 
 
-let email=document.getElementById("forgotEmail").value;
+let email=
+document.getElementById("resetEmail").value;
 
 
-let savedUser=localStorage.getItem("odpUser");
-
-
-
-if(!savedUser){
-
-alert("No account found");
-
-return;
-
-}
+let user=
+JSON.parse(localStorage.getItem("odpUser"));
 
 
 
-let user=JSON.parse(savedUser);
+if(user && user.email===email){
 
 
-
-if(email===user.email){
-
-
-alert("Password reset request accepted. Contact admin for reset.");
-
-
-showLogin();
-
+alert("Reset request received");
 
 
 }
@@ -245,15 +388,13 @@ showLogin();
 else{
 
 
-alert("Email not registered");
+alert("Email not found");
 
 
 }
 
 
-
 }
-
 
 
 
@@ -263,17 +404,14 @@ alert("Email not registered");
 
 // LOGOUT
 
-function logoutUser(){
+
+function logout(){
 
 
-localStorage.removeItem("odpSession");
+localStorage.removeItem("odpLogin");
 
 
-document.getElementById("dashboard").classList.add("hidden");
-
-
-showLogin();
-
+location.reload();
 
 
 }
@@ -283,21 +421,22 @@ showLogin();
 
 
 
+// AUTO LOAD
 
-// AUTO LOGIN
 
 window.onload=function(){
 
 
-let session=localStorage.getItem("odpSession");
+if(localStorage.getItem("odpLogin")){
 
-
-
-if(session==="active"){
-
-    openDashboard();
+openDashboard();
 
 }
+
+
+loadWorks();
+
+loadFiles();
 
 
 }
