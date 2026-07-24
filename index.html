@@ -4,9 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Omni Data Pro</title>
+<title>OmniDataPro</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,18 +17,60 @@
 <body>
 
 
+<!-- WELCOME / LOGIN SYSTEM START -->
+
+
+<section id="welcomePage" class="auth-page">
+
+<div class="auth-box">
+
+<h1>Welcome To OmniDataPro</h1>
+
+<p>
+Freelancer Work Management Platform
+</p>
+
+
+<button onclick="showLogin()">
+Login
+</button>
+
+
+<button onclick="showSignup()">
+Create Account
+</button>
+
+
+</div>
+
+</section>
+
+
+
+
+
 <!-- LOGIN -->
 
-<section id="loginSection" class="auth">
 
-<h1>Omni Data Pro</h1>
+<section id="loginPage" class="auth-page hidden">
 
-<p>Freelancer Workspace Platform</p>
+<div class="auth-box">
 
 
-<input id="loginEmail" type="email" placeholder="Email">
+<h2>Login</h2>
 
-<input id="loginPassword" type="password" placeholder="Password">
+
+<input 
+id="loginEmail"
+type="email"
+placeholder="Email Address">
+
+
+<input 
+id="loginPassword"
+type="password"
+placeholder="Password">
+
 
 
 <button onclick="login()">
@@ -35,17 +78,21 @@ Login
 </button>
 
 
-<p>
-<a onclick="showSignup()">Create Account</a>
+
+<p onclick="showForgot()">
+Forgot Password?
 </p>
 
 
-<p>
-<a onclick="showForgot()">Forgot Password?</a>
+<p onclick="showSignup()">
+Create New Account
 </p>
 
+
+</div>
 
 </section>
+
 
 
 
@@ -55,19 +102,34 @@ Login
 <!-- SIGNUP -->
 
 
-<section id="signupSection" class="auth hidden">
+<section id="signupPage" class="auth-page hidden">
+
+
+<div class="auth-box">
 
 
 <h2>Create Freelancer Account</h2>
 
 
-<input id="name" placeholder="Full Name">
+
+<input 
+id="signupName"
+placeholder="Full Name">
 
 
-<input id="email" type="email" placeholder="Email">
+
+<input 
+id="signupEmail"
+type="email"
+placeholder="Email Address">
 
 
-<input id="password" type="password" placeholder="Password">
+
+<input 
+id="signupPassword"
+type="password"
+placeholder="Create Password">
+
 
 
 <button onclick="signup()">
@@ -75,9 +137,13 @@ Sign Up
 </button>
 
 
-<p>
-<a onclick="showLogin()">Back To Login</a>
+
+<p onclick="showLogin()">
+Already have account? Login
 </p>
+
+
+</div>
 
 
 </section>
@@ -91,13 +157,20 @@ Sign Up
 <!-- FORGOT PASSWORD -->
 
 
-<section id="forgotSection" class="auth hidden">
+<section id="forgotPage" class="auth-page hidden">
+
+
+<div class="auth-box">
 
 
 <h2>Forgot Password</h2>
 
 
-<input id="resetEmail" placeholder="Registered Email">
+
+<input
+id="forgotEmail"
+placeholder="Registered Email">
+
 
 
 <button onclick="forgotPassword()">
@@ -105,56 +178,138 @@ Reset Password
 </button>
 
 
-<p>
-<a onclick="showLogin()">Back To Login</a>
+
+<p onclick="showLogin()">
+Back To Login
 </p>
 
 
-</section>
+</div>
+<!-- MAIN APP -->
+
+
+<section id="app" class="hidden">
 
 
 
+<!-- TOP HEADER -->
 
 
+<header class="app-header">
 
 
+<div class="brand">
 
-
-<!-- DASHBOARD -->
-
-
-<section id="dashboard" class="hidden">
-
-
-
-<aside>
-
-
-<h2>ODP</h2>
-
-
-<button onclick="openPage('home')">
-Dashboard
+<button onclick="goBack()" class="back-btn">
+←
 </button>
 
 
-<button onclick="openPage('work')">
-My Work
+<h2>
+OmniDataPro
+</h2>
+
+
+</div>
+
+
+
+<div class="user-area" onclick="openPage('profile')">
+
+
+<img 
+src="https://via.placeholder.com/40"
+class="profile-image">
+
+
+<span id="userName">
+User
+</span>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+<!-- APP BODY -->
+
+
+<div class="app-container">
+
+
+
+
+
+<!-- SIDEBAR -->
+
+
+<aside class="sidebar">
+
+
+<h3>
+Menu
+</h3>
+
+
+<button onclick="openPage('dashboard')">
+🏠 Dashboard
+</button>
+
+
+<button onclick="openPage('projects')">
+📁 Projects
+</button>
+
+
+<button onclick="openPage('workspace')">
+📝 Workspace
+</button>
+
+
+<button onclick="openPage('tasks')">
+✅ Tasks
 </button>
 
 
 <button onclick="openPage('files')">
-Files
+📂 Files
+</button>
+
+
+<button onclick="openPage('calendar')">
+📅 Calendar
+</button>
+
+
+<button onclick="openPage('notes')">
+📒 Notes
+</button>
+
+
+<button onclick="openPage('reports')">
+📊 Reports
 </button>
 
 
 <button onclick="openPage('profile')">
-Profile
+👤 Profile
+</button>
+
+
+<button onclick="openPage('settings')">
+⚙ Settings
 </button>
 
 
 <button onclick="logout()">
-Logout
+🚪 Logout
 </button>
 
 
@@ -167,70 +322,253 @@ Logout
 
 
 
-
-<main>
-
+<!-- CONTENT AREA -->
 
 
+<main class="content">
 
 
-<!-- HOME -->
 
 
-<div id="home" class="page">
+
+
+<!-- DASHBOARD -->
+
+
+<div id="dashboard" class="page">
 
 
 <h1>
-Freelancer Dashboard
+Work Dashboard
 </h1>
 
 
-
-<div class="cards">
-
-
-<div class="card">
-
-<h3>Tasks</h3>
-
-<p id="totalTasks">
-0
+<p>
+Select your work category
 </p>
+
+
+
+
+
+<div class="work-grid">
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Basic Data Entry
+</span>
+
+</label>
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Copy Writing
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Typing Work
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Excel Data Work
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Medical Data Entry
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+PDF Work
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Web Research
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Data Cleaning
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Data Processing
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Document Formatting
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Virtual Assistant
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Reporting Work
+</span>
+
+</label>
+
+
+
+
+
+<label class="work-card">
+
+<input type="checkbox">
+
+<span>
+Custom Work
+</span>
+
+</label>
+
+
 
 </div>
 
 
 
+</div>
+  
+<!-- PROJECTS -->
+
+
+<div id="projects" class="page hidden">
+
+<h2>
+My Projects
+</h2>
+
+
+<button>
++ New Project
+</button>
+
+
 <div class="card">
 
-<h3>Completed</h3>
+<h3>
+Project List
+</h3>
 
 <p>
-0
+Your projects will appear here.
 </p>
 
 </div>
 
 
-
-<div class="card">
-
-<h3>Files</h3>
-
-<p id="totalFiles">
-0
-</p>
-
 </div>
-
-
-
-</div>
-
-
-
-</div>
-
 
 
 
@@ -242,11 +580,11 @@ Freelancer Dashboard
 <!-- WORKSPACE -->
 
 
-<div id="work" class="page hidden">
+<div id="workspace" class="page hidden">
 
 
 <h2>
-My Workspace
+Work Sheet
 </h2>
 
 
@@ -257,8 +595,14 @@ placeholder="Work Title">
 
 
 <textarea 
-id="workDetails"
+id="workDescription"
 placeholder="Write your work here...">
+</textarea>
+
+
+
+<textarea
+placeholder="Instructions">
 </textarea>
 
 
@@ -269,27 +613,50 @@ Save Work
 
 
 
-<button onclick="clearWork()">
-New Work
+<div id="savedWork">
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- TASKS -->
+
+
+<div id="tasks" class="page hidden">
+
+
+<h2>
+Tasks
+</h2>
+
+
+<input
+placeholder="Task Name">
+
+
+
+<button>
+Add Task
 </button>
 
 
+<div class="card">
 
-
-<h3>
-Saved Work
-</h3>
-
-
-<div id="workList">
+No Tasks Added
 
 </div>
 
 
-
 </div>
-
-
 
 
 
@@ -304,20 +671,49 @@ Saved Work
 
 
 <h2>
-My Files
+File Manager
 </h2>
 
 
-<input type="file" id="fileInput">
+<input 
+type="file">
 
 
-<button onclick="saveFile()">
-Add File
+
+<button>
+Upload File
 </button>
 
 
+<div class="card">
 
-<div id="fileList">
+Files will appear here.
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- CALENDAR -->
+
+
+<div id="calendar" class="page hidden">
+
+
+<h2>
+Calendar
+</h2>
+
+
+<div class="card">
+
+Work Schedule
 
 </div>
 
@@ -325,6 +721,59 @@ Add File
 </div>
 
 
+
+
+
+
+
+<!-- NOTES -->
+
+
+<div id="notes" class="page hidden">
+
+
+<h2>
+Notes
+</h2>
+
+
+<textarea
+placeholder="Write your notes">
+</textarea>
+
+
+<button>
+Save Note
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- REPORTS -->
+
+
+<div id="reports" class="page hidden">
+
+
+<h2>
+Reports
+</h2>
+
+
+<div class="card">
+
+Work Progress Report
+
+</div>
+
+
+</div>
 
 
 
@@ -339,7 +788,7 @@ Add File
 
 
 <h2>
-My Profile
+User Profile
 </h2>
 
 
@@ -355,6 +804,36 @@ Email:
 </p>
 
 
+<button>
+Edit Profile
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SETTINGS -->
+
+
+<div id="settings" class="page hidden">
+
+
+<h2>
+Settings
+</h2>
+
+
+<div class="card">
+
+Account Settings
+
+</div>
+
 
 </div>
 
@@ -367,9 +846,13 @@ Email:
 </main>
 
 
+</div>
+
+
+</div>
+
 
 </section>
-
 
 
 
@@ -381,3 +864,9 @@ Email:
 </body>
 
 </html>
+</section>
+
+
+
+
+
