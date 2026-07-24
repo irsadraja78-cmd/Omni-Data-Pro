@@ -132,11 +132,11 @@
             <section id="clients" class="content-section hidden">
                 <h2>Client Management</h2>
                 <div class="client-box">
-                    <input placeholder="Client Name">
-                    <input placeholder="Client Email">
-                    <button>Add Client</button>
+                    <input id="clientNameInput" placeholder="Client Name">
+                    <input id="clientEmailInput" placeholder="Client Email">
+                    <button onclick="addNewClient()">Add Client</button>
                 </div>
-                <div class="client-list">
+                <div class="client-list" id="clientContainer">
                     <div class="client-card">
                         <h3>Demo Client</h3>
                         <p>Project Status: Active</p>
@@ -196,10 +196,10 @@
                 <h2>Settings</h2>
                 <div class="settings-card">
                     <label>Company Name</label>
-                    <input value="Omni Data Pro">
+                    <input id="companyNameInput" value="Omni Data Pro">
                     <label>Account Email</label>
-                    <input value="admin@omnidatapro.com">
-                    <button>Save Settings</button>
+                    <input id="companyEmailInput" value="admin@omnidatapro.com">
+                    <button onclick="saveCompanySettings()">Save Settings</button>
                 </div>
             </section>
 
