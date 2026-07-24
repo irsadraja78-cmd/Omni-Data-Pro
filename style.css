@@ -1,7 +1,6 @@
-/* OmniDataPro Updated CSS */
 
+/* OmniDataPro Full New CSS */
 
-/* RESET */
 
 *{
 
@@ -13,12 +12,14 @@ font-family:Arial, sans-serif;
 }
 
 
+
 body{
 
 background:#f1f5f9;
 color:#1e293b;
 
 }
+
 
 
 .hidden{
@@ -33,15 +34,14 @@ display:none !important;
 
 
 
-/* LOGIN / SIGNUP */
-
+/* AUTH */
 
 .auth-page{
 
 height:100vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 background:#e0e7ff;
 
 }
@@ -95,14 +95,15 @@ border-radius:10px;
 
 textarea{
 
-min-height:140px;
+min-height:130px;
 
 }
 
 
 
-button{
 
+
+button{
 
 background:#2563eb;
 color:white;
@@ -110,8 +111,6 @@ border:none;
 padding:12px 18px;
 border-radius:10px;
 cursor:pointer;
-margin:5px;
-
 
 }
 
@@ -135,33 +134,22 @@ background:#1d4ed8;
 
 .app-header{
 
-
 height:70px;
 background:white;
 display:flex;
+align-items:center;
 justify-content:space-between;
-align-items:center;
-padding:0 25px;
+padding:0 20px;
 box-shadow:0 3px 15px rgba(0,0,0,.1);
-
-
-}
-
-
-
-.brand{
-
-
-display:flex;
-align-items:center;
-gap:15px;
-
+position:sticky;
+top:0;
+z-index:900;
 
 }
 
 
 
-.brand h2{
+.app-header h2{
 
 color:#2563eb;
 
@@ -169,44 +157,23 @@ color:#2563eb;
 
 
 
-.user-area{
+.menu-btn{
+
+font-size:25px;
+background:transparent;
+color:#2563eb;
+padding:5px;
+
+}
 
 
-display:flex;
-align-items:center;
-gap:10px;
+
+.profile-box{
+
 cursor:pointer;
-
-
-}
-
-
-
-.user-area img{
-
-
-width:40px;
-height:40px;
-border-radius:50%;
-
-
-}
-
-
-
-
-
-
-
-/* APP LAYOUT */
-
-
-.app-container{
-
-
 display:flex;
-min-height:calc(100vh - 70px);
-
+gap:8px;
+align-items:center;
 
 }
 
@@ -221,11 +188,24 @@ min-height:calc(100vh - 70px);
 
 .sidebar{
 
-
-width:250px;
+position:fixed;
+top:70px;
+left:-270px;
+width:260px;
+height:calc(100vh - 70px);
 background:#111827;
 padding:20px;
+transition:.3s;
+z-index:1000;
+overflow-y:auto;
 
+}
+
+
+
+.sidebar.active{
+
+left:0;
 
 }
 
@@ -233,12 +213,10 @@ padding:20px;
 
 .sidebar button{
 
-
 width:100%;
 text-align:left;
+margin-bottom:12px;
 background:#1f2937;
-margin-bottom:10px;
-
 
 }
 
@@ -262,10 +240,7 @@ background:#2563eb;
 
 .content{
 
-
-flex:1;
 padding:30px;
-
 
 }
 
@@ -274,11 +249,10 @@ padding:30px;
 .page h1,
 .page h2{
 
-
 margin-bottom:20px;
 
-
-}/* WORK DASHBOARD */
+}
+/* DASHBOARD */
 
 
 .work-grid{
@@ -294,7 +268,6 @@ margin-top:25px;
 
 .work-card{
 
-
 background:white;
 padding:25px;
 border-radius:15px;
@@ -304,17 +277,14 @@ font-size:17px;
 font-weight:600;
 transition:.3s;
 
-
 }
 
 
 
 .work-card:hover{
 
-
 transform:translateY(-5px);
 background:#eff6ff;
-
 
 }
 
@@ -324,11 +294,10 @@ background:#eff6ff;
 
 
 
-/* WORKSPACE */
+/* CARD BOX */
 
 
 .card{
-
 
 background:white;
 padding:25px;
@@ -336,17 +305,6 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,.08);
 margin-bottom:20px;
 
-
-}
-
-
-
-#workHeading{
-
-
-color:#2563eb;
-
-
 }
 
 
@@ -355,17 +313,15 @@ color:#2563eb;
 
 
 
-/* FILE MANAGER */
+/* FILES */
 
 
 #fileList p{
 
-
 background:#f8fafc;
 padding:12px;
-margin:8px 0;
+margin-top:10px;
 border-radius:8px;
-
 
 }
 
@@ -375,18 +331,16 @@ border-radius:8px;
 
 
 
-/* TASK LIST */
+/* TASKS */
 
 
 #taskList p{
 
-
 background:white;
 padding:12px;
-margin:8px 0;
+margin-top:10px;
 border-radius:8px;
 box-shadow:0 3px 10px rgba(0,0,0,.08);
-
 
 }
 
@@ -401,13 +355,11 @@ box-shadow:0 3px 10px rgba(0,0,0,.08);
 
 #noteList p{
 
-
 background:#fff7ed;
 padding:12px;
-margin:8px 0;
+margin-top:10px;
 border-radius:8px;
 
-
 }
 
 
@@ -416,56 +368,15 @@ border-radius:8px;
 
 
 
-/* PROFILE */
-
-
-#profile .card p{
-
-
-font-size:18px;
-margin:15px 0;
-
-
-}
-
-
-
-
-
-
-
-/* MOBILE DESIGN */
+/* MOBILE APP VIEW */
 
 
 @media(max-width:800px){
 
 
-
-.app-container{
-
-
-flex-direction:column;
-
-
-}
-
-
-
-.sidebar{
-
-
-width:100%;
-
-
-}
-
-
-
 .content{
 
-
 padding:15px;
-
 
 }
 
@@ -473,9 +384,7 @@ padding:15px;
 
 .work-grid{
 
-
 grid-template-columns:1fr;
-
 
 }
 
@@ -483,19 +392,15 @@ grid-template-columns:1fr;
 
 .auth-box{
 
-
 width:90%;
-
 
 }
 
 
 
-.user-area span{
-
+.profile-box span{
 
 display:none;
-
 
 }
 
