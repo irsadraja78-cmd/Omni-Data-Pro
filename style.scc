@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f4f6f9;
+    background-color: #f8f9fc;
     color: #333;
 }
 
@@ -14,41 +14,43 @@ body {
     display: none !important;
 }
 
-/* LOGIN & FORGOT SCREEN */
+/* LOGIN SCREEN DESIGN */
 .screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #4e73df, #224abe);
 }
 
 .login-card {
     background: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    width: 350px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
 .login-card h1, .login-card h2 {
-    margin-bottom: 10px;
-    color: #1e3c72;
+    color: #224abe;
+    margin-bottom: 8px;
 }
 
 .login-card p {
-    margin-bottom: 20px;
-    color: #666;
+    color: #6c757d;
     font-size: 14px;
+    margin-bottom: 20px;
 }
 
-.login-card input {
+.login-card input, .card-box input {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #d1d3e2;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
 .login-options {
@@ -60,73 +62,86 @@ body {
 }
 
 .login-options a {
-    color: #2a5298;
+    color: #4e73df;
     text-decoration: none;
 }
 
-.login-card button, .content-section button, .client-box button, .settings-card button {
-    width: 100%;
-    padding: 12px;
-    background: #1e3c72;
+button {
+    padding: 12px 20px;
+    background: #4e73df;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s;
+    font-size: 14px;
+    width: 100%;
+    transition: background 0.2s;
 }
 
-.login-card button:hover, .content-section button:hover {
-    background: #2a5298;
+button:hover {
+    background: #224abe;
 }
 
-/* MAIN APP LAYOUT */
+.secondary-btn {
+    background: #6c757d;
+    margin-top: 10px;
+}
+
+/* APP DASHBOARD LAYOUT */
 #app {
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 
 .sidebar {
-    width: 250px;
-    background: #1e1e2f;
+    width: 260px;
+    background: #1f293d;
     color: white;
     display: flex;
     flex-direction: column;
 }
 
 .brand {
-    padding: 20px;
-    background: #151521;
+    padding: 25px 20px;
+    background: #151c28;
     text-align: center;
 }
 
 .brand h2 {
+    color: #60a5fa;
     font-size: 24px;
-    color: #4e73df;
+}
+
+.brand p {
+    font-size: 12px;
+    color: #9ca3af;
 }
 
 .sidebar nav {
     display: flex;
     flex-direction: column;
     padding: 15px;
+    gap: 5px;
 }
 
 .sidebar nav button {
-    background: none;
-    border: none;
-    color: #b5b5c3;
-    padding: 12px 15px;
+    background: transparent;
     text-align: left;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    transition: 0.2s;
+    color: #d1d5db;
+    padding: 12px 15px;
+    border-radius: 6px;
 }
 
 .sidebar nav button:hover {
-    background: #2a2a40;
+    background: #374151;
     color: white;
+}
+
+.logout-btn {
+    background: #dc2626 !important;
+    margin-top: 20px;
 }
 
 .main-content {
@@ -146,89 +161,86 @@ body {
 }
 
 .profile-box {
-    background: #eef2f7;
+    background: #f1f5f9;
     padding: 8px 15px;
     border-radius: 20px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .content-section {
     padding: 30px;
 }
 
-/* DASHBOARD */
+/* DASHBOARD CARDS */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    margin-bottom: 30px;
 }
 
 .dashboard-card {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    border-left: 4px solid #4e73df;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid #4e73df;
 }
 
 .dashboard-card h3 {
-    font-size: 14px;
+    font-size: 13px;
     color: #858796;
-    margin-bottom: 10px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
 }
 
 .dashboard-card h1 {
-    font-size: 28px;
-    color: #5a5c69;
+    font-size: 26px;
+    color: #2e59d9;
     margin-bottom: 5px;
 }
 
-.business-panel {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-/* FILE & CLIENT & SERVICES */
-.file-toolbar, .client-box, .settings-card {
+/* CARDS & FORMS */
+.card-box {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     display: flex;
     gap: 15px;
+    margin-bottom: 20px;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.file-toolbar input, .client-box input, .settings-card input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex: 1;
+.card-box.vertical {
+    flex-direction: column;
+    align-items: stretch;
 }
 
-.file-list, .client-list {
+.card-box.vertical label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.list-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.file-item, .client-card {
+.item-card {
     background: white;
     padding: 15px 20px;
     border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
 }
 
@@ -236,38 +248,17 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     text-align: center;
 }
 
 .service-card h3 {
-    margin-bottom: 10px;
-    color: #1e3c72;
+    color: #224abe;
+    margin-bottom: 8px;
 }
 
 .service-card p {
     font-size: 13px;
     color: #666;
     margin-bottom: 15px;
-}
-
-.settings-card {
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.settings-card label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.notification-panel {
-    background: #1e1e2f;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    font-size: 13px;
 }
