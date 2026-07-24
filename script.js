@@ -1,41 +1,39 @@
-// PAGE SWITCH
-
-function showSection(id){
-
-document.querySelectorAll(".auth").forEach(e=>{
-e.classList.add("hidden");
-});
-
-document.getElementById(id).classList.remove("hidden");
-
-}
-
-
+// SHOW LOGIN
 
 function showLogin(){
 
 document.getElementById("loginSection").classList.remove("hidden");
+
 document.getElementById("signupSection").classList.add("hidden");
+
 document.getElementById("forgotSection").classList.add("hidden");
 
 }
 
 
+
+// SHOW SIGNUP
 
 function showSignup(){
 
 document.getElementById("loginSection").classList.add("hidden");
+
 document.getElementById("signupSection").classList.remove("hidden");
+
 document.getElementById("forgotSection").classList.add("hidden");
 
 }
 
 
 
+// SHOW FORGOT
+
 function showForgot(){
 
 document.getElementById("loginSection").classList.add("hidden");
+
 document.getElementById("signupSection").classList.add("hidden");
+
 document.getElementById("forgotSection").classList.remove("hidden");
 
 }
@@ -44,9 +42,10 @@ document.getElementById("forgotSection").classList.remove("hidden");
 
 
 
-// SIGNUP
+// CREATE ACCOUNT
 
 function signup(){
+
 
 let user={
 
@@ -59,13 +58,15 @@ password:document.getElementById("password").value
 };
 
 
+
 if(!user.name || !user.email || !user.password){
 
-alert("Fill all details");
+alert("Please fill all fields");
 
 return;
 
 }
+
 
 
 localStorage.setItem(
@@ -74,7 +75,8 @@ JSON.stringify(user)
 );
 
 
-alert("Account Created");
+
+alert("Account Created Successfully");
 
 
 showLogin();
@@ -98,6 +100,7 @@ let email=document.getElementById("loginEmail").value;
 let password=document.getElementById("loginPassword").value;
 
 
+
 let user=JSON.parse(
 localStorage.getItem("odpUser")
 );
@@ -108,19 +111,21 @@ if(user && user.email===email && user.password===password){
 
 
 localStorage.setItem(
-"odpLogin",
-"true"
+"odpSession",
+"active"
 );
+
 
 
 openDashboard();
 
 
 }
+
 else{
 
 
-alert("Invalid Login");
+alert("Invalid Email or Password");
 
 
 }
@@ -134,8 +139,7 @@ alert("Invalid Login");
 
 
 
-
-// DASHBOARD
+// OPEN DASHBOARD
 
 function openDashboard(){
 
@@ -156,34 +160,38 @@ localStorage.getItem("odpUser")
 );
 
 
+
 if(user){
+
 
 document.getElementById("profileName").innerHTML=user.name;
 
+
 document.getElementById("profileEmail").innerHTML=user.email;
 
-}
-
 
 }
 
 
+}
 
 
 
 
 
 
-// SIDEBAR
+
+// SIDEBAR PAGE CHANGE
 
 function openPage(page){
 
 
-document.querySelectorAll(".page").forEach(e=>{
+document.querySelectorAll(".page").forEach(function(item){
 
-e.classList.add("hidden");
+item.classList.add("hidden");
 
 });
+
 
 
 document.getElementById(page).classList.remove("hidden");
@@ -197,19 +205,30 @@ document.getElementById(page).classList.remove("hidden");
 
 
 
-// WORK SAVE
-
+// SAVE WORK
 
 function saveWork(){
 
 
 let title=document.getElementById("workTitle").value;
 
-let detail=document.getElementById("workDetails").value;
+let details=document.getElementById("workDetails").value;
 
 
-let works=
-JSON.parse(localStorage.getItem("works")) || [];
+
+if(!title || !details){
+
+alert("Enter work details");
+
+return;
+
+}
+
+
+
+let works=JSON.parse(
+localStorage.getItem("odpWorks")
+) || [];
 
 
 
@@ -217,14 +236,16 @@ works.push({
 
 title:title,
 
-detail:detail
+details:details,
+
+date:new Date().toLocaleString()
 
 });
 
 
 
 localStorage.setItem(
-"works",
+"odpWorks",
 JSON.stringify(works)
 );
 
@@ -233,11 +254,19 @@ JSON.stringify(works)
 loadWorks();
 
 
+
+clearWork();
+
+
 }
 
 
 
 
+
+
+
+// LOAD WORK
 
 function loadWorks(){
 
@@ -248,24 +277,36 @@ let box=document.getElementById("workList");
 if(!box)return;
 
 
+
 box.innerHTML="";
 
 
-let works=
-JSON.parse(localStorage.getItem("works")) || [];
+
+let works=JSON.parse(
+localStorage.getItem("odpWorks")
+) || [];
 
 
 
-works.forEach(w=>{
+works.forEach(function(work,index){
 
 
-box.innerHTML +=
-`
+
+box.innerHTML += `
+
 <div class="card">
-<h3>${w.title}</h3>
-<p>${w.detail}</p>
+
+<h3>${work.title}</h3>
+
+<p>${work.details}</p>
+
+<small>${work.date}</small>
+
 </div>
+
 `;
+
+
 
 });
 
@@ -278,20 +319,41 @@ box.innerHTML +=
 
 
 
+// CLEAR WORK
+
+function clearWork(){
+
+
+let title=document.getElementById("workTitle");
+
+let details=document.getElementById("workDetails");
+
+
+if(title) title.value="";
+
+if(details) details.value="";
+
+
+}
+
+
+
+
+
+
 
 // FILE SAVE
-
 
 function saveFile(){
 
 
-let file=
-document.getElementById("fileInput").files[0];
+let file=document.getElementById("fileInput").files[0];
+
 
 
 if(!file){
 
-alert("Select File");
+alert("Select file");
 
 return;
 
@@ -299,15 +361,18 @@ return;
 
 
 
-let files=
-JSON.parse(localStorage.getItem("files")) || [];
+let files=JSON.parse(
+localStorage.getItem("odpFiles")
+) || [];
+
 
 
 files.push(file.name);
 
 
+
 localStorage.setItem(
-"files",
+"odpFiles",
 JSON.stringify(files)
 );
 
@@ -323,6 +388,9 @@ loadFiles();
 
 
 
+
+// LOAD FILES
+
 function loadFiles(){
 
 
@@ -332,25 +400,35 @@ let box=document.getElementById("fileList");
 if(!box)return;
 
 
+
 box.innerHTML="";
 
 
-let files=
-JSON.parse(localStorage.getItem("files")) || [];
+
+let files=JSON.parse(
+localStorage.getItem("odpFiles")
+) || [];
 
 
 
-files.forEach(f=>{
+files.forEach(function(file){
 
 
-box.innerHTML+=
-`
+box.innerHTML += `
+
 <div class="card">
-${f}
+
+${file}
+
 </div>
+
 `;
 
+
 });
+
+
+document.getElementById("totalFiles").innerHTML=files.length;
 
 
 }
@@ -361,26 +439,28 @@ ${f}
 
 
 
-
 // FORGOT PASSWORD
-
 
 function forgotPassword(){
 
 
-let email=
-document.getElementById("resetEmail").value;
+let email=document.getElementById("resetEmail").value;
 
 
-let user=
-JSON.parse(localStorage.getItem("odpUser"));
+
+let user=JSON.parse(
+localStorage.getItem("odpUser")
+);
 
 
 
 if(user && user.email===email){
 
 
-alert("Reset request received");
+alert("Password reset request sent");
+
+
+showLogin();
 
 
 }
@@ -404,11 +484,10 @@ alert("Email not found");
 
 // LOGOUT
 
-
 function logout(){
 
 
-localStorage.removeItem("odpLogin");
+localStorage.removeItem("odpSession");
 
 
 location.reload();
@@ -421,17 +500,18 @@ location.reload();
 
 
 
-// AUTO LOAD
 
+// AUTO LOGIN
 
 window.onload=function(){
 
 
-if(localStorage.getItem("odpLogin")){
+if(localStorage.getItem("odpSession")){
 
 openDashboard();
 
 }
+
 
 
 loadWorks();
