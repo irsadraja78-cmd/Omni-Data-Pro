@@ -4,237 +4,179 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Omni Data Pro</title>
-
-<link rel="stylesheet" href="style.css">
+<title>Omni Data Pro - Commercial Dashboard</title>
 
 </head>
-
 
 <body>
 
 
-<!-- Login Section -->
+<!-- LOGIN SYSTEM -->
 
-<section id="login-section" class="page">
-
-
-<div class="login-box">
+<div id="loginPage">
 
 <h1>Omni Data Pro</h1>
 
-<p>Professional Data Services</p>
+<p>Commercial Data Management Platform</p>
 
 
-<input 
-type="text" 
-id="username" 
-placeholder="Enter Username">
+<input id="loginEmail" type="email" placeholder="Email">
 
 
-<input 
-type="password" 
-id="password" 
-placeholder="Enter Password">
+<input id="loginPassword" type="password" placeholder="Password">
 
 
-<button onclick="login()">
+<button onclick="loginUser()">
 Login
+</button>
+
+
+<button onclick="showForgotPassword()">
+Forgot Password?
 </button>
 
 
 </div>
 
 
-</section>
 
 
 
+<!-- FORGOT PASSWORD -->
+
+<div id="forgotPage" style="display:none;">
 
 
-<!-- Dashboard Section -->
-
-<section id="dashboard-section" class="page hidden">
+<h2>Password Recovery</h2>
 
 
-<header class="header">
+<input id="recoverEmail" placeholder="Enter Email">
 
 
-<div class="logo">
-ODP
+<button onclick="recoverPassword()">
+Send Recovery
+</button>
+
+
+<button onclick="backToLogin()">
+Back Login
+</button>
+
+
 </div>
 
 
-<div>
+
+
+
+
+<!-- MAIN APP -->
+
+<div id="appPage" style="display:none;">
+
+
+
+<!-- SIDEBAR -->
+
+<aside id="sidebar">
+
 
 <h2>
-Omni Data Pro
+ODP
 </h2>
 
-<p>
+
+<button onclick="openSection('dashboard')">
 Dashboard
+</button>
+
+
+<button onclick="openSection('files')">
+File Manager
+</button>
+
+
+<button onclick="openSection('clients')">
+Clients
+</button>
+
+
+<button onclick="openSection('services')">
+Services
+</button>
+
+
+<button onclick="openSection('settings')">
+Settings
+</button>
+
+
+<button onclick="logoutUser()">
+Logout
+</button>
+
+
+</aside>
+
+
+
+
+
+<!-- MAIN CONTENT -->
+
+<main>
+
+
+<header>
+
+<h1>
+Omni Data Pro Dashboard
+</h1>
+
+
+<p>
+Professional Business Management System
 </p>
-
-</div>
-
-
-<div>
-👤
-</div>
 
 
 </header>
 
 
+<!-- Dashboard Section -->
 
 
-
-
-<div class="welcome-card">
+<section id="dashboard" class="section">
 
 
 <h2>
-Welcome
+Dashboard Overview
 </h2>
 
 
-<p>
-Select your required service
-</p>
+<div>
 
-
-</div>
-
-
-
-
-
-
-
-<!-- Services -->
-
-
-<div class="services-container">
-
-
-
-
-
-<div class="service-card">
-
-<h3>
-Basic Data Entry
-</h3>
-
-<p>
-Professional data entry solutions
-</p>
-
-<button onclick="showService('Basic Data Entry')">
-Open
-</button>
+<h3>Total Projects</h3>
+<p id="projectCount">0</p>
 
 </div>
 
 
+<div>
 
-
-
-<div class="service-card">
-
-<h3>
-Online Data Entry
-</h3>
-
-<p>
-Online data processing services
-</p>
-
-<button onclick="showService('Online Data Entry')">
-Open
-</button>
+<h3>Active Files</h3>
+<p id="fileCount">0</p>
 
 </div>
 
 
+<div>
 
-
-
-<div class="service-card">
-
-<h3>
-E-Commerce Catalog
-</h3>
-
-<p>
-Product listing and management
-</p>
-
-<button onclick="showService('E-Commerce Catalog')">
-Open
-</button>
+<h3>Clients</h3>
+<p id="clientCount">0</p>
 
 </div>
 
 
-
-
-
-<div class="service-card">
-
-<h3>
-Image To Text
-</h3>
-
-<p>
-Convert images into editable data
-</p>
-
-<button onclick="showService('Image To Text')">
-Open
-</button>
-
-</div>
-
-
-
-
-
-<div class="service-card">
-
-<h3>
-Web Research
-</h3>
-
-<p>
-Internet research and data collection
-</p>
-
-<button onclick="showService('Web Research')">
-Open
-</button>
-
-</div>
-
-
-
-
-
-<div class="service-card">
-
-<h3>
-Data Mining
-</h3>
-
-<p>
-Data collection and analysis
-</p>
-
-<button onclick="showService('Data Mining')">
-Open
-</button>
-
-</div>
+</section>
