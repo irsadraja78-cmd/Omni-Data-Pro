@@ -1,7 +1,9 @@
-// OmniDataPro Updated Script
+
+// OmniDataPro Full Script
 
 
-// AUTH PAGE CONTROL
+
+// AUTH CONTROL
 
 
 function hideAuth(){
@@ -15,6 +17,7 @@ document.getElementById("signupPage").classList.add("hidden");
 document.getElementById("forgotPage").classList.add("hidden");
 
 }
+
 
 
 
@@ -54,26 +57,34 @@ document.getElementById("forgotPage").classList.remove("hidden");
 
 
 
-// CREATE ACCOUNT
+// SIGNUP
 
 
 function signup(){
 
 
-let name =
-document.getElementById("signupName").value;
+let user={
 
 
-let email =
-document.getElementById("signupEmail").value;
+name:
+document.getElementById("signupName").value,
 
 
-let password =
-document.getElementById("signupPassword").value;
+email:
+document.getElementById("signupEmail").value,
+
+
+password:
+document.getElementById("signupPassword").value
 
 
 
-if(!name || !email || !password){
+};
+
+
+
+if(!user.name || !user.email || !user.password){
+
 
 alert("Fill all details");
 
@@ -83,21 +94,12 @@ return;
 
 
 
-let user={
-
-name:name,
-
-email:email,
-
-password:password
-
-};
-
-
-
 localStorage.setItem(
+
 "odpUser",
+
 JSON.stringify(user)
+
 );
 
 
@@ -125,6 +127,7 @@ function login(){
 
 let email =
 document.getElementById("loginEmail").value;
+
 
 
 let password =
@@ -156,7 +159,7 @@ openApp();
 else{
 
 
-alert("Invalid Login");
+alert("Wrong Login Details");
 
 
 }
@@ -178,11 +181,12 @@ function forgotPassword(){
 
 
 alert(
-"Password reset link will be added with email system"
+"Password reset system will be connected with email later"
 );
 
 
-}// OPEN APP
+}
+// OPEN APP
 
 
 function openApp(){
@@ -231,7 +235,27 @@ openPage("dashboard");
 
 
 
-// PAGE NAVIGATION
+// SIDEBAR SLIDE
+
+
+function toggleSidebar(){
+
+
+document
+.getElementById("sidebar")
+.classList.toggle("active");
+
+
+}
+
+
+
+
+
+
+
+
+// PAGE OPEN
 
 
 function openPage(page){
@@ -242,9 +266,11 @@ document.querySelectorAll(".page");
 
 
 
-pages.forEach(function(p){
+pages.forEach(function(item){
 
-p.classList.add("hidden");
+
+item.classList.add("hidden");
+
 
 });
 
@@ -257,9 +283,15 @@ document.getElementById(page);
 
 if(selected){
 
+
 selected.classList.remove("hidden");
 
+
 }
+
+
+
+toggleSidebar();
 
 
 }
@@ -276,7 +308,9 @@ selected.classList.remove("hidden");
 
 function goBack(){
 
+
 openPage("dashboard");
+
 
 }
 
@@ -294,38 +328,8 @@ function openWork(workName){
 
 
 
-document.getElementById("workHeading").innerHTML =
+document.getElementById("workTitle").innerHTML =
 workName;
-
-
-
-openPage("mywork");
-
-
-
-let folder =
-JSON.parse(localStorage.getItem("odpFolder")) || {};
-
-
-
-if(!folder[workName]){
-
-
-folder[workName]={
-
-files:[],
-works:[]
-
-};
-
-
-localStorage.setItem(
-"odpFolder",
-JSON.stringify(folder)
-);
-
-
-}
 
 
 
@@ -336,21 +340,41 @@ workName
 
 
 
+let folders =
+JSON.parse(localStorage.getItem("odpFolders")) || {};
+
+
+
+if(!folders[workName]){
+
+
+folders[workName]={
+
+files:[],
+
+works:[]
+
+};
+
+
+localStorage.setItem(
+"odpFolders",
+JSON.stringify(folders)
+);
+
+
 }
 
 
 
+openPage("mywork");
 
 
-
-
-
-
+}
 // SAVE WORK
 
 
 function saveWork(){
-
 
 
 let current =
@@ -360,7 +384,7 @@ localStorage.getItem("currentWork");
 
 if(!current){
 
-alert("Select Work Category First");
+alert("Select Work First");
 
 return;
 
@@ -368,43 +392,40 @@ return;
 
 
 
-let project =
-document.getElementById("projectName").value;
+let folders =
+JSON.parse(localStorage.getItem("odpFolders")) || {};
 
 
 
-let details =
-document.getElementById("workDetails").value;
+folders[current].works.push({
 
 
-
-let status =
-document.getElementById("workStatus").value;
-
+project:
+document.getElementById("projectName").value,
 
 
-let folder =
-JSON.parse(localStorage.getItem("odpFolder"));
+details:
+document.getElementById("workDetails").value,
 
 
+status:
+document.getElementById("workStatus").value,
 
-folder[current].works.push({
 
-project:project,
+date:
+new Date().toLocaleString()
 
-details:details,
-
-status:status,
-
-date:new Date().toLocaleString()
 
 });
 
 
 
 localStorage.setItem(
-"odpFolder",
-JSON.stringify(folder)
+
+"odpFolders",
+
+JSON.stringify(folders)
+
 );
 
 
@@ -412,7 +433,16 @@ JSON.stringify(folder)
 alert("Work Saved Successfully");
 
 
-}// FILE SYSTEM
+}
+
+
+
+
+
+
+
+
+// ADD FILE
 
 
 function addFile(){
@@ -422,9 +452,10 @@ let input =
 document.getElementById("fileUpload");
 
 
+
 if(!input.files.length){
 
-alert("Select a file first");
+alert("Select File");
 
 return;
 
@@ -437,34 +468,31 @@ localStorage.getItem("currentWork");
 
 
 
-if(!current){
-
-alert("Open a work category first");
-
-return;
-
-}
+let folders =
+JSON.parse(localStorage.getItem("odpFolders")) || {};
 
 
 
-let folder =
-JSON.parse(localStorage.getItem("odpFolder")) || {};
+folders[current].files.push({
+
+name:
+input.files[0].name,
 
 
+date:
+new Date().toLocaleString()
 
-folder[current].files.push({
-
-name:input.files[0].name,
-
-date:new Date().toLocaleString()
 
 });
 
 
 
 localStorage.setItem(
-"odpFolder",
-JSON.stringify(folder)
+
+"odpFolders",
+
+JSON.stringify(folders)
+
 );
 
 
@@ -481,11 +509,10 @@ loadFiles();
 
 
 
+// SHOW FILES
+
+
 function loadFiles(){
-
-
-let current =
-localStorage.getItem("currentWork");
 
 
 let list =
@@ -493,12 +520,17 @@ document.getElementById("fileList");
 
 
 
-if(!list || !current)return;
+if(!list)return;
 
 
 
-let folder =
-JSON.parse(localStorage.getItem("odpFolder")) || {};
+let current =
+localStorage.getItem("currentWork");
+
+
+
+let folders =
+JSON.parse(localStorage.getItem("odpFolders")) || {};
 
 
 
@@ -506,11 +538,11 @@ list.innerHTML="";
 
 
 
-if(folder[current] && folder[current].files.length){
+if(folders[current]){
 
 
+folders[current].files.forEach(function(file){
 
-folder[current].files.forEach(function(file){
 
 
 list.innerHTML += `
@@ -524,15 +556,6 @@ list.innerHTML += `
 
 
 });
-
-
-
-}
-
-else{
-
-
-list.innerHTML="No Files Added";
 
 
 }
@@ -572,8 +595,11 @@ tasks.push(task);
 
 
 localStorage.setItem(
+
 "odpTasks",
+
 JSON.stringify(tasks)
+
 );
 
 
@@ -614,13 +640,9 @@ list.innerHTML="";
 tasks.forEach(function(task){
 
 
-list.innerHTML += `
+list.innerHTML +=
 
-<p>
-☐ ${task}
-</p>
-
-`;
+`<p>☐ ${task}</p>`;
 
 
 });
@@ -635,8 +657,7 @@ list.innerHTML += `
 
 
 
-
-// NOTES SYSTEM
+// NOTES
 
 
 function saveNote(){
@@ -644,10 +665,6 @@ function saveNote(){
 
 let note =
 document.getElementById("noteInput").value;
-
-
-
-if(!note)return;
 
 
 
@@ -661,8 +678,11 @@ notes.push(note);
 
 
 localStorage.setItem(
+
 "odpNotes",
+
 JSON.stringify(notes)
+
 );
 
 
@@ -703,13 +723,9 @@ list.innerHTML="";
 notes.forEach(function(note){
 
 
-list.innerHTML += `
+list.innerHTML +=
 
-<p>
-📝 ${note}
-</p>
-
-`;
+`<p>📝 ${note}</p>`;
 
 
 });
@@ -745,7 +761,7 @@ location.reload();
 
 
 
-// AUTO LOAD
+// AUTO START
 
 
 window.onload=function(){
