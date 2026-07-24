@@ -1,154 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni Data Pro</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Omni Data Pro</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
 
-    <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="screen">
-        <div class="login-card">
-            <h1>Omni Data Pro</h1>
-            <p>Commercial Data Management Platform</p>
-            
-            <input id="email" type="email" placeholder="Enter Email">
-            <input id="password" type="password" placeholder="Enter Password">
-            
-            <div class="login-options">
-                <label><input type="checkbox"> Remember Me</label>
-                <a href="#" onclick="showForgot()">Forgot Password?</a>
-            </div>
-            
-            <button onclick="login()">Login</button>
-        </div>
-    </div>
 
-    <!-- FORGOT PASSWORD SCREEN -->
-    <div id="forgotScreen" class="screen hidden">
-        <div class="login-card">
-            <h2>Forgot Password</h2>
-            <p>Enter your registered email</p>
-            
-            <input id="resetEmail" type="email" placeholder="Email Address">
-            
-            <button onclick="resetPassword()">Reset Password</button>
-            <button onclick="backLogin()" class="secondary-btn">Back To Login</button>
-        </div>
-    </div>
+<div class="container">
 
-    <!-- MAIN APP DASHBOARD -->
-    <div id="app" class="hidden">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="brand">
-                <h2>ODP</h2>
-                <p>Omni Data Pro</p>
-            </div>
-            <nav>
-                <button onclick="openTab('dashboard')">Dashboard</button>
-                <button onclick="openTab('files')">File Manager</button>
-                <button onclick="openTab('clients')">Clients</button>
-                <button onclick="openTab('services')">Services</button>
-                <button onclick="openTab('settings')">Settings</button>
-                <button onclick="logout()" class="logout-btn">Logout</button>
-            </nav>
-        </aside>
 
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <header class="topbar">
-                <div>
-                    <h2>Dashboard</h2>
-                    <p>Business Management System</p>
-                </div>
-                <div class="profile-box">👤 Admin</div>
-            </header>
+<!-- LOGIN BOX -->
 
-            <!-- DASHBOARD SECTION -->
-            <section id="dashboard" class="content-section">
-                <div class="dashboard-grid">
-                    <div class="dashboard-card">
-                        <h3>Total Projects</h3>
-                        <h1 id="projectTotal">25</h1>
-                        <p>Active Business Projects</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Total Clients</h3>
-                        <h1 id="clientTotal">120</h1>
-                        <p>Registered Clients</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Total Files</h3>
-                        <h1 id="fileTotal">560</h1>
-                        <p>Managed Documents</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Completed Tasks</h3>
-                        <h1 id="taskTotal">340</h1>
-                        <p>Finished Work</p>
-                    </div>
-                </div>
-            </section>
+<div class="auth-box" id="loginBox">
 
-            <!-- FILE MANAGER SECTION -->
-            <section id="files" class="content-section hidden">
-                <h2>File Management System</h2>
-                <div class="card-box">
-                    <button onclick="alert('File uploaded successfully')">Upload File</button>
-                    <button onclick="alert('New folder created')">Create Folder</button>
-                </div>
-            </section>
 
-            <!-- CLIENTS SECTION -->
-            <section id="clients" class="content-section hidden">
-                <h2>Client Management</h2>
-                <div class="card-box">
-                    <input id="clientNameInput" placeholder="Client Name">
-                    <input id="clientEmailInput" placeholder="Client Email">
-                    <button onclick="addNewClient()">Add Client</button>
-                </div>
-                <div id="clientContainer" class="list-container">
-                    <div class="item-card">
-                        <h3>Demo Client</h3>
-                        <p>Status: Active</p>
-                    </div>
-                </div>
-            </section>
+<h1>Omni Data Pro</h1>
 
-            <!-- SERVICES SECTION -->
-            <section id="services" class="content-section hidden">
-                <h2>Service Management</h2>
-                <div class="service-grid">
-                    <div class="service-card">
-                        <h3>Data Entry</h3>
-                        <p>Professional data processing</p>
-                        <button onclick="alert('Service Requested')">Request</button>
-                    </div>
-                    <div class="service-card">
-                        <h3>Web Research</h3>
-                        <p>Accurate information collection</p>
-                        <button onclick="alert('Service Requested')">Request</button>
-                    </div>
-                </div>
-            </section>
+<p>Freelancer Workspace Platform</p>
 
-            <!-- SETTINGS SECTION -->
-            <section id="settings" class="content-section hidden">
-                <h2>Settings</h2>
-                <div class="card-box vertical">
-                    <label>Company Name</label>
-                    <input id="companyNameInput" value="Omni Data Pro">
-                    <label>Account Email</label>
-                    <input id="companyEmailInput" value="admin@omnidatapro.com">
-                    <button onclick="saveCompanySettings()">Save Settings</button>
-                </div>
-            </section>
-        </main>
-    </div>
 
-    <script src="script.js"></script>
+<input 
+id="loginEmail"
+type="email"
+placeholder="Email Address">
+
+
+<input 
+id="loginPassword"
+type="password"
+placeholder="Password">
+
+
+
+<button onclick="loginUser()">
+Login
+</button>
+
+
+<div class="links">
+
+<a onclick="showSignup()">
+Create Account
+</a>
+
+
+<a onclick="showForgot()">
+Forgot Password?
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SIGNUP BOX -->
+
+<div class="auth-box hidden" id="signupBox">
+
+
+<h2>Create Freelancer Account</h2>
+
+
+<input
+id="signupName"
+placeholder="Full Name">
+
+
+<input
+id="signupEmail"
+type="email"
+placeholder="Email">
+
+
+<input
+id="signupPassword"
+type="password"
+placeholder="Create Password">
+
+
+<button onclick="registerUser()">
+Sign Up
+</button>
+
+
+<div class="links">
+
+<a onclick="showLogin()">
+Already have account?
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- FORGOT PASSWORD -->
+
+<div class="auth-box hidden" id="forgotBox">
+
+
+<h2>Password Reset</h2>
+
+
+<input
+id="forgotEmail"
+type="email"
+placeholder="Registered Email">
+
+
+
+<button onclick="resetPassword()">
+Reset Password
+</button>
+
+
+
+<div class="links">
+
+<a onclick="showLogin()">
+Back To Login
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- DASHBOARD PLACEHOLDER -->
+
+<div class="hidden" id="dashboard">
+
+
+<h2>
+Welcome To Omni Data Pro
+</h2>
+
+
+<p>
+Freelancer Dashboard Loading...
+</p>
+
+
+<button onclick="logoutUser()">
+Logout
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
