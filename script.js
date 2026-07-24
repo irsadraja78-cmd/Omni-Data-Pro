@@ -1,10 +1,10 @@
-// OmniDataPro Main Script
+// OmniDataPro Updated Script
 
 
-// PAGE CONTROL
+// AUTH PAGE CONTROL
 
 
-function hideAllAuth(){
+function hideAuth(){
 
 document.getElementById("welcomePage").classList.add("hidden");
 
@@ -21,7 +21,7 @@ document.getElementById("forgotPage").classList.add("hidden");
 
 function showLogin(){
 
-hideAllAuth();
+hideAuth();
 
 document.getElementById("loginPage").classList.remove("hidden");
 
@@ -29,10 +29,9 @@ document.getElementById("loginPage").classList.remove("hidden");
 
 
 
-
 function showSignup(){
 
-hideAllAuth();
+hideAuth();
 
 document.getElementById("signupPage").classList.remove("hidden");
 
@@ -40,10 +39,9 @@ document.getElementById("signupPage").classList.remove("hidden");
 
 
 
-
 function showForgot(){
 
-hideAllAuth();
+hideAuth();
 
 document.getElementById("forgotPage").classList.remove("hidden");
 
@@ -55,13 +53,14 @@ document.getElementById("forgotPage").classList.remove("hidden");
 
 
 
-// SIGNUP SYSTEM
+
+// CREATE ACCOUNT
 
 
 function signup(){
 
 
-let userName =
+let name =
 document.getElementById("signupName").value;
 
 
@@ -74,9 +73,9 @@ document.getElementById("signupPassword").value;
 
 
 
-if(!userName || !email || !password){
+if(!name || !email || !password){
 
-alert("Please fill all details");
+alert("Fill all details");
 
 return;
 
@@ -86,7 +85,7 @@ return;
 
 let user={
 
-name:userName,
+name:name,
 
 email:email,
 
@@ -103,7 +102,7 @@ JSON.stringify(user)
 
 
 
-alert("Account Created Successfully");
+alert("Account Created");
 
 
 showLogin();
@@ -118,7 +117,7 @@ showLogin();
 
 
 
-// LOGIN SYSTEM
+// LOGIN
 
 
 function login(){
@@ -141,6 +140,7 @@ JSON.parse(localStorage.getItem("odpUser"));
 if(user && user.email===email && user.password===password){
 
 
+
 localStorage.setItem(
 "odpLogin",
 "true"
@@ -151,19 +151,20 @@ localStorage.setItem(
 openApp();
 
 
-
 }
 
 else{
 
 
-alert("Wrong Email or Password");
+alert("Invalid Login");
 
 
 }
 
 
 }
+
+
 
 
 
@@ -176,50 +177,18 @@ alert("Wrong Email or Password");
 function forgotPassword(){
 
 
-let email =
-document.getElementById("forgotEmail").value;
+alert(
+"Password reset link will be added with email system"
+);
 
 
-
-let user =
-JSON.parse(localStorage.getItem("odpUser"));
-
-
-
-if(user && user.email===email){
-
-
-alert("Password reset request accepted");
-
-
-showLogin();
-
-
-}
-
-else{
-
-
-alert("Email not found");
-
-
-}
-
-
-}// OPEN MAIN APP
+}// OPEN APP
 
 
 function openApp(){
 
 
-document.getElementById("welcomePage").classList.add("hidden");
-
-document.getElementById("loginPage").classList.add("hidden");
-
-document.getElementById("signupPage").classList.add("hidden");
-
-document.getElementById("forgotPage").classList.add("hidden");
-
+hideAuth();
 
 
 document.getElementById("app").classList.remove("hidden");
@@ -262,7 +231,7 @@ openPage("dashboard");
 
 
 
-// OPEN SIDEBAR PAGE
+// PAGE NAVIGATION
 
 
 function openPage(page){
@@ -273,9 +242,9 @@ document.querySelectorAll(".page");
 
 
 
-pages.forEach(function(item){
+pages.forEach(function(p){
 
-item.classList.add("hidden");
+p.classList.add("hidden");
 
 });
 
@@ -301,16 +270,453 @@ selected.classList.remove("hidden");
 
 
 
+
 // BACK BUTTON
 
 
 function goBack(){
 
-
 openPage("dashboard");
+
+}
+
+
+
+
+
+
+
+
+// OPEN WORK CATEGORY
+
+
+function openWork(workName){
+
+
+
+document.getElementById("workHeading").innerHTML =
+workName;
+
+
+
+openPage("mywork");
+
+
+
+let folder =
+JSON.parse(localStorage.getItem("odpFolder")) || {};
+
+
+
+if(!folder[workName]){
+
+
+folder[workName]={
+
+files:[],
+works:[]
+
+};
+
+
+localStorage.setItem(
+"odpFolder",
+JSON.stringify(folder)
+);
 
 
 }
+
+
+
+localStorage.setItem(
+"currentWork",
+workName
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// SAVE WORK
+
+
+function saveWork(){
+
+
+
+let current =
+localStorage.getItem("currentWork");
+
+
+
+if(!current){
+
+alert("Select Work Category First");
+
+return;
+
+}
+
+
+
+let project =
+document.getElementById("projectName").value;
+
+
+
+let details =
+document.getElementById("workDetails").value;
+
+
+
+let status =
+document.getElementById("workStatus").value;
+
+
+
+let folder =
+JSON.parse(localStorage.getItem("odpFolder"));
+
+
+
+folder[current].works.push({
+
+project:project,
+
+details:details,
+
+status:status,
+
+date:new Date().toLocaleString()
+
+});
+
+
+
+localStorage.setItem(
+"odpFolder",
+JSON.stringify(folder)
+);
+
+
+
+alert("Work Saved Successfully");
+
+
+}// FILE SYSTEM
+
+
+function addFile(){
+
+
+let input =
+document.getElementById("fileUpload");
+
+
+if(!input.files.length){
+
+alert("Select a file first");
+
+return;
+
+}
+
+
+
+let current =
+localStorage.getItem("currentWork");
+
+
+
+if(!current){
+
+alert("Open a work category first");
+
+return;
+
+}
+
+
+
+let folder =
+JSON.parse(localStorage.getItem("odpFolder")) || {};
+
+
+
+folder[current].files.push({
+
+name:input.files[0].name,
+
+date:new Date().toLocaleString()
+
+});
+
+
+
+localStorage.setItem(
+"odpFolder",
+JSON.stringify(folder)
+);
+
+
+
+loadFiles();
+
+
+}
+
+
+
+
+
+
+
+
+function loadFiles(){
+
+
+let current =
+localStorage.getItem("currentWork");
+
+
+let list =
+document.getElementById("fileList");
+
+
+
+if(!list || !current)return;
+
+
+
+let folder =
+JSON.parse(localStorage.getItem("odpFolder")) || {};
+
+
+
+list.innerHTML="";
+
+
+
+if(folder[current] && folder[current].files.length){
+
+
+
+folder[current].files.forEach(function(file){
+
+
+list.innerHTML += `
+
+<p>
+📄 ${file.name}
+</p>
+
+`;
+
+
+
+});
+
+
+
+}
+
+else{
+
+
+list.innerHTML="No Files Added";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+// TASK SYSTEM
+
+
+function addTask(){
+
+
+let task =
+document.getElementById("taskInput").value;
+
+
+
+if(!task)return;
+
+
+
+let tasks =
+JSON.parse(localStorage.getItem("odpTasks")) || [];
+
+
+
+tasks.push(task);
+
+
+
+localStorage.setItem(
+"odpTasks",
+JSON.stringify(tasks)
+);
+
+
+
+loadTasks();
+
+
+}
+
+
+
+
+
+
+
+
+function loadTasks(){
+
+
+let list =
+document.getElementById("taskList");
+
+
+
+if(!list)return;
+
+
+
+let tasks =
+JSON.parse(localStorage.getItem("odpTasks")) || [];
+
+
+
+list.innerHTML="";
+
+
+
+tasks.forEach(function(task){
+
+
+list.innerHTML += `
+
+<p>
+☐ ${task}
+</p>
+
+`;
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// NOTES SYSTEM
+
+
+function saveNote(){
+
+
+let note =
+document.getElementById("noteInput").value;
+
+
+
+if(!note)return;
+
+
+
+let notes =
+JSON.parse(localStorage.getItem("odpNotes")) || [];
+
+
+
+notes.push(note);
+
+
+
+localStorage.setItem(
+"odpNotes",
+JSON.stringify(notes)
+);
+
+
+
+loadNotes();
+
+
+}
+
+
+
+
+
+
+
+
+function loadNotes(){
+
+
+let list =
+document.getElementById("noteList");
+
+
+
+if(!list)return;
+
+
+
+let notes =
+JSON.parse(localStorage.getItem("odpNotes")) || [];
+
+
+
+list.innerHTML="";
+
+
+
+notes.forEach(function(note){
+
+
+list.innerHTML += `
+
+<p>
+📝 ${note}
+</p>
+
+`;
+
+
+});
+
+
+}
+
 
 
 
@@ -338,296 +744,11 @@ location.reload();
 
 
 
-// SAVE WORK
-
-
-function saveWork(){
-
-
-
-let title =
-document.getElementById("workTitle").value;
-
-
-
-let description =
-document.getElementById("workDescription").value;
-
-
-
-if(!title || !description){
-
-
-alert("Please add work details");
-
-
-return;
-
-
-}
-
-
-
-let works =
-JSON.parse(localStorage.getItem("odpWorks")) || [];
-
-
-
-works.push({
-
-title:title,
-
-description:description,
-
-date:new Date().toLocaleString()
-
-});
-
-
-
-localStorage.setItem(
-"odpWorks",
-JSON.stringify(works)
-);
-
-
-
-loadWorks();
-
-
-
-alert("Work Saved");
-
-
-}
-
-
-
-
-
-
-
-// LOAD WORK
-
-
-function loadWorks(){
-
-
-let box =
-document.getElementById("savedWork");
-
-
-
-if(!box)return;
-
-
-
-box.innerHTML="";
-
-
-
-let works =
-JSON.parse(localStorage.getItem("odpWorks")) || [];
-
-
-
-works.forEach(function(work){
-
-
-
-box.innerHTML += `
-
-<div class="card">
-
-<h3>${work.title}</h3>
-
-<p>${work.description}</p>
-
-<small>${work.date}</small>
-
-</div>
-
-`;
-
-
-
-});
-
-
-}// FILE MANAGER
-
-
-function saveFile(){
-
-
-let fileInput =
-document.querySelector("#files input[type='file']");
-
-
-if(!fileInput.files.length){
-
-alert("Please select a file");
-
-return;
-
-}
-
-
-
-let fileName =
-fileInput.files[0].name;
-
-
-
-let files =
-JSON.parse(localStorage.getItem("odpFiles")) || [];
-
-
-
-files.push(fileName);
-
-
-
-localStorage.setItem(
-"odpFiles",
-JSON.stringify(files)
-);
-
-
-
-loadFiles();
-
-
-alert("File Added");
-
-
-}
-
-
-
-
-
-
-
-function loadFiles(){
-
-
-let area =
-document.querySelector("#files .card");
-
-
-
-if(!area)return;
-
-
-
-let files =
-JSON.parse(localStorage.getItem("odpFiles")) || [];
-
-
-
-area.innerHTML="";
-
-
-
-files.forEach(function(file,index){
-
-
-area.innerHTML += `
-
-<p>
-📄 ${file}
-
-<button onclick="deleteFile(${index})">
-Delete
-</button>
-
-</p>
-
-`;
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-function deleteFile(index){
-
-
-let files =
-JSON.parse(localStorage.getItem("odpFiles")) || [];
-
-
-
-files.splice(index,1);
-
-
-
-localStorage.setItem(
-"odpFiles",
-JSON.stringify(files)
-);
-
-
-
-loadFiles();
-
-
-}
-
-
-
-
-
-
-
-// TASK SYSTEM
-
-
-function addTask(){
-
-
-alert("Task System Ready");
-
-
-}
-
-
-
-
-
-
-
-
-// NOTES SAVE
-
-
-function saveNote(){
-
-
-alert("Note Saved");
-
-
-}
-
-
-
-
-
-
 
 // AUTO LOAD
 
 
 window.onload=function(){
-
 
 
 if(localStorage.getItem("odpLogin")){
@@ -640,11 +761,11 @@ openApp();
 
 
 
-loadWorks();
+loadTasks();
 
+loadNotes();
 
 loadFiles();
-
 
 
 };
