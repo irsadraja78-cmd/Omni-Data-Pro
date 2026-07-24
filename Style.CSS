@@ -1,1 +1,304 @@
 
+/* Omni Data Pro - Main Style */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e40af
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+
+/* Main Container */
+
+.container {
+
+    width: 100%;
+    max-width: 420px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    color: white;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.3);
+
+}
+
+
+
+/* Logo */
+
+.logo-section {
+
+    text-align: center;
+
+}
+
+
+.logo {
+
+    width: 80px;
+    height: 80px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #1e40af;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+    font-weight:bold;
+
+}
+
+
+
+.logo-section h1 {
+
+    margin-top:15px;
+    font-size:30px;
+
+}
+
+
+.logo-section p {
+
+    margin-top:8px;
+    opacity:0.8;
+
+}
+
+
+
+
+/* Profile Card */
+
+.profile-card {
+
+    background:white;
+
+    color:#222;
+
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+}
+
+
+
+.profile-image img {
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+
+
+.profile-card h2 {
+
+    margin-top:10px;
+
+}
+
+
+
+/* Login */
+
+.login-box {
+
+    margin-top:25px;
+
+    text-align:center;
+
+}
+
+
+
+.login-box h2 {
+
+    margin-bottom:15px;
+
+}
+
+
+
+input {
+
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:none;
+
+    border-radius:12px;
+
+    outline:none;
+
+}
+
+
+
+button {
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover {
+
+    opacity:0.9;
+
+}
+
+
+
+.signup {
+
+    background:#16a34a;
+
+}
+
+
+
+a {
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+
+
+
+/* AI Section */
+
+.ai-section {
+
+    margin-top:25px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,0.15);
+
+    padding:20px;
+
+    border-radius:20px;
+
+}
+
+
+
+.ai-logo {
+
+    width:60px;
+
+    height:60px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#2563eb;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* Mobile Adjustment */
+
+@media(max-width:480px){
+
+    .container{
+
+        padding:20px;
+
+    }
+
+
+    .logo-section h1{
+
+        font-size:25px;
+
+    }
+
+}
