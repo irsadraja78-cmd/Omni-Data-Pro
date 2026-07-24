@@ -1,5 +1,3 @@
-/* Omni Data Pro - Complete Style */
-
 *{
     margin:0;
     padding:0;
@@ -10,73 +8,51 @@
 
 body{
 
-    min-height:100vh;
+    background:#f1f5f9;
+    color:#1e293b;
 
-    background:linear-gradient(
-        135deg,
-        #0f172a,
-        #2563eb
-    );
+}
 
+
+
+.container,
+.dashboard-container{
+
+    width:100%;
+    max-width:500px;
+    margin:auto;
     padding:20px;
 
 }
 
 
-/* Login Container */
 
-.container{
-
-    max-width:420px;
-
-    margin:auto;
-
-    background:rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(10px);
-
-    padding:25px;
-
-    border-radius:25px;
-
-    color:white;
-
-}
-
-
-/* Logo */
-
-.logo{
-
-    width:80px;
-    height:80px;
-
-    border-radius:50%;
-
-    background:white;
-
-    color:#2563eb;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    margin:auto;
-
-}
-
+/* Login Page */
 
 .logo-section{
 
     text-align:center;
+    margin-top:40px;
 
 }
+
+
+.logo{
+
+    width:70px;
+    height:70px;
+    background:#2563eb;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:bold;
+    margin:auto;
+
+}
+
 
 
 .logo-section h1{
@@ -87,170 +63,99 @@ body{
 
 
 
+.login-box{
 
-
-/* Inputs */
-
-input{
-
-    width:100%;
-
-    padding:14px;
-
-    margin:8px 0;
-
-    border:none;
-
-    border-radius:12px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    margin-top:30px;
+    box-shadow:0 5px 20px #0002;
 
 }
 
 
+
+input{
+
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+
+}
 
 
 
 button{
 
     width:100%;
-
     padding:14px;
-
     border:none;
-
-    border-radius:12px;
-
+    border-radius:10px;
     background:#2563eb;
-
     color:white;
-
-    font-weight:bold;
-
+    font-size:16px;
     cursor:pointer;
-
     margin-top:10px;
 
 }
 
 
-.signup{
+button:hover{
 
-    background:#16a34a;
-
-}
-
-
-
-
-/* Dashboard */
-
-.dashboard-container{
-
-    max-width:1000px;
-
-    margin:auto;
+    opacity:.9;
 
 }
 
 
+
+/* Dashboard Header */
 
 
 .dashboard-header{
 
-    background:white;
-
-    padding:15px;
-
-    border-radius:20px;
-
     display:flex;
-
-    align-items:center;
-
     justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:20px;
 
 }
-
-
-.dashboard-header .logo{
-
-    width:55px;
-
-    height:55px;
-
-    font-size:20px;
-
-    margin:0;
-
-}
-
-
-.dashboard-header p{
-
-    color:#555;
-
-}
-
-
 
 
 
 .profile{
 
-    font-size:30px;
+    font-size:25px;
 
 }
 
 
 
 
-/* User Card */
-
-.user-card{
+.user-card,
+.ai-card,
+.service{
 
     background:white;
-
-    color:#222;
-
     padding:20px;
-
-    border-radius:20px;
-
-    margin-top:20px;
-
-}
-
-
-
-
-/* Search */
-
-.search-box{
-
-    margin:20px 0;
+    border-radius:15px;
+    margin-top:15px;
+    box-shadow:0 4px 15px #0001;
 
 }
 
 
 
-
-
-/* AI Card */
 
 .ai-card{
 
-    background:white;
-
-    color:#222;
-
-    padding:20px;
-
-    border-radius:20px;
-
     display:flex;
-
+    gap:15px;
     align-items:center;
-
-    gap:20px;
 
 }
 
@@ -258,38 +163,23 @@ button{
 
 .ai-logo{
 
-    width:65px;
-
-    height:65px;
-
+    width:50px;
+    height:50px;
     background:#2563eb;
-
     color:white;
-
     border-radius:50%;
-
     display:flex;
-
-    align-items:center;
-
     justify-content:center;
-
-    font-size:25px;
-
+    align-items:center;
     font-weight:bold;
 
 }
 
 
 
-
-/* Services */
-
 .section-title{
 
-    color:white;
-
-    margin:25px 0 15px;
+    margin-top:25px;
 
 }
 
@@ -298,33 +188,102 @@ button{
 .services{
 
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
     gap:15px;
 
 }
 
 
 
-.service{
+.service h2,
+.service h3{
 
-    background:white;
-
-    color:#222;
-
-    padding:20px;
-
-    border-radius:20px;
+    margin-bottom:10px;
 
 }
 
 
 
-.service button{
+.service p{
 
-    background:#2563eb;
+    margin:8px 0;
+
+}
+
+
+
+
+/* Service Colors */
+
+
+.basic{
+
+    border-left:6px solid #2563eb;
+
+}
+
+
+.online{
+
+    border-left:6px solid #16a34a;
+
+}
+
+
+.ecommerce{
+
+    border-left:6px solid #f59e0b;
+
+}
+
+
+.image{
+
+    border-left:6px solid #7c3aed;
+
+}
+
+
+.research{
+
+    border-left:6px solid #0891b2;
+
+}
+
+
+.mining{
+
+    border-left:6px solid #475569;
+
+}
+
+
+.cleaning{
+
+    border-left:6px solid #059669;
+
+}
+
+
+.medical{
+
+    border-left:6px solid #dc2626;
+
+}
+
+
+.legal{
+
+    border-left:6px solid #9333ea;
+
+}
+
+
+
+/* Search */
+
+.search-box input{
+
+    background:white;
 
 }
 
@@ -332,32 +291,15 @@ button{
 
 /* Bottom Menu */
 
+
 .bottom-menu{
 
-    position:fixed;
-
-    bottom:15px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:90%;
-
-    max-width:500px;
-
-    background:white;
-
-    color:#2563eb;
-
-    border-radius:20px;
-
     display:flex;
-
     justify-content:space-around;
-
-    padding:12px;
-
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    margin-top:25px;
     text-align:center;
 
 }
@@ -365,74 +307,15 @@ button{
 
 
 
-
 @media(max-width:600px){
 
-    .services{
 
-        grid-template-columns:1fr;
+.dashboard-container,
+.container{
 
-    }
-
-
-    .dashboard-header h2{
-
-        font-size:18px;
-
-    }
+    padding:15px;
 
 }
-/* Service Different Colors */
-
-.basic{
-    background:#2563eb;
-    color:white;
-}
 
 
-.online{
-    background:#16a34a;
-    color:white;
-}
-
-
-.ecommerce{
-    background:#f59e0b;
-    color:white;
-}
-
-
-.image{
-    background:#7c3aed;
-    color:white;
-}
-
-
-.research{
-    background:#0891b2;
-    color:white;
-}
-
-
-.mining{
-    background:#475569;
-    color:white;
-}
-
-
-.cleaning{
-    background:#059669;
-    color:white;
-}
-
-
-.medical{
-    background:#dc2626;
-    color:white;
-}
-
-
-.legal{
-    background:#9333ea;
-    color:white;
 }
