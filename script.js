@@ -1,100 +1,46 @@
-// Omni Data Pro - Main Script
+// Omni Data Pro Script
 
 
-// Login Button
-
-const loginButton = document.querySelector(".login-box button");
+document.addEventListener("DOMContentLoaded", function(){
 
 
-if(loginButton){
-
-    loginButton.addEventListener("click", function(){
-
-        const email = document.querySelector(
-            'input[type="email"]'
-        ).value;
+    console.log("Omni Data Pro Loaded");
 
 
-        const password = document.querySelector(
-            'input[type="password"]'
-        ).value;
+});
 
 
 
-        if(email === "" || password === ""){
 
-            alert(
-                "Please enter email and password"
-            );
-
-        }
-
-        else{
-
-            // Open Dashboard
-
-            window.location.href = "dashboard.html";
-
-        }
+// Login Button Function
 
 
-    });
+function loginUser(){
+
+    window.location.href="dashboard.html";
 
 }
 
 
 
 
-// Signup Button
-
-const signupButton = document.querySelector(".signup");
+// Service Request Message
 
 
-if(signupButton){
+function serviceRequest(serviceName){
 
-    signupButton.addEventListener("click", function(){
-
-        alert(
-            "Signup system will be added soon"
-        );
-
-    });
+    alert(serviceName + " Request Submitted Successfully");
 
 }
 
 
 
 
-
-// Forgot Password
-
-const forgotPassword = document.querySelector(
-    ".login-box a"
-);
+// Back Dashboard
 
 
-if(forgotPassword){
+function goDashboard(){
 
-    forgotPassword.addEventListener(
-        "click",
-        function(event){
-
-            event.preventDefault();
-
-            alert(
-                "Password recovery system will be added soon"
-            );
-
-        }
-    );
+    window.location.href="dashboard.html";
 
 }
-
-
-
-
-// AI Teacher Message
-
-console.log(
-    "Welcome to Omni Data Pro AI Teacher"
-);
