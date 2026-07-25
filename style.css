@@ -1,305 +1,199 @@
+/* OmniData Pro - style.css */
 
-/* OmniDataPro Global Style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+body {
+    background: #f4f7fb;
+    color: #1f2937;
 }
 
 
-body{
+/* Top Bar */
 
-    background:#f5f7fb;
-    color:#222;
+.topbar {
+    width: 100%;
+    background: #111827;
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar h1 {
+    font-size: 24px;
 }
 
 
-/* ===============================
-   TOP BAR
-================================ */
+/* Buttons */
 
+button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
 
-.topbar{
-
-    height:60px;
-    background:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
+button:hover {
+    background: #1d4ed8;
 }
 
 
-.logo{
+/* Main Layout */
 
-    font-size:22px;
-    font-weight:bold;
-
+main {
+    padding: 25px;
+    max-width: 1200px;
+    margin: auto;
 }
 
 
+/* Cards */
 
-.profile-btn{
-
-    cursor:pointer;
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
 
 
-
-
-
-/* ===============================
-   SIDEBAR
-================================ */
-
-
-#sidebar{
-
-    position:fixed;
-    top:0;
-    left:-280px;
-    width:280px;
-    height:100vh;
-    background:#111827;
-    color:white;
-    transition:.3s;
-    z-index:1000;
-    padding:20px;
-
+.card h2 {
+    margin-bottom: 20px;
+    color: #111827;
 }
 
 
+/* Input */
 
-#sidebar.active{
-
-    left:0;
-
+input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
 }
 
 
-
-#sidebar a{
-
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:14px;
-    margin:5px 0;
-    border-radius:8px;
-
+input:focus {
+    border-color: #2563eb;
 }
 
 
+/* Authentication */
 
-#sidebar a:hover{
-
-    background:#2563eb;
-
-}
-
-
-
-
-
-/* ===============================
-   MAIN CONTENT
-================================ */
-
-
-#app{
-
-    padding:80px 20px;
-
-}
-
-
-.page{
-
-    display:none;
-
-}
-
-
-.page.active{
-
-    display:block;
-
+#auth-section {
+    max-width: 420px;
+    margin: 50px auto;
 }
 
 
 
+/* Dashboard */
 
-
-/* ===============================
-   DASHBOARD
-================================ */
-
-
-#workDashboard{
-
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-
+#dashboard-section,
+#workspace-section,
+#files-section,
+#settings-section {
+    display: block;
 }
 
 
 
-.work-card{
+/* Dashboard Info */
 
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
-
+#profile-info,
+#stats,
+#projects-list,
+#files-list,
+#settings-area {
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 
 
-.work-card:hover{
+/* Workspace */
 
-    transform:translateY(-5px);
-
+.project-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
 }
 
 
 
+/* File List */
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
 
 
-/* ===============================
-   FILE SYSTEM
-================================ */
+/* Upload */
 
-
-.folder-card,
-.file-card,
-.project-card{
-
-    background:white;
-    padding:15px;
-    margin:10px 0;
-    border-radius:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-
+#file-upload {
+    background: white;
 }
 
 
 
-button{
+/* Logout */
 
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
+#logout {
+    background: #dc2626;
+}
 
+
+#logout:hover {
+    background: #b91c1c;
 }
 
 
 
-button:hover{
-
-    background:#1d4ed8;
-
-}
-
-
-
-
-
-/* ===============================
-   FORM
-================================ */
-
-
-input,
-textarea,
-select{
-
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:1px solid #ddd;
-    border-radius:8px;
-
-}
-
-
-
-
-
-
-/* ===============================
-   DARK MODE
-================================ */
-
-
-.dark-mode{
-
-    background:#111827;
-    color:white;
-
-}
-
-
-
-.dark-mode .work-card,
-.dark-mode .file-card,
-.dark-mode .folder-card,
-.dark-mode .project-card{
-
-    background:#1f2937;
-    color:white;
-
-}
-
-
-
-
-
-/* ===============================
-   MOBILE RESPONSIVE
-================================ */
-
+/* Responsive Mobile */
 
 @media(max-width:768px){
 
-
-#sidebar{
-
-    width:240px;
-
-}
-
-
-#workDashboard{
-
-    grid-template-columns:1fr;
-/* ===============================
-   MAIN APP HIDE / SHOW FIX
-================================ */
-
-#mainApp {
-    display: none;
+    .topbar {
+        flex-direction: column;
+        gap: 15px;
     }
-    
-}
 
 
-.topbar{
+    main {
+        padding: 15px;
+    }
 
-    padding:0 10px;
 
-}
+    .card {
+        padding: 18px;
+    }
 
+
+    button {
+        width: 100%;
+    }
 
 }
