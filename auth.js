@@ -1,85 +1,57 @@
+// =====================================
 // OmniDataPro Authentication System
+// =====================================
 
 
-// ===============================
 // SIGNUP
-// ===============================
 
-async function signupUser(email, password) {
+async function signup(email, password) {
 
-    const { data, error } =
-        await supabaseClient.auth.signUp({
-            email: email,
-            password: password
-        });
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+    });
 
 
     if (error) {
-
         alert(error.message);
-        return false;
-
+        return;
     }
 
 
-    alert("Account Created Successfully");
+    alert("Account created successfully");
 
-    openPage("loginPage");
-
-    return true;
+    return data;
 
 }
 
 
 
 
-// ===============================
+
 // LOGIN
-// ===============================
 
-async function loginUser(email, password) {
+async function login(email, password) {
 
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
 
-    const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
 
-            email: email,
-            password: password
-
-        });
-
+    });
 
 
     if (error) {
 
-        addLoginAttempt();
-
         alert(error.message);
-
-        return false;
+        return;
 
     }
 
 
+    alert("Login successful");
 
-    resetLoginAttempts();
-
-
-
-    // Hide Auth Pages
-
-    document.getElementById("loginPage").style.display="none";
-
-    document.getElementById("mainApp").style.display="block";
-
-
-
-    openPage("dashboardPage");
-
-
-
-    return true;
-
+    return data;
 
 }
 
@@ -87,109 +59,23 @@ async function loginUser(email, password) {
 
 
 
-
-
-// ===============================
-// FORGOT PASSWORD
-// ===============================
-
-async function forgotPassword(email){
-
-
-const {error} =
-await supabaseClient.auth.resetPasswordForEmail(email);
-
-
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-
-
-alert(
-"Password Reset Link Sent"
-);
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
 // LOGOUT
-// ===============================
 
-async function logoutAccount(){
+async function logout(){
 
-
-await supabaseClient.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
 
 
-localStorage.clear();
+    if(error){
 
+        alert(error.message);
 
-document.getElementById("mainApp").style.display="none";
+    }
+    else{
 
+        alert("Logged out");
 
-openPage("loginPage");
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// SESSION CHECK
-// ===============================
-
-async function checkUserSession(){
-
-
-const {data} =
-await supabaseClient.auth.getSession();
-
-
-
-if(data.session){
-
-
-document.getElementById("loginPage").style.display="none";
-
-
-document.getElementById("mainApp").style.display="block";
-
-
-openPage("dashboardPage");
-
-
-}
-
-else{
-
-
-document.getElementById("mainApp").style.display="none";
-
-
-openPage("loginPage");
-
-
-}
-
-
+    }
 
 }
 
@@ -197,14 +83,20 @@ openPage("loginPage");
 
 
 
+// CHECK USER SESSION
+
+async function checkUser(){
+
+    const { data } = await supabaseClient.auth.getSession();
 
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
+    if(data.session){
 
-checkUserSession();
+        return data.session.user;
+
+    }
+
+
+    return null;
 
 }
-
-);
