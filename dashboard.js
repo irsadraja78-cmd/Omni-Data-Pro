@@ -1,84 +1,267 @@
+// ===================================
+// OmniData Pro
 // Dashboard.js
+// ===================================
+
 
 import supabaseClient from "./Supabase.js";
-import { getProfile } from "./Profile.js";
-import { logout } from "./Auth.js";
 
 
-// Load Dashboard
-export async function loadDashboard() {
+
+
+
+// Load Dashboard Data
+
+export async function loadDashboard(){
+
 
     const {
-        data: { session },
-        error
-    } = await supabaseClient.auth.getSession();
 
+        data:{
+            user
 
-    if (error) {
-        throw error;
-    }
+        },
 
+        error:userError
 
-    if (!session) {
-        window.location.href = "index.html";
-        return null;
-    }
-
-
-    const profile = await getProfile();
-
-
-    return {
-        user: session.user,
-        profile: profile
-    };
-}
-
-
-// Get User Activity Summary
-export async function getDashboardStats() {
-
-    const {
-        data: { user },
-        error: userError
     } = await supabaseClient.auth.getUser();
 
 
-    if (userError) {
+
+
+
+    if(userError){
+
         throw userError;
+
     }
 
 
-    const { data: projects } = await supabaseClient
-        .from("work_projects")
-        .select("id")
-        .eq("user_id", user.id);
 
 
-    const { data: files } = await supabaseClient
-        .from("files")
-        .select("id")
-        .eq("user_id", user.id);
 
 
-    const { data: tasks } = await supabaseClient
-        .from("tasks")
-        .select("id")
-        .eq("user_id", user.id);
+    const projects =
+    await getProjectsCount(user.id);
+
+
+
+    const files =
+    await getFilesCount(user.id);
+
+
+
+    const aiRequests =
+    await getAIRequestsCount(user.id);
+
+
+
 
 
     return {
-        projects: projects?.length || 0,
-        files: files?.length || 0,
-        tasks: tasks?.length || 0
+
+
+        user:user,
+
+        stats:{
+
+
+            projects,
+
+            files,
+
+            aiRequests
+
+
+        }
+
+
     };
+
 }
 
 
-// Dashboard Logout
-export async function dashboardLogout() {
 
-    await logout();
 
-    window.location.href = "index.html";
+
+
+
+
+
+// Projects Count
+
+async function getProjectsCount(
+    userId
+){
+
+
+    const {
+
+        data,
+
+        error
+
+    } = await supabaseClient
+
+    .from("work_projects")
+
+    .select(
+        "id",
+        {
+            count:"exact",
+            head:true
+        }
+    )
+
+    .eq(
+        "user_id",
+        userId
+    );
+
+
+
+
+
+    if(error){
+
+        throw error;
+
+    }
+
+
+
+
+
+    return data?.length || 0;
+
+}
+
+
+
+
+
+
+
+
+
+// Files Count
+
+async function getFilesCount(
+    userId
+){
+
+
+    const {
+
+        data,
+
+        error
+
+    } = await supabaseClient
+
+    .from("files")
+
+    .select(
+        "id",
+        {
+            count:"exact",
+            head:true
+        }
+    )
+
+    .eq(
+        "user_id",
+        userId
+    );
+
+
+
+
+
+    if(error){
+
+        throw error;
+
+    }
+
+
+
+
+
+    return data?.length || 0;
+
+}
+
+
+
+
+
+
+
+
+
+// AI Requests Count
+
+async function getAIRequestsCount(
+    userId
+){
+
+
+    const {
+
+        data,
+
+        error
+
+    } = await supabaseClient
+
+    .from("ai_history")
+
+    .select(
+        "id",
+        {
+            count:"exact",
+            head:true
+        }
+    )
+
+    .eq(
+        "user_id",
+        userId
+    );
+
+
+
+
+
+    if(error){
+
+        throw error;
+
+    }
+
+
+
+
+
+    return data?.length || 0;
+
+}
+
+
+
+
+
+
+
+
+// Logout Redirect Helper
+
+export function redirectAfterLogout(){
+
+
+    window.location.href =
+    "index.html";
+
+
 }
