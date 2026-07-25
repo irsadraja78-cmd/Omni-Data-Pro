@@ -1,180 +1,94 @@
-// OmniDataPro AI System
+// AI.js
+
+import supabaseClient from "./Supabase.js";
 
 
-// ===============================
-// AI ASSISTANT BASE
-// ===============================
+// Save AI Request History
+export async function saveAIHistory(prompt, response) {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-function aiAssistant(input){
+    if (error) {
+        throw error;
+    }
 
 
-if(!input){
+    const { data, error: saveError } =
+        await supabaseClient
+        .from("ai_history")
+        .insert([
+            {
+                user_id: user.id,
+                prompt: prompt,
+                response: response
+            }
+        ])
+        .select()
+        .single();
 
-return "Please enter your request";
 
+    if (saveError) {
+        throw saveError;
+    }
+
+
+    return data;
 }
 
 
 
-let response = "";
+// Get User AI History
+export async function getAIHistory() {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-
-input = input.toLowerCase();
-
-
-
-// Simple AI Help Rules
+    if (error) {
+        throw error;
+    }
 
 
-if(input.includes("data")){
+    const { data, error: historyError } =
+        await supabaseClient
+        .from("ai_history")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", {
+            ascending: false
+        });
 
 
-response =
-"AI Suggestion: Check data format, remove duplicate entries and verify accuracy.";
+    if (historyError) {
+        throw historyError;
+    }
 
+
+    return data;
 }
 
 
 
-else if(input.includes("typing")){
+// AI Request Handler
+export async function runAI(prompt) {
+
+    /*
+       यहां बाद में AI API connect होगी।
+       फिलहाल system structure ready है।
+    */
 
 
-response =
-"AI Suggestion: Maintain proper formatting and spelling while typing.";
+    const response = "AI response will be connected here";
 
+
+    await saveAIHistory(prompt, response);
+
+
+    return response;
 }
-
-
-
-else if(input.includes("excel")){
-
-
-response =
-"AI Suggestion: Use proper columns, filters and data validation.";
-
-}
-
-
-
-else if(input.includes("write")){
-
-
-response =
-"AI Suggestion: Improve grammar, structure and readability.";
-
-}
-
-
-
-else{
-
-
-response =
-"AI is ready to help you with your work.";
-
-}
-
-
-
-return response;
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// AI OUTPUT DISPLAY
-// ===============================
-
-
-function runAI(){
-
-
-let input =
-document.getElementById("aiInput")?.value;
-
-
-
-let output =
-document.getElementById("aiOutput");
-
-
-
-if(!output)return;
-
-
-
-output.innerHTML =
-aiAssistant(input);
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// AI WORK SUGGESTION
-// ===============================
-
-
-function getAIWorkSuggestion(work){
-
-
-
-let suggestions = {
-
-
-"Basic Data Entry":
-"Check spelling, accuracy and data consistency.",
-
-
-"Excel Data Work":
-"Use sorting, filtering and formulas carefully.",
-
-
-"Medical Data Entry":
-"Verify every field before saving.",
-
-
-"Copy Writing":
-"Focus on grammar, clarity and user intent.",
-
-
-"Typing Work":
-"Maintain speed with accuracy."
-
-
-};
-
-
-
-return suggestions[work] ||
-
-"Complete your task with quality and accuracy.";
-
-
-}
-
-
-
-
-
-
-
-
-console.log(
-"OmniDataPro AI System Active"
-);
