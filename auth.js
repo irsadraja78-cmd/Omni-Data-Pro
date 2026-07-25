@@ -1,102 +1,90 @@
-// =====================================
-// OmniDataPro Authentication System
-// =====================================
+// Auth.js
+
+import supabaseClient from "./Supabase.js";
 
 
-// SIGNUP
-
-async function signup(email, password) {
-
+// Signup
+export async function signup(email, password) {
     const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password
+        email,
+        password
     });
 
-
     if (error) {
-        alert(error.message);
-        return;
+        throw error;
     }
 
-
-    alert("Account created successfully");
-
     return data;
-
 }
 
 
-
-
-
-// LOGIN
-
-async function login(email, password) {
-
+// Login
+export async function login(email, password) {
     const { data, error } = await supabaseClient.auth.signInWithPassword({
-
-        email: email,
-        password: password
-
+        email,
+        password
     });
 
-
     if (error) {
-
-        alert(error.message);
-        return;
-
+        throw error;
     }
 
-
-    alert("Login successful");
-
     return data;
-
 }
 
 
-
-
-
-// LOGOUT
-
-async function logout(){
-
+// Logout
+export async function logout() {
     const { error } = await supabaseClient.auth.signOut();
 
-
-    if(error){
-
-        alert(error.message);
-
-    }
-    else{
-
-        alert("Logged out");
-
+    if (error) {
+        throw error;
     }
 
+    return true;
 }
 
 
+// Current Session Check
+export async function getSession() {
 
+    const { data, error } = await supabaseClient.auth.getSession();
 
-
-// CHECK USER SESSION
-
-async function checkUser(){
-
-    const { data } = await supabaseClient.auth.getSession();
-
-
-    if(data.session){
-
-        return data.session.user;
-
+    if (error) {
+        throw error;
     }
 
+    return data.session;
+}
 
-    return null;
 
+// Forgot Password
+export async function forgotPassword(email) {
+
+    const { data, error } =
+        await supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + "/reset-password.html"
+        });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
+
+// Update New Password
+export async function updatePassword(newPassword) {
+
+    const { data, error } =
+        await supabaseClient.auth.updateUser({
+            password: newPassword
+        });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
 }
