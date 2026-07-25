@@ -1,323 +1,69 @@
-// OmniDataPro Settings System
+// Setting.js
+
+import supabaseClient from "./Supabase.js";
 
 
-// ===============================
-// SAVE SETTINGS
-// ===============================
+// Get User Settings
+export async function getSettings() {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-function saveSettings(){
+    if (error) {
+        throw error;
+    }
 
 
-let settings = {
+    const { data, error: settingsError } =
+        await supabaseClient
+        .from("profiles")
+        .select("settings")
+        .eq("id", user.id)
+        .single();
 
 
-theme:
-document.getElementById("themeSelect")?.value || "light",
+    if (settingsError) {
+        throw settingsError;
+    }
 
 
-language:
-document.getElementById("languageSelect")?.value || "English",
-
-
-notifications:
-document.getElementById("notificationToggle")?.checked || false,
-
-
-updated:
-new Date().toLocaleString()
-
-
-};
-
-
-
-localStorage.setItem(
-
-"odpSettings",
-
-JSON.stringify(settings)
-
-);
-
-
-
-applySettings();
-
-
-alert("Settings Saved");
-
+    return data.settings || {};
 }
 
 
 
+// Update User Settings
+export async function updateSettings(settingsData) {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
+    if (error) {
+        throw error;
+    }
 
 
-
-// ===============================
-// LOAD SETTINGS
-// ===============================
-
-
-function loadSettings(){
-
-
-let settings =
-JSON.parse(
-
-localStorage.getItem("odpSettings")
-
-);
+    const { data, error: updateError } =
+        await supabaseClient
+        .from("profiles")
+        .update({
+            settings: settingsData
+        })
+        .eq("id", user.id)
+        .select()
+        .single();
 
 
+    if (updateError) {
+        throw updateError;
+    }
 
-if(!settings){
 
-return;
-
+    return data;
 }
-
-
-
-let theme =
-document.getElementById("themeSelect");
-
-
-
-let language =
-document.getElementById("languageSelect");
-
-
-
-let notification =
-document.getElementById("notificationToggle");
-
-
-
-if(theme){
-
-theme.value =
-settings.theme;
-
-}
-
-
-
-if(language){
-
-language.value =
-settings.language;
-
-}
-
-
-
-if(notification){
-
-notification.checked =
-settings.notifications;
-
-}
-
-
-
-applySettings();
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// THEME SYSTEM
-// ===============================
-
-
-function applySettings(){
-
-
-let settings =
-JSON.parse(
-
-localStorage.getItem("odpSettings")
-
-);
-
-
-
-if(!settings){
-
-return;
-
-}
-
-
-
-if(settings.theme === "dark"){
-
-
-document.body.classList.add(
-"dark-mode"
-);
-
-
-}
-
-else{
-
-
-document.body.classList.remove(
-"dark-mode"
-);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// LOGOUT SYSTEM
-// ===============================
-
-
-async function logoutAccount(){
-
-
-
-if(window.supabaseClient){
-
-
-await supabaseClient.auth.signOut();
-
-
-}
-
-
-
-localStorage.removeItem(
-"odpLogin"
-);
-
-
-
-location.reload();
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// DELETE ACCOUNT DATA
-// ===============================
-
-
-function clearLocalData(){
-
-
-
-let confirmDelete =
-confirm(
-
-"Delete all local data?"
-
-);
-
-
-
-if(confirmDelete){
-
-
-localStorage.clear();
-
-
-location.reload();
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// SECURITY SETTINGS
-// ===============================
-
-
-function securityStatus(){
-
-
-return {
-
-
-honeypot:
-"Active",
-
-
-sessionProtection:
-"Active",
-
-
-fileProtection:
-"Enabled"
-
-
-};
-
-
-}
-
-
-
-
-
-
-
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-function(){
-
-
-loadSettings();
-
-
-}
-
-);
-
-
-
-console.log(
-"OmniDataPro Settings System Active"
-);
