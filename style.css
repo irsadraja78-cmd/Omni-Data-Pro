@@ -1,124 +1,104 @@
 
-/* OmniDataPro Full New CSS */
+/* OmniDataPro Global Style */
 
 
 *{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
-
 
 
 body{
 
-background:#f1f5f9;
-color:#1e293b;
+    background:#f5f7fb;
+    color:#222;
+}
+
+
+/* ===============================
+   TOP BAR
+================================ */
+
+
+.topbar{
+
+    height:60px;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+
+.logo{
+
+    font-size:22px;
+    font-weight:bold;
 
 }
 
 
 
-.hidden{
+.profile-btn{
 
-display:none !important;
-
-}
-
-
-
-
-
-
-
-/* AUTH */
-
-.auth-page{
-
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#e0e7ff;
-
-}
-
-
-
-.auth-box{
-
-width:380px;
-background:white;
-padding:35px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-}
-
-
-
-.auth-box h1{
-
-color:#2563eb;
-margin-bottom:15px;
-
-}
-
-
-
-.auth-box h2{
-
-margin-bottom:20px;
-
-}
-
-
-
-input,
-textarea,
-select{
-
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #cbd5e1;
-border-radius:10px;
-
-}
-
-
-
-textarea{
-
-min-height:130px;
-
+    cursor:pointer;
 }
 
 
 
 
 
-button{
+/* ===============================
+   SIDEBAR
+================================ */
 
-background:#2563eb;
-color:white;
-border:none;
-padding:12px 18px;
-border-radius:10px;
-cursor:pointer;
+
+#sidebar{
+
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:280px;
+    height:100vh;
+    background:#111827;
+    color:white;
+    transition:.3s;
+    z-index:1000;
+    padding:20px;
 
 }
 
 
 
-button:hover{
+#sidebar.active{
 
-background:#1d4ed8;
+    left:0;
+
+}
+
+
+
+#sidebar a{
+
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:14px;
+    margin:5px 0;
+    border-radius:8px;
+
+}
+
+
+
+#sidebar a:hover{
+
+    background:#2563eb;
 
 }
 
@@ -126,54 +106,28 @@ background:#1d4ed8;
 
 
 
+/* ===============================
+   MAIN CONTENT
+================================ */
 
 
+#app{
 
-/* HEADER */
-
-
-.app-header{
-
-height:70px;
-background:white;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 20px;
-box-shadow:0 3px 15px rgba(0,0,0,.1);
-position:sticky;
-top:0;
-z-index:900;
+    padding:80px 20px;
 
 }
 
 
+.page{
 
-.app-header h2{
-
-color:#2563eb;
-
-}
-
-
-
-.menu-btn{
-
-font-size:25px;
-background:transparent;
-color:#2563eb;
-padding:5px;
+    display:none;
 
 }
 
 
+.page.active{
 
-.profile-box{
-
-cursor:pointer;
-display:flex;
-gap:8px;
-align-items:center;
+    display:block;
 
 }
 
@@ -181,86 +135,17 @@ align-items:center;
 
 
 
+/* ===============================
+   DASHBOARD
+================================ */
 
 
-/* SIDEBAR */
+#workDashboard{
 
-
-.sidebar{
-
-position:fixed;
-top:70px;
-left:-270px;
-width:260px;
-height:calc(100vh - 70px);
-background:#111827;
-padding:20px;
-transition:.3s;
-z-index:1000;
-overflow-y:auto;
-
-}
-
-
-
-.sidebar.active{
-
-left:0;
-
-}
-
-
-
-.sidebar button{
-
-width:100%;
-text-align:left;
-margin-bottom:12px;
-background:#1f2937;
-
-}
-
-
-
-.sidebar button:hover{
-
-background:#2563eb;
-
-}
-
-
-
-
-
-
-
-
-/* CONTENT */
-
-
-.content{
-
-padding:30px;
-
-}
-
-
-
-.page h1,
-.page h2{
-
-margin-bottom:20px;
-
-}
-/* DASHBOARD */
-
-
-.work-grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-margin-top:25px;
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 
 }
 
@@ -268,14 +153,12 @@ margin-top:25px;
 
 .work-card{
 
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-cursor:pointer;
-font-size:17px;
-font-weight:600;
-transition:.3s;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
 
 }
 
@@ -283,8 +166,70 @@ transition:.3s;
 
 .work-card:hover{
 
-transform:translateY(-5px);
-background:#eff6ff;
+    transform:translateY(-5px);
+
+}
+
+
+
+
+
+/* ===============================
+   FILE SYSTEM
+================================ */
+
+
+.folder-card,
+.file-card,
+.project-card{
+
+    background:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+
+
+button{
+
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+
+
+/* ===============================
+   FORM
+================================ */
+
+
+input,
+textarea,
+select{
+
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
 
 }
 
@@ -293,17 +238,27 @@ background:#eff6ff;
 
 
 
+/* ===============================
+   DARK MODE
+================================ */
 
-/* CARD BOX */
+
+.dark-mode{
+
+    background:#111827;
+    color:white;
+
+}
 
 
-.card{
 
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-margin-bottom:20px;
+.dark-mode .work-card,
+.dark-mode .file-card,
+.dark-mode .folder-card,
+.dark-mode .project-card{
+
+    background:#1f2937;
+    color:white;
 
 }
 
@@ -311,96 +266,31 @@ margin-bottom:20px;
 
 
 
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
 
 
-/* FILES */
+@media(max-width:768px){
 
 
-#fileList p{
+#sidebar{
 
-background:#f8fafc;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-
-}
-
-
-
-
-
-
-
-/* TASKS */
-
-
-#taskList p{
-
-background:white;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-box-shadow:0 3px 10px rgba(0,0,0,.08);
+    width:240px;
 
 }
 
 
+#workDashboard{
 
-
-
-
-
-/* NOTES */
-
-
-#noteList p{
-
-background:#fff7ed;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
+    grid-template-columns:1fr;
 
 }
 
 
+.topbar{
 
-
-
-
-
-/* MOBILE APP VIEW */
-
-
-@media(max-width:800px){
-
-
-.content{
-
-padding:15px;
-
-}
-
-
-
-.work-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.auth-box{
-
-width:90%;
-
-}
-
-
-
-.profile-box span{
-
-display:none;
+    padding:0 10px;
 
 }
 
