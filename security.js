@@ -1,176 +1,94 @@
-// OmniDataPro Security System Final
+// Security.js
+
+import supabaseClient from "./Supabase.js";
 
 
-// ===============================
-// HONEYPOT SYSTEM
-// ===============================
+// Create Security Log
+export async function createSecurityLog(action, details = {}) {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-function checkHoneypot(){
-
-    const trap =
-    document.getElementById("website");
-
-    if(trap && trap.value !== ""){
-
-        console.warn(
-            "Bot activity detected"
-        );
-
-        return false;
-
+    if (error) {
+        throw error;
     }
+
+
+    const { data, error: logError } =
+        await supabaseClient
+        .from("security_logs")
+        .insert([
+            {
+                user_id: user.id,
+                action: action,
+                details: details
+            }
+        ])
+        .select()
+        .single();
+
+
+    if (logError) {
+        throw logError;
+    }
+
+
+    return data;
+}
+
+
+
+// Get User Security Logs
+export async function getSecurityLogs() {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
+
+
+    if (error) {
+        throw error;
+    }
+
+
+    const { data, error: logsError } =
+        await supabaseClient
+        .from("security_logs")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (logsError) {
+        throw logsError;
+    }
+
+
+    return data;
+}
+
+
+
+// Delete Security Log
+export async function deleteSecurityLog(id) {
+
+    const { error } =
+        await supabaseClient
+        .from("security_logs")
+        .delete()
+        .eq("id", id);
+
+
+    if (error) {
+        throw error;
+    }
+
 
     return true;
-
 }
-
-
-
-
-
-
-// ===============================
-// LOGIN ATTEMPT SECURITY
-// ===============================
-
-
-function addLoginAttempt(){
-
-
-    let attempts =
-    Number(
-        localStorage.getItem(
-            "loginAttempts"
-        )
-    ) || 0;
-
-
-    attempts++;
-
-
-    localStorage.setItem(
-        "loginAttempts",
-        attempts
-    );
-
-
-    securityLog(
-        "Failed login attempt"
-    );
-
-
-    if(attempts >= 5){
-
-        alert(
-            "Too many login attempts. Try later."
-        );
-
-    }
-
-
-}
-
-
-
-
-
-
-function resetLoginAttempts(){
-
-
-    localStorage.removeItem(
-        "loginAttempts"
-    );
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// SECURITY LOG
-// ===============================
-
-
-function securityLog(action){
-
-
-    let logs =
-    JSON.parse(
-        localStorage.getItem(
-            "securityLogs"
-        )
-    ) || [];
-
-
-
-    logs.push({
-
-        action: action,
-
-        time:
-        new Date().toLocaleString()
-
-
-    });
-
-
-
-    localStorage.setItem(
-
-        "securityLogs",
-
-        JSON.stringify(logs)
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// SESSION CHECK
-// ===============================
-
-
-function checkSecuritySession(){
-
-
-    let session =
-    localStorage.getItem(
-        "odpLogin"
-    );
-
-
-    if(session){
-
-        return true;
-
-    }
-
-
-    return false;
-
-
-}
-
-
-
-
-
-
-
-console.log(
-"OmniDataPro Security Active"
-);
