@@ -1,4 +1,4 @@
-// OmniDataPro File & Folder System
+// OmniDataPro File & Folder System Final
 
 
 // ===============================
@@ -9,60 +9,68 @@
 function createFolder(folderName){
 
 
-if(!folderName){
+    if(!folderName){
 
-alert("Enter Folder Name");
+        alert("Folder name required");
 
-return;
+        return;
 
-}
-
-
-
-let currentWork =
-localStorage.getItem("currentWork");
+    }
 
 
 
-let folders =
-JSON.parse(
-localStorage.getItem("odpFolders")
-) || {};
+    const work =
+    getCurrentWork();
 
 
 
-if(!folders[currentWork]){
+    if(!work){
 
-folders[currentWork]=[];
+        alert("Select Work First");
 
-}
+        return;
 
-
-
-folders[currentWork].push({
-
-name: folderName,
-
-files:[],
-
-date:
-new Date().toLocaleString()
-
-});
+    }
 
 
 
-localStorage.setItem(
-
-"odpFolders",
-
-JSON.stringify(folders)
-
-);
+    let folders =
+    JSON.parse(
+        localStorage.getItem("odpFolders")
+    ) || {};
 
 
 
-loadFolders();
+    if(!folders[work.id]){
+
+        folders[work.id]=[];
+
+    }
+
+
+
+    folders[work.id].push({
+
+        name:folderName,
+
+        created:
+        new Date().toLocaleString()
+
+    });
+
+
+
+    localStorage.setItem(
+
+        "odpFolders",
+
+        JSON.stringify(folders)
+
+    );
+
+
+
+    loadFolders();
 
 
 }
@@ -81,57 +89,52 @@ loadFolders();
 function loadFolders(){
 
 
-let box =
-document.getElementById(
-"folderList"
-);
+    const box =
+    document.getElementById(
+        "folderList"
+    );
+
+
+    if(!box)return;
 
 
 
-if(!box) return;
+    const work =
+    getCurrentWork();
 
 
 
-let currentWork =
-localStorage.getItem(
-"currentWork"
-);
+    if(!work)return;
 
 
 
-let folders =
-JSON.parse(
-localStorage.getItem("odpFolders")
-) || {};
+    let folders =
+    JSON.parse(
+        localStorage.getItem("odpFolders")
+    ) || {};
 
 
 
-box.innerHTML="";
+    box.innerHTML="";
 
 
 
-if(folders[currentWork]){
+    (folders[work.id] || [])
+    .forEach(function(folder){
 
 
-folders[currentWork].forEach(function(folder){
+        box.innerHTML += `
+
+        <div class="folder-card">
+
+        📁 ${folder.name}
+
+        </div>
+
+        `;
 
 
-
-box.innerHTML += `
-
-<div class="folder-card">
-
-📁 ${folder.name}
-
-</div>
-
-`;
-
-
-});
-
-
-}
+    });
 
 
 }
@@ -144,85 +147,94 @@ box.innerHTML += `
 
 
 // ===============================
-// ADD FILE
+// UPLOAD FILE
 // ===============================
 
 
 function uploadFile(){
 
 
-let input =
-document.getElementById(
-"fileInput"
-);
+
+    const input =
+    document.getElementById(
+        "fileInput"
+    );
 
 
 
-if(!input || !input.files.length){
+    if(!input || !input.files.length){
 
-alert("Select File");
+        alert("Select File");
 
-return;
+        return;
+
+    }
+
+
+
+    const work =
+    getCurrentWork();
+
+
+
+    if(!work){
+
+        alert("Select Work First");
+
+        return;
+
+    }
+
+
+
+    let files =
+    JSON.parse(
+        localStorage.getItem("odpFiles")
+    ) || {};
+
+
+
+    if(!files[work.id]){
+
+        files[work.id]=[];
+
+    }
+
+
+
+    files[work.id].push({
+
+
+        name:
+        input.files[0].name,
+
+
+        size:
+        input.files[0].size,
+
+
+        date:
+        new Date().toLocaleString()
+
+
+    });
+
+
+
+    localStorage.setItem(
+
+        "odpFiles",
+
+        JSON.stringify(files)
+
+    );
+
+
+
+    loadFiles();
+
 
 }
-
-
-
-let currentWork =
-localStorage.getItem(
-"currentWork"
-);
-
-
-
-let files =
-JSON.parse(
-localStorage.getItem("odpFiles")
-) || {};
-
-
-
-if(!files[currentWork]){
-
-files[currentWork]=[];
-
-}
-
-
-
-files[currentWork].push({
-
-name:
-input.files[0].name,
-
-
-size:
-input.files[0].size,
-
-
-date:
-new Date().toLocaleString()
-
-
-});
-
-
-
-localStorage.setItem(
-
-"odpFiles",
-
-JSON.stringify(files)
-
-);
-
-
-
-loadFiles();
-
-
-}
-
 
 
 
@@ -231,70 +243,68 @@ loadFiles();
 
 
 // ===============================
-// SHOW FILES
+// LOAD FILES
 // ===============================
 
 
 function loadFiles(){
 
 
-let list =
-document.getElementById(
-"fileList"
-);
+
+    const list =
+    document.getElementById(
+        "fileList"
+    );
 
 
 
-if(!list)return;
+    if(!list)return;
 
 
 
-let currentWork =
-localStorage.getItem(
-"currentWork"
-);
+    const work =
+    getCurrentWork();
 
 
 
-let files =
-JSON.parse(
-localStorage.getItem("odpFiles")
-) || {};
+    if(!work)return;
 
 
 
-list.innerHTML="";
+    let files =
+    JSON.parse(
+        localStorage.getItem("odpFiles")
+    ) || {};
 
 
 
-if(files[currentWork]){
-
-
-files[currentWork].forEach(function(file,index){
+    list.innerHTML="";
 
 
 
-list.innerHTML += `
-
-<div class="file-card">
-
-📄 ${file.name}
-
-<button onclick="deleteFile(${index})">
-
-Delete
-
-</button>
-
-</div>
-
-`;
+    (files[work.id] || [])
+    .forEach(function(file,index){
 
 
-});
+        list.innerHTML += `
+
+        <div class="file-card">
+
+        📄 ${file.name}
+
+        <button onclick="deleteFile(${index})">
+
+        Delete
+
+        </button>
+
+        </div>
+
+        `;
 
 
-}
+    });
+
 
 
 }
@@ -314,35 +324,33 @@ Delete
 function deleteFile(index){
 
 
-let currentWork =
-localStorage.getItem(
-"currentWork"
-);
+    const work =
+    getCurrentWork();
 
 
 
-let files =
-JSON.parse(
-localStorage.getItem("odpFiles")
-) || {};
+    let files =
+    JSON.parse(
+        localStorage.getItem("odpFiles")
+    ) || {};
 
 
 
-files[currentWork].splice(index,1);
+    files[work.id].splice(index,1);
 
 
 
-localStorage.setItem(
+    localStorage.setItem(
 
-"odpFiles",
+        "odpFiles",
 
-JSON.stringify(files)
+        JSON.stringify(files)
 
-);
+    );
 
 
 
-loadFiles();
+    loadFiles();
 
 
 }
@@ -353,17 +361,6 @@ loadFiles();
 
 
 
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-function(){
-
-loadFolders();
-
-loadFiles();
-
-}
-
+console.log(
+"OmniDataPro File System Active"
 );
