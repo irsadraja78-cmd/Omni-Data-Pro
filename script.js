@@ -1,24 +1,20 @@
-// OmniDataPro Main Controller
+// OmniDataPro Main Controller Final
 
 
 // ===============================
-// SIDEBAR SYSTEM
+// SIDEBAR CONTROL
 // ===============================
 
 
 function openSidebar(){
 
+    const sidebar = document.getElementById("sidebar");
 
-let sidebar =
-document.getElementById("sidebar");
+    if(sidebar){
 
+        sidebar.classList.add("active");
 
-if(sidebar){
-
-sidebar.classList.add("active");
-
-}
-
+    }
 
 }
 
@@ -27,19 +23,16 @@ sidebar.classList.add("active");
 
 function closeSidebar(){
 
+    const sidebar = document.getElementById("sidebar");
 
-let sidebar =
-document.getElementById("sidebar");
+    if(sidebar){
 
+        sidebar.classList.remove("active");
 
-if(sidebar){
-
-sidebar.classList.remove("active");
-
-}
-
+    }
 
 }
+
 
 
 
@@ -47,48 +40,38 @@ sidebar.classList.remove("active");
 
 
 // ===============================
-// PAGE CONTROL
+// PAGE NAVIGATION
 // ===============================
 
 
 function openPage(pageName){
 
 
-
-let pages =
-document.querySelectorAll(".page");
+    const pages = document.querySelectorAll(".page");
 
 
+    pages.forEach(function(page){
 
-pages.forEach(function(page){
+        page.style.display = "none";
 
-
-page.style.display="none";
-
-
-});
+    });
 
 
 
-let target =
-document.getElementById(pageName);
+    const target =
+    document.getElementById(pageName);
 
 
 
-if(target){
+    if(target){
 
+        target.style.display = "block";
 
-target.style.display="block";
-
-
-}
+    }
 
 
 
-// Close sidebar after selection
-
-closeSidebar();
-
+    closeSidebar();
 
 
 }
@@ -107,9 +90,7 @@ closeSidebar();
 
 function goBack(){
 
-
-history.back();
-
+    history.back();
 
 }
 
@@ -121,81 +102,56 @@ history.back();
 
 
 // ===============================
-// APP START
+// START APP
 // ===============================
 
 
 function startOmniDataPro(){
 
 
-console.log(
-"OmniDataPro System Started"
-);
+    console.log(
+        "OmniDataPro Started"
+    );
 
 
 
-if(typeof loadDashboard === "function"){
+    if(typeof loadDashboard === "function"){
 
+        loadDashboard();
 
-loadDashboard();
-
-
-}
-
-
-
-if(typeof loadProfile === "function"){
-
-
-loadProfile();
-
-
-}
+    }
 
 
 
-if(typeof loadSettings === "function"){
+    if(typeof loadFolders === "function"){
 
+        loadFolders();
 
-loadSettings();
-
-
-}
-
-
-}
+    }
 
 
 
+    if(typeof loadFiles === "function"){
+
+        loadFiles();
+
+    }
 
 
 
+    if(typeof loadProfile === "function"){
 
+        loadProfile();
 
-// ===============================
-// USER MENU
-// ===============================
-
-
-function toggleUserMenu(){
-
-
-let menu =
-document.getElementById(
-"userMenu"
-);
+    }
 
 
 
-if(menu){
+    if(typeof loadSettings === "function"){
 
+        loadSettings();
 
-menu.classList.toggle(
-"show"
-);
-
-
-}
+    }
 
 
 }
@@ -208,20 +164,56 @@ menu.classList.toggle(
 
 
 // ===============================
-// INITIALIZE
+// CLOSE SIDEBAR OUTSIDE CLICK
 // ===============================
 
 
 document.addEventListener(
+"click",
+function(event){
 
+
+const sidebar =
+document.getElementById("sidebar");
+
+const menuButton =
+event.target.closest("button");
+
+
+
+if(
+sidebar &&
+sidebar.classList.contains("active") &&
+!sidebar.contains(event.target) &&
+!menuButton
+){
+
+closeSidebar();
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+// ===============================
+// INITIAL LOAD
+// ===============================
+
+
+document.addEventListener(
 "DOMContentLoaded",
-
 function(){
 
 
 startOmniDataPro();
 
 
-}
-
-);
+});
