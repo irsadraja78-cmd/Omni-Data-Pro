@@ -1,219 +1,74 @@
-// OmniDataPro Main Controller Final
+// Script.js
+
+import { getSession, logout } from "./Auth.js";
+import { loadDashboard } from "./Dashboard.js";
 
 
-// ===============================
-// SIDEBAR CONTROL
-// ===============================
+// Application Start
+async function initApp() {
+
+    try {
+
+        const session = await getSession();
 
 
-function openSidebar(){
+        if (session) {
 
-    const sidebar = document.getElementById("sidebar");
+            const dashboardData = await loadDashboard();
 
-    if(sidebar){
+            console.log(
+                "Dashboard Loaded:",
+                dashboardData
+            );
 
-        sidebar.classList.add("active");
+        } else {
 
-    }
+            console.log(
+                "User not logged in"
+            );
 
-}
-
-
-
-
-function closeSidebar(){
-
-    const sidebar = document.getElementById("sidebar");
-
-    if(sidebar){
-
-        sidebar.classList.remove("active");
-
-    }
-
-}
+        }
 
 
+    } catch (error) {
 
-
-
-
-
-// ===============================
-// PAGE NAVIGATION
-// ===============================
-
-
-function openPage(pageName){
-
-
-    const pages = document.querySelectorAll(".page");
-
-
-    pages.forEach(function(page){
-
-        page.style.display = "none";
-
-    });
-
-
-
-    const target =
-    document.getElementById(pageName);
-
-
-
-    if(target){
-
-        target.style.display = "block";
+        console.error(
+            "Application Error:",
+            error.message
+        );
 
     }
 
-
-
-    closeSidebar();
-
-
 }
 
 
 
+// Logout Button Handler
+const logoutButton =
+document.getElementById("logout");
 
 
+if (logoutButton) {
 
+    logoutButton.addEventListener(
+        "click",
+        async () => {
 
+            await logout();
 
-// ===============================
-// BACK BUTTON
-// ===============================
+            window.location.href =
+            "index.html";
 
-
-function goBack(){
-
-    history.back();
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// START APP
-// ===============================
-
-
-function startOmniDataPro(){
-
-
-    console.log(
-        "OmniDataPro Started"
+        }
     );
 
-
-
-    if(typeof loadDashboard === "function"){
-
-        loadDashboard();
-
-    }
-
-
-
-    if(typeof loadFolders === "function"){
-
-        loadFolders();
-
-    }
-
-
-
-    if(typeof loadFiles === "function"){
-
-        loadFiles();
-
-    }
-
-
-
-    if(typeof loadProfile === "function"){
-
-        loadProfile();
-
-    }
-
-
-
-    if(typeof loadSettings === "function"){
-
-        loadSettings();
-
-    }
-
-
 }
 
 
 
-
-
-
-
-
-// ===============================
-// CLOSE SIDEBAR OUTSIDE CLICK
-// ===============================
-
+// Start Application
 
 document.addEventListener(
-"click",
-function(event){
-
-
-const sidebar =
-document.getElementById("sidebar");
-
-const menuButton =
-event.target.closest("button");
-
-
-
-if(
-sidebar &&
-sidebar.classList.contains("active") &&
-!sidebar.contains(event.target) &&
-!menuButton
-){
-
-closeSidebar();
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-
-// ===============================
-// INITIAL LOAD
-// ===============================
-
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-
-startOmniDataPro();
-
-
-});
+    "DOMContentLoaded",
+    initApp
+);
