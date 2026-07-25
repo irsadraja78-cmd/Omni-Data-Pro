@@ -2,61 +2,664 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>OmniData Pro</title>
 
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
 
+
+    <!-- Supabase Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 </head>
 
 
 <body>
 
 
-<header class="topbar">
-    <h1>OmniData Pro</h1>
+<!-- Application Loader -->
 
-    <button id="logout">
-        Logout
-    </button>
+<div id="app-loader" class="loader-screen">
+
+    <div class="loader-box">
+
+        <div class="loader"></div>
+
+        <p>
+            Loading OmniData Pro...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- Main Application -->
+
+<div id="app-container">
+
+
+
+<!-- Header -->
+
+<header class="main-header">
+
+
+    <div class="logo-area">
+
+        <h1>
+            OmniData Pro
+        </h1>
+
+        <span>
+            Marketing Workspace Platform
+        </span>
+
+    </div>
+
+
+
+    <div class="user-actions">
+
+
+        <button 
+        id="notification-btn">
+
+            Notifications
+
+        </button>
+
+
+
+        <button 
+        id="logout-btn">
+
+            Logout
+
+        </button>
+
+
+    </div>
+
+
 </header>
 
 
 
-<main>
 
 
-<!-- Authentication -->
+
+<!-- Navigation -->
+
+
+<nav class="main-navigation">
+
+
+    <button data-section="dashboard-section">
+        Dashboard
+    </button>
+
+
+    <button data-section="workspace-section">
+        Workspace
+    </button>
+
+
+    <button data-section="files-section">
+        Files
+    </button>
+
+
+    <button data-section="ai-section">
+        AI Tools
+    </button>
+
+
+    <button data-section="profile-section">
+        Profile
+    </button>
+
+
+    <button data-section="settings-section">
+        Settings
+    </button>
+
+
+</nav>
+
+
+
+
+
+
+
+<!-- Authentication Area -->
+
 
 <section id="auth-section">
 
-    <div class="card">
 
-        <h2>Login</h2>
 
-        <input 
+    <!-- Login -->
+
+    <div 
+    id="login-box"
+    class="auth-card">
+
+
+        <h2>
+            Login
+        </h2>
+
+
+
+        <input
         id="login-email"
         type="email"
-        placeholder="Email">
+        placeholder="Email Address">
 
 
-        <input 
+
+        <input
         id="login-password"
         type="password"
         placeholder="Password">
 
 
-        <button id="login-btn">
+
+        <button 
+        id="login-btn">
+
             Login
+
         </button>
 
 
-        <button id="forgot-btn">
+
+
+        <button 
+        id="show-signup-btn">
+
+            Create New Account
+
+        </button>
+
+
+
+        <button
+        id="forgot-password-btn">
+
             Forgot Password?
+
         </button>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Signup -->
+
+
+    <div
+    id="signup-box"
+    class="auth-card hidden">
+
+
+        <h2>
+            Create Account
+        </h2>
+
+
+
+        <input
+        id="signup-name"
+        type="text"
+        placeholder="Full Name">
+
+
+
+        <input
+        id="signup-email"
+        type="email"
+        placeholder="Email Address">
+
+
+
+        <input
+        id="signup-password"
+        type="password"
+        placeholder="Password">
+
+
+
+        <button
+        id="signup-btn">
+
+            Signup
+
+        </button>
+
+
+
+        <button
+        id="show-login-btn">
+
+            Already have account?
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Forgot Password -->
+
+
+    <div
+    id="forgot-box"
+    class="auth-card hidden">
+
+
+        <h2>
+            Reset Password
+        </h2>
+
+
+
+        <input
+        id="forgot-email"
+        type="email"
+        placeholder="Your Email">
+
+
+
+        <button
+        id="send-reset-btn">
+
+            Send Reset Link
+
+        </button>
+
+
+
+        <button
+        id="back-login-btn">
+
+            Back To Login
+
+        </button>
+
+
+    </div>
+
+
+<!-- ============================= -->
+<!-- Dashboard Section -->
+<!-- ============================= -->
+
+<section 
+id="dashboard-section"
+class="app-section">
+
+
+    <div class="section-header">
+
+        <h2>
+            Dashboard
+        </h2>
+
+        <p>
+            Your platform overview
+        </p>
+
+    </div>
+
+
+
+
+    <div class="dashboard-cards">
+
+
+        <div class="dashboard-card">
+
+            <h3>
+                Projects
+            </h3>
+
+            <span id="total-projects">
+                0
+            </span>
+
+        </div>
+
+
+
+
+        <div class="dashboard-card">
+
+            <h3>
+                Files
+            </h3>
+
+            <span id="total-files">
+                0
+            </span>
+
+        </div>
+
+
+
+
+        <div class="dashboard-card">
+
+            <h3>
+                AI Requests
+            </h3>
+
+            <span id="total-ai">
+                0
+            </span>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="dashboard-panel">
+
+
+        <h3>
+            Recent Activity
+        </h3>
+
+
+        <div id="activity-list">
+
+            No activity found
+
+        </div>
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- Workspace Section -->
+<!-- ============================= -->
+
+<section
+id="workspace-section"
+class="app-section">
+
+
+
+    <div class="section-header">
+
+
+        <h2>
+            Workspace
+        </h2>
+
+
+        <button id="create-project-btn">
+
+            Create Project
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+    <div 
+    id="workspace-list">
+
+
+        <!-- Projects will load here -->
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- File Manager Section -->
+<!-- ============================= -->
+
+<section
+id="files-section"
+class="app-section">
+
+
+
+    <div class="section-header">
+
+
+        <h2>
+            File Manager
+        </h2>
+
+
+    </div>
+
+
+
+
+
+    <div class="file-upload-box">
+
+
+        <input
+        type="file"
+        id="file-input">
+
+
+
+        <button
+        id="upload-file-btn">
+
+            Upload File
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div
+    id="files-list">
+
+
+        <!-- Files load here -->
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- AI Tools Section -->
+<!-- ============================= -->
+
+<section
+id="ai-section"
+class="app-section">
+
+
+
+    <div class="section-header">
+
+
+        <h2>
+            AI Tools
+        </h2>
+
+
+    </div>
+
+
+
+
+
+
+    <textarea
+    id="ai-prompt"
+    placeholder="Write your request here..."></textarea>
+
+
+
+
+
+    <button
+    id="run-ai-btn">
+
+        Generate
+
+    </button>
+
+
+
+
+
+
+    <div
+    id="ai-response">
+
+
+        AI response will appear here
+
+
+    </div>
+
+
+
+
+</section><!-- ============================= -->
+<!-- Profile Section -->
+<!-- ============================= -->
+
+<section
+id="profile-section"
+class="app-section">
+
+
+    <div class="section-header">
+
+        <h2>
+            Profile
+        </h2>
+
+    </div>
+
+
+
+
+    <div class="profile-card">
+
+
+        <div class="profile-item">
+
+            <label>
+                Name
+            </label>
+
+            <input 
+            id="profile-name"
+            type="text">
+
+        </div>
+
+
+
+
+        <div class="profile-item">
+
+            <label>
+                Email
+            </label>
+
+            <input 
+            id="profile-email"
+            type="email"
+            disabled>
+
+        </div>
+
+
+
+
+        <button
+        id="update-profile-btn">
+
+            Update Profile
+
+        </button>
+
 
 
     </div>
@@ -68,95 +671,53 @@
 
 
 
-<!-- Dashboard -->
-
-<section id="dashboard-section">
 
 
-<div class="card">
-
-<h2>
-Dashboard
-</h2>
 
 
-<div id="profile-info">
-</div>
+<!-- ============================= -->
+<!-- Security Section -->
+<!-- ============================= -->
 
 
-<div id="stats">
-</div>
+<section
+id="security-section"
+class="app-section">
 
 
-</div>
+    <div class="section-header">
 
+        <h2>
+            Security
+        </h2>
 
-</section>
+    </div>
 
 
 
 
 
-
-<!-- Workspace -->
-
-<section id="workspace-section">
+    <div class="security-panel">
 
 
-<div class="card">
-
-<h2>
-Workspace
-</h2>
-
-
-<button id="create-project">
-Create Project
-</button>
-
-
-<div id="projects-list">
-</div>
-
-
-</div>
-
-
-</section>
+        <h3>
+            Security Activity
+        </h3>
 
 
 
+        <div
+        id="security-log-list">
+
+
+            No security logs
+
+
+        </div>
 
 
 
-<!-- Files -->
-
-
-<section id="files-section">
-
-
-<div class="card">
-
-<h2>
-Files
-</h2>
-
-
-<input 
-type="file"
-id="file-upload">
-
-
-<button id="upload-btn">
-Upload
-</button>
-
-
-<div id="files-list">
-</div>
-
-
-</div>
+    </div>
 
 
 </section>
@@ -167,25 +728,87 @@ Upload
 
 
 
-<!-- Settings -->
 
 
-<section id="settings-section">
+<!-- ============================= -->
+<!-- Settings Section -->
+<!-- ============================= -->
 
 
-<div class="card">
+<section
+id="settings-section"
+class="app-section">
 
 
-<h2>
-Settings
-</h2>
+    <div class="section-header">
 
 
-<div id="settings-area">
-</div>
+        <h2>
+            Settings
+        </h2>
 
 
-</div>
+    </div>
+
+
+
+
+
+    <div class="settings-card">
+
+
+        <div class="setting-row">
+
+
+            <label>
+                Dark Mode
+            </label>
+
+
+            <input
+            id="dark-mode-toggle"
+            type="checkbox">
+
+
+        </div>
+
+
+
+
+
+        <div class="setting-row">
+
+
+            <label>
+                Email Notifications
+            </label>
+
+
+            <input
+            id="email-notification-toggle"
+            type="checkbox">
+
+
+        </div>
+
+
+
+
+
+
+        <button
+        id="save-settings-btn">
+
+
+            Save Settings
+
+
+        </button>
+
+
+
+
+    </div>
 
 
 </section>
@@ -194,14 +817,105 @@ Settings
 
 
 
-</main>
 
 
 
 
-<script type="module" src="Script.js"></script>
+<!-- ============================= -->
+<!-- Notification Modal -->
+<!-- ============================= -->
 
+
+<div
+id="notification-modal"
+class="modal hidden">
+
+
+
+    <div class="modal-content">
+
+
+        <h3>
+            Notifications
+        </h3>
+
+
+
+        <div
+        id="notification-list">
+
+
+            No notifications
+
+
+        </div>
+
+
+
+
+        <button
+        id="close-notification-btn">
+
+
+            Close
+
+
+        </button>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- Message Box -->
+<!-- ============================= -->
+
+
+<div
+id="message-box"
+class="message-box hidden">
+
+
+    <p id="message-text"></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- JavaScript -->
+<!-- ============================= -->
+
+
+<script
+type="module"
+src="Script.js">
+</script>
+
+
+
+
+
+</div>
 
 </body>
 
 </html>
+</section>
