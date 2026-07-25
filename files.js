@@ -1,366 +1,125 @@
-// OmniDataPro File & Folder System Final
+// File.js
+
+import supabaseClient from "./Supabase.js";
+
+const BUCKET_NAME = "omnidatapro-files";
 
 
-// ===============================
-// CREATE FOLDER
-// ===============================
+// Get User Files
+export async function getFiles() {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-function createFolder(folderName){
-
-
-    if(!folderName){
-
-        alert("Folder name required");
-
-        return;
-
+    if (error) {
+        throw error;
     }
 
 
+    const { data, error: fileError } = await supabaseClient
+        .from("files")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
 
-    const work =
-    getCurrentWork();
 
-
-
-    if(!work){
-
-        alert("Select Work First");
-
-        return;
-
+    if (fileError) {
+        throw fileError;
     }
 
 
-
-    let folders =
-    JSON.parse(
-        localStorage.getItem("odpFolders")
-    ) || {};
-
-
-
-    if(!folders[work.id]){
-
-        folders[work.id]=[];
-
-    }
-
-
-
-    folders[work.id].push({
-
-        name:folderName,
-
-        created:
-        new Date().toLocaleString()
-
-    });
-
-
-
-    localStorage.setItem(
-
-        "odpFolders",
-
-        JSON.stringify(folders)
-
-    );
-
-
-
-    loadFolders();
-
-
+    return data;
 }
 
 
 
+// Upload File
+export async function uploadFile(file) {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
 
 
+    if (error) {
+        throw error;
+    }
 
 
-// ===============================
-// LOAD FOLDERS
-// ===============================
+    const filePath = `${user.id}/${Date.now()}_${file.name}`;
 
 
-function loadFolders(){
+    const { error: uploadError } =
+        await supabaseClient.storage
+        .from(BUCKET_NAME)
+        .upload(filePath, file);
 
 
-    const box =
-    document.getElementById(
-        "folderList"
-    );
-
-
-    if(!box)return;
-
-
-
-    const work =
-    getCurrentWork();
-
-
-
-    if(!work)return;
-
-
-
-    let folders =
-    JSON.parse(
-        localStorage.getItem("odpFolders")
-    ) || {};
-
-
-
-    box.innerHTML="";
-
-
-
-    (folders[work.id] || [])
-    .forEach(function(folder){
-
-
-        box.innerHTML += `
-
-        <div class="folder-card">
-
-        📁 ${folder.name}
-
-        </div>
-
-        `;
-
-
-    });
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// UPLOAD FILE
-// ===============================
-
-
-function uploadFile(){
-
-
-
-    const input =
-    document.getElementById(
-        "fileInput"
-    );
-
-
-
-    if(!input || !input.files.length){
-
-        alert("Select File");
-
-        return;
-
+    if (uploadError) {
+        throw uploadError;
     }
 
 
 
-    const work =
-    getCurrentWork();
+    const { data, error: dbError } =
+        await supabaseClient
+        .from("files")
+        .insert([
+            {
+                user_id: user.id,
+                name: file.name,
+                path: filePath,
+                type: file.type,
+                size: file.size
+            }
+        ])
+        .select()
+        .single();
 
 
 
-    if(!work){
+    if (dbError) {
+        throw dbError;
+    }
 
-        alert("Select Work First");
 
-        return;
+    return data;
+}
 
+
+
+// Delete File
+export async function deleteFile(fileId, filePath) {
+
+
+    const { error: storageError } =
+        await supabaseClient.storage
+        .from(BUCKET_NAME)
+        .remove([filePath]);
+
+
+    if (storageError) {
+        throw storageError;
     }
 
 
 
-    let files =
-    JSON.parse(
-        localStorage.getItem("odpFiles")
-    ) || {};
+    const { error: dbError } =
+        await supabaseClient
+        .from("files")
+        .delete()
+        .eq("id", fileId);
 
 
 
-    if(!files[work.id]){
-
-        files[work.id]=[];
-
+    if (dbError) {
+        throw dbError;
     }
 
 
-
-    files[work.id].push({
-
-
-        name:
-        input.files[0].name,
-
-
-        size:
-        input.files[0].size,
-
-
-        date:
-        new Date().toLocaleString()
-
-
-    });
-
-
-
-    localStorage.setItem(
-
-        "odpFiles",
-
-        JSON.stringify(files)
-
-    );
-
-
-
-    loadFiles();
-
-
+    return true;
 }
-
-
-
-
-
-
-
-// ===============================
-// LOAD FILES
-// ===============================
-
-
-function loadFiles(){
-
-
-
-    const list =
-    document.getElementById(
-        "fileList"
-    );
-
-
-
-    if(!list)return;
-
-
-
-    const work =
-    getCurrentWork();
-
-
-
-    if(!work)return;
-
-
-
-    let files =
-    JSON.parse(
-        localStorage.getItem("odpFiles")
-    ) || {};
-
-
-
-    list.innerHTML="";
-
-
-
-    (files[work.id] || [])
-    .forEach(function(file,index){
-
-
-        list.innerHTML += `
-
-        <div class="file-card">
-
-        📄 ${file.name}
-
-        <button onclick="deleteFile(${index})">
-
-        Delete
-
-        </button>
-
-        </div>
-
-        `;
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// DELETE FILE
-// ===============================
-
-
-function deleteFile(index){
-
-
-    const work =
-    getCurrentWork();
-
-
-
-    let files =
-    JSON.parse(
-        localStorage.getItem("odpFiles")
-    ) || {};
-
-
-
-    files[work.id].splice(index,1);
-
-
-
-    localStorage.setItem(
-
-        "odpFiles",
-
-        JSON.stringify(files)
-
-    );
-
-
-
-    loadFiles();
-
-
-}
-
-
-
-
-
-
-
-console.log(
-"OmniDataPro File System Active"
-);
