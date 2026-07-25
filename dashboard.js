@@ -1,43 +1,92 @@
-// OmniDataPro Dashboard System
+// OmniDataPro Dashboard Final
 
 
 // ===============================
-// WORK CATEGORY LIST
+// WORK CATEGORIES
 // ===============================
 
 
 const workCategories = [
 
+    {
+        id:"data_entry",
+        name:"Basic Data Entry",
+        icon:"📄"
+    },
 
-"Basic Data Entry",
+    {
+        id:"copywriting",
+        name:"Copy Writing",
+        icon:"✍️"
+    },
 
-"Copy Writing",
+    {
+        id:"typing",
+        name:"Typing Work",
+        icon:"⌨️"
+    },
 
-"Typing Work",
+    {
+        id:"excel",
+        name:"Excel Data Work",
+        icon:"📊"
+    },
 
-"Excel Data Work",
+    {
+        id:"medical",
+        name:"Medical Data Entry",
+        icon:"🏥"
+    },
 
-"Medical Data Entry",
+    {
+        id:"pdf",
+        name:"PDF Work",
+        icon:"📑"
+    },
 
-"PDF Work",
+    {
+        id:"research",
+        name:"Web Research",
+        icon:"🌐"
+    },
 
-"Web Research",
+    {
+        id:"cleaning",
+        name:"Data Cleaning",
+        icon:"🧹"
+    },
 
-"Data Cleaning",
+    {
+        id:"processing",
+        name:"Data Processing",
+        icon:"⚙️"
+    },
 
-"Data Processing",
+    {
+        id:"formatting",
+        name:"Document Formatting",
+        icon:"📝"
+    },
 
-"Document Formatting",
+    {
+        id:"assistant",
+        name:"Virtual Assistant",
+        icon:"👨‍💻"
+    },
 
-"Virtual Assistant",
+    {
+        id:"reporting",
+        name:"Reporting Work",
+        icon:"📈"
+    },
 
-"Reporting Work",
-
-"Custom Work"
-
+    {
+        id:"custom",
+        name:"Custom Work",
+        icon:"➕"
+    }
 
 ];
-
 
 
 
@@ -53,7 +102,7 @@ const workCategories = [
 function loadDashboard(){
 
 
-let dashboard =
+const dashboard =
 document.getElementById(
 "workDashboard"
 );
@@ -88,7 +137,13 @@ card.className =
 
 card.innerHTML = `
 
-<h3>☑ ${work}</h3>
+<h3>
+
+${work.icon}
+
+${work.name}
+
+</h3>
 
 <p>
 Open Workspace
@@ -100,7 +155,9 @@ Open Workspace
 
 card.onclick=function(){
 
-openWorkDashboard(work);
+
+selectWork(work);
+
 
 };
 
@@ -121,13 +178,12 @@ dashboard.appendChild(card);
 
 
 
-
 // ===============================
-// OPEN WORK
+// SELECT WORK
 // ===============================
 
 
-function openWorkDashboard(workName){
+function selectWork(work){
 
 
 
@@ -135,9 +191,10 @@ localStorage.setItem(
 
 "currentWork",
 
-workName
+JSON.stringify(work)
 
 );
+
 
 
 
@@ -152,11 +209,13 @@ localStorage.getItem(
 
 
 
-if(!workData[workName]){
+
+if(!workData[work.id]){
 
 
-workData[workName]={
+workData[work.id]={
 
+name:work.name,
 
 files:[],
 
@@ -164,11 +223,12 @@ tasks:[],
 
 notes:[],
 
-created:
-new Date().toLocaleString()
-
+status:"New"
 
 };
+
+
+}
 
 
 
@@ -181,21 +241,14 @@ JSON.stringify(workData)
 );
 
 
-}
 
 
 
-if(typeof openPage === "function"){
-
-
-openPage("mywork");
-
-
-}
+openPage("workPage");
 
 
 
-let title =
+const title =
 document.getElementById(
 "workTitle"
 );
@@ -204,16 +257,13 @@ document.getElementById(
 
 if(title){
 
-
 title.innerHTML =
-workName;
-
-
-}
-
+work.icon+" "+work.name;
 
 }
 
+
+}
 
 
 
@@ -229,9 +279,11 @@ workName;
 function getCurrentWork(){
 
 
-return localStorage.getItem(
+return JSON.parse(
 
+localStorage.getItem(
 "currentWork"
+)
 
 );
 
@@ -244,9 +296,8 @@ return localStorage.getItem(
 
 
 
-
 // ===============================
-// DASHBOARD START
+// START
 // ===============================
 
 
