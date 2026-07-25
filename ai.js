@@ -1,94 +1,257 @@
+// ===================================
+// OmniData Pro
 // AI.js
+// ===================================
+
 
 import supabaseClient from "./Supabase.js";
 
 
-// Save AI Request History
-export async function saveAIHistory(prompt, response) {
+
+
+
+
+
+// Save AI History
+
+export async function saveAIHistory(
+    prompt,
+    response
+){
+
+
 
     const {
-        data: { user },
-        error
+
+        data:{
+            user
+
+        },
+
+        error:userError
+
     } = await supabaseClient.auth.getUser();
 
 
-    if (error) {
+
+
+
+    if(userError){
+
+        throw userError;
+
+    }
+
+
+
+
+
+
+
+
+    const {
+
+        data,
+
+        error
+
+    } = await supabaseClient
+
+    .from("ai_history")
+
+    .insert([
+
+        {
+
+            user_id:user.id,
+
+            prompt:prompt,
+
+            response:response
+
+
+        }
+
+    ])
+
+    .select()
+
+    .single();
+
+
+
+
+
+
+
+    if(error){
+
         throw error;
+
     }
 
 
-    const { data, error: saveError } =
-        await supabaseClient
-        .from("ai_history")
-        .insert([
-            {
-                user_id: user.id,
-                prompt: prompt,
-                response: response
-            }
-        ])
-        .select()
-        .single();
 
 
-    if (saveError) {
-        throw saveError;
-    }
+
 
 
     return data;
+
 }
 
 
 
-// Get User AI History
-export async function getAIHistory() {
+
+
+
+
+
+
+
+
+// Get AI History
+
+export async function getAIHistory(){
+
+
 
     const {
-        data: { user },
-        error
+
+        data:{
+            user
+
+        },
+
+        error:userError
+
     } = await supabaseClient.auth.getUser();
 
 
-    if (error) {
+
+
+
+
+    if(userError){
+
+        throw userError;
+
+    }
+
+
+
+
+
+
+
+
+    const {
+
+        data,
+
+        error
+
+    } = await supabaseClient
+
+    .from("ai_history")
+
+    .select("*")
+
+    .eq(
+
+        "user_id",
+
+        user.id
+
+    )
+
+    .order(
+
+        "created_at",
+
+        {
+
+            ascending:false
+
+        }
+
+    );
+
+
+
+
+
+
+
+    if(error){
+
         throw error;
+
     }
 
 
-    const { data, error: historyError } =
-        await supabaseClient
-        .from("ai_history")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", {
-            ascending: false
-        });
 
 
-    if (historyError) {
-        throw historyError;
-    }
+
 
 
     return data;
+
 }
 
 
 
-// AI Request Handler
-export async function runAI(prompt) {
+
+
+
+
+
+
+
+
+// Run AI Request
+
+export async function runAI(
+    prompt
+){
+
+
 
     /*
-       यहां बाद में AI API connect होगी।
-       फिलहाल system structure ready है।
+    
+    यहां बाद में OpenAI / अन्य AI API connect होगी।
+    अभी system structure ready है।
+
     */
 
 
-    const response = "AI response will be connected here";
 
 
-    await saveAIHistory(prompt, response);
+
+    const response =
+
+    "AI response generated";
+
+
+
+
+
+
+
+    await saveAIHistory(
+
+        prompt,
+
+        response
+
+    );
+
+
+
+
+
 
 
     return response;
+
 }
