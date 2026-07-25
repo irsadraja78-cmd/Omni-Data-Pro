@@ -1,4 +1,4 @@
-// OmniDataPro Security System
+// OmniDataPro Security System Final
 
 
 // ===============================
@@ -6,31 +6,22 @@
 // ===============================
 
 
-// Hidden field check
-function checkHoneypot(form){
+function checkHoneypot(){
 
+    const trap =
+    document.getElementById("website");
 
-let trap = form.querySelector(
-".website-check"
-);
+    if(trap && trap.value !== ""){
 
+        console.warn(
+            "Bot activity detected"
+        );
 
+        return false;
 
-if(trap && trap.value !== ""){
+    }
 
-
-securityAlert(
-"Bot activity detected"
-);
-
-
-return false;
-
-}
-
-
-return true;
-
+    return true;
 
 }
 
@@ -40,119 +31,42 @@ return true;
 
 
 // ===============================
-// SECURITY LOG
+// LOGIN ATTEMPT SECURITY
 // ===============================
-
-
-function securityAlert(message){
-
-
-let logs =
-JSON.parse(
-localStorage.getItem("securityLogs")
-) || [];
-
-
-
-logs.push({
-
-message: message,
-
-time:
-new Date().toLocaleString(),
-
-device:
-navigator.userAgent
-
-
-});
-
-
-
-localStorage.setItem(
-
-"securityLogs",
-
-JSON.stringify(logs)
-
-);
-
-
-
-console.warn(
-"Security Alert:",
-message
-);
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// LOGIN ATTEMPT MONITOR
-// ===============================
-
-
-function checkLoginAttempts(){
-
-
-let attempts =
-JSON.parse(
-localStorage.getItem("loginAttempts")
-) || 0;
-
-
-
-if(attempts >= 5){
-
-
-alert(
-"Too many attempts. Try later."
-);
-
-
-return false;
-
-
-}
-
-
-return true;
-
-
-}
-
-
-
-
-
 
 
 function addLoginAttempt(){
 
 
-let attempts =
-JSON.parse(
-localStorage.getItem("loginAttempts")
-) || 0;
+    let attempts =
+    Number(
+        localStorage.getItem(
+            "loginAttempts"
+        )
+    ) || 0;
 
 
+    attempts++;
 
-attempts++;
+
+    localStorage.setItem(
+        "loginAttempts",
+        attempts
+    );
 
 
-localStorage.setItem(
+    securityLog(
+        "Failed login attempt"
+    );
 
-"loginAttempts",
 
-JSON.stringify(attempts)
+    if(attempts >= 5){
 
-);
+        alert(
+            "Too many login attempts. Try later."
+        );
+
+    }
 
 
 }
@@ -165,9 +79,9 @@ JSON.stringify(attempts)
 function resetLoginAttempts(){
 
 
-localStorage.removeItem(
-"loginAttempts"
-);
+    localStorage.removeItem(
+        "loginAttempts"
+    );
 
 
 }
@@ -179,76 +93,84 @@ localStorage.removeItem(
 
 
 // ===============================
-// SESSION SECURITY
+// SECURITY LOG
 // ===============================
 
 
-function secureSession(){
+function securityLog(action){
 
 
-let login =
-localStorage.getItem(
-"odpLogin"
-);
+    let logs =
+    JSON.parse(
+        localStorage.getItem(
+            "securityLogs"
+        )
+    ) || [];
 
 
 
-if(!login){
+    logs.push({
+
+        action: action,
+
+        time:
+        new Date().toLocaleString()
+
+
+    });
+
+
+
+    localStorage.setItem(
+
+        "securityLogs",
+
+        JSON.stringify(logs)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// SESSION CHECK
+// ===============================
+
+
+function checkSecuritySession(){
+
+
+    let session =
+    localStorage.getItem(
+        "odpLogin"
+    );
+
+
+    if(session){
+
+        return true;
+
+    }
+
+
+    return false;
+
+
+}
+
+
+
+
+
 
 
 console.log(
-"No active session"
-);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// FILE ACCESS CHECK
-// ===============================
-
-
-function checkFileAccess(userId,fileOwner){
-
-
-if(userId !== fileOwner){
-
-
-securityAlert(
-"Unauthorized file access attempt"
-);
-
-
-return false;
-
-
-}
-
-
-return true;
-
-
-}
-
-
-
-
-
-
-// Start Security
-
-secureSession();
-
-
-console.log(
-"OmniDataPro Security System Active"
+"OmniDataPro Security Active"
 );
