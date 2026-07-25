@@ -1,316 +1,84 @@
-// OmniDataPro Dashboard Final
+// Dashboard.js
+
+import supabaseClient from "./Supabase.js";
+import { getProfile } from "./Profile.js";
+import { logout } from "./Auth.js";
 
 
-// ===============================
-// WORK CATEGORIES
-// ===============================
+// Load Dashboard
+export async function loadDashboard() {
+
+    const {
+        data: { session },
+        error
+    } = await supabaseClient.auth.getSession();
 
 
-const workCategories = [
-
-    {
-        id:"data_entry",
-        name:"Basic Data Entry",
-        icon:"📄"
-    },
-
-    {
-        id:"copywriting",
-        name:"Copy Writing",
-        icon:"✍️"
-    },
-
-    {
-        id:"typing",
-        name:"Typing Work",
-        icon:"⌨️"
-    },
-
-    {
-        id:"excel",
-        name:"Excel Data Work",
-        icon:"📊"
-    },
-
-    {
-        id:"medical",
-        name:"Medical Data Entry",
-        icon:"🏥"
-    },
-
-    {
-        id:"pdf",
-        name:"PDF Work",
-        icon:"📑"
-    },
-
-    {
-        id:"research",
-        name:"Web Research",
-        icon:"🌐"
-    },
-
-    {
-        id:"cleaning",
-        name:"Data Cleaning",
-        icon:"🧹"
-    },
-
-    {
-        id:"processing",
-        name:"Data Processing",
-        icon:"⚙️"
-    },
-
-    {
-        id:"formatting",
-        name:"Document Formatting",
-        icon:"📝"
-    },
-
-    {
-        id:"assistant",
-        name:"Virtual Assistant",
-        icon:"👨‍💻"
-    },
-
-    {
-        id:"reporting",
-        name:"Reporting Work",
-        icon:"📈"
-    },
-
-    {
-        id:"custom",
-        name:"Custom Work",
-        icon:"➕"
+    if (error) {
+        throw error;
     }
 
-];
+
+    if (!session) {
+        window.location.href = "index.html";
+        return null;
+    }
 
 
+    const profile = await getProfile();
 
 
-
-
-
-// ===============================
-// LOAD DASHBOARD
-// ===============================
-
-
-function loadDashboard(){
-
-
-const dashboard =
-document.getElementById(
-"workDashboard"
-);
-
-
-
-if(!dashboard){
-
-return;
-
+    return {
+        user: session.user,
+        profile: profile
+    };
 }
 
 
+// Get User Activity Summary
+export async function getDashboardStats() {
 
-dashboard.innerHTML="";
-
-
-
-workCategories.forEach(function(work){
-
-
-
-let card =
-document.createElement("div");
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
 
 
-
-card.className =
-"work-card";
-
-
-
-card.innerHTML = `
-
-<h3>
-
-${work.icon}
-
-${work.name}
-
-</h3>
-
-<p>
-Open Workspace
-</p>
-
-`;
+    if (userError) {
+        throw userError;
+    }
 
 
-
-card.onclick=function(){
-
-
-selectWork(work);
-
-
-};
+    const { data: projects } = await supabaseClient
+        .from("work_projects")
+        .select("id")
+        .eq("user_id", user.id);
 
 
-
-dashboard.appendChild(card);
-
-
-
-});
+    const { data: files } = await supabaseClient
+        .from("files")
+        .select("id")
+        .eq("user_id", user.id);
 
 
+    const { data: tasks } = await supabaseClient
+        .from("tasks")
+        .select("id")
+        .eq("user_id", user.id);
+
+
+    return {
+        projects: projects?.length || 0,
+        files: files?.length || 0,
+        tasks: tasks?.length || 0
+    };
 }
 
 
+// Dashboard Logout
+export async function dashboardLogout() {
 
+    await logout();
 
-
-
-
-// ===============================
-// SELECT WORK
-// ===============================
-
-
-function selectWork(work){
-
-
-
-localStorage.setItem(
-
-"currentWork",
-
-JSON.stringify(work)
-
-);
-
-
-
-
-let workData =
-JSON.parse(
-
-localStorage.getItem(
-"workData"
-)
-
-) || {};
-
-
-
-
-if(!workData[work.id]){
-
-
-workData[work.id]={
-
-name:work.name,
-
-files:[],
-
-tasks:[],
-
-notes:[],
-
-status:"New"
-
-};
-
-
+    window.location.href = "index.html";
 }
-
-
-
-localStorage.setItem(
-
-"workData",
-
-JSON.stringify(workData)
-
-);
-
-
-
-
-
-openPage("workPage");
-
-
-
-const title =
-document.getElementById(
-"workTitle"
-);
-
-
-
-if(title){
-
-title.innerHTML =
-work.icon+" "+work.name;
-
-}
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// GET CURRENT WORK
-// ===============================
-
-
-function getCurrentWork(){
-
-
-return JSON.parse(
-
-localStorage.getItem(
-"currentWork"
-)
-
-);
-
-
-}
-
-
-
-
-
-
-
-// ===============================
-// START
-// ===============================
-
-
-document.addEventListener(
-
-"DOMContentLoaded",
-
-function(){
-
-
-loadDashboard();
-
-
-}
-
-);
