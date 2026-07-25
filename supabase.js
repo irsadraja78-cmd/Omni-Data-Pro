@@ -1,104 +1,29 @@
-// OmniDataPro Supabase Connection Final
+// =====================================
+// OmniDataPro Supabase Connection
+// =====================================
 
 
-// ===============================
-// SUPABASE CONFIG
-// ===============================
+// अपना Supabase Project URL यहाँ डालें
+
+const SUPABASE_URL = "https://qvmywidjilwwkqvstglo.supabase.co";
 
 
-// बाद में यहाँ अपनी Supabase जानकारी डालनी है
+// अपनी Supabase anon public key यहाँ डालें
 
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-
-
-
-
-
-// ===============================
-// CREATE CLIENT
-// ===============================
-
-
-let supabaseClient;
-
-
-
-try {
-
-
-    supabaseClient = supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-
-
-    window.supabaseClient = supabaseClient;
-
-
-
-    console.log(
-        "OmniDataPro Supabase Connected"
-    );
-
-
-}
-
-catch(error){
-
-
-    console.error(
-        "Supabase Connection Error:",
-        error
-    );
-
-
-}
+const SUPABASE_ANON_KEY = "sb_publishable_4HhTJOl3003RLkW_DQR6-w_Kg01Vh5U";
 
 
 
 
+// Supabase Client Create
 
-
-// ===============================
-// CONNECTION CHECK
-// ===============================
-
-
-async function checkSupabaseConnection(){
-
-
-    if(!supabaseClient){
-
-        console.log(
-            "Supabase Not Connected"
-        );
-
-        return false;
-
-    }
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
 
 
 
-    const {data,error} =
-    await supabaseClient.auth.getSession();
+// Export
 
-
-
-    if(error){
-
-        console.log(
-            error.message
-        );
-
-        return false;
-
-    }
-
-
-
-    return true;
-
-
-}
+window.supabaseClient = supabaseClient;
