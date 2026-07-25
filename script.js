@@ -57,30 +57,23 @@ document.addEventListener(
     "DOMContentLoaded",
     async()=>{
 
+        try {
+            const session = await getSession();
 
-        const session =
-        await getSession();
-
-
-
-        if(session){
-
-            showApp();
-
-            await initializeDashboard();
-
-
-        }else{
-
-
+            if(session){
+                showApp();
+                await initializeDashboard();
+            } else {
+                showAuth();
+            }
+        } catch (error) {
+            console.error("Auth session error:", error);
             showAuth();
-
-
         }
-
 
     }
 );
+
 
 
 
