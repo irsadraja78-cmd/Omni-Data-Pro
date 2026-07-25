@@ -9,9 +9,7 @@
 
 <title>OmniDataPro</title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
@@ -19,11 +17,34 @@
 <body>
 
 
-<!-- Main App Area -->
+<!-- =========================
+LOGIN PAGE
+========================= -->
 
-<div id="app">
+<div id="loginPage" class="page active">
 
 <h1>Welcome To OmniDataPro</h1>
+
+<input id="loginEmail" placeholder="Email">
+
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button onclick="loginUser(
+document.getElementById('loginEmail').value,
+document.getElementById('loginPassword').value
+)">
+Login
+</button>
+
+
+<p onclick="openPage('signupPage')">
+Create Account
+</p>
+
+
+<p onclick="openPage('forgotPage')">
+Forgot Password
+</p>
 
 
 </div>
@@ -32,15 +53,415 @@
 
 
 
-<!-- Supabase Library -->
+
+<!-- =========================
+SIGNUP PAGE
+========================= -->
+
+
+<div id="signupPage" class="page">
+
+
+<h1>Create Account</h1>
+
+
+<input id="signupEmail" placeholder="Email">
+
+
+<input id="signupPassword" type="password" placeholder="Password">
+
+
+<button onclick="signupUser(
+document.getElementById('signupEmail').value,
+document.getElementById('signupPassword').value
+)">
+Signup
+</button>
+
+
+</div>
+
+
+
+
+
+
+<!-- =========================
+FORGOT PAGE
+========================= -->
+
+
+<div id="forgotPage" class="page">
+
+
+<h1>Reset Password</h1>
+
+
+<input id="forgotEmail" placeholder="Email">
+
+
+<button onclick="forgotPassword(
+document.getElementById('forgotEmail').value
+)">
+Send Link
+</button>
+
+
+</div>
+
+
+
+
+
+
+<!-- =========================
+TOP BAR
+========================= -->
+
+
+<div id="mainApp">
+
+
+<div class="topbar">
+
+
+<button onclick="openSidebar()">
+☰
+</button>
+
+
+<div class="logo">
+OmniDataPro
+</div>
+
+
+<div onclick="openPage('profilePage')">
+👤 Profile
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+SIDEBAR
+========================= -->
+
+
+<div id="sidebar">
+
+
+<h2>Menu</h2>
+
+
+<a onclick="openPage('dashboardPage')">
+Dashboard
+</a>
+
+
+<a onclick="openPage('workPage')">
+My Work
+</a>
+
+
+<a onclick="openPage('filesPage')">
+Files
+</a>
+
+
+<a onclick="openPage('aiPage')">
+AI Assistant
+</a>
+
+
+<a onclick="openPage('profilePage')">
+Profile
+</a>
+
+
+<a onclick="openPage('settingsPage')">
+Settings
+</a>
+
+
+<a onclick="logoutAccount()">
+Logout
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+DASHBOARD
+========================= -->
+
+
+<div id="dashboardPage" class="page">
+
+
+<h1>Work Dashboard</h1>
+
+
+<div id="workDashboard">
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+WORKSPACE
+========================= -->
+
+
+<div id="workPage" class="page">
+
+
+<button onclick="goBack()">
+← Back
+</button>
+
+
+<h1 id="workTitle">
+My Work
+</h1>
+
+
+
+<input id="projectTitle"
+placeholder="Project Title">
+
+
+<textarea id="projectDescription"
+placeholder="Work Description">
+</textarea>
+
+
+<select id="projectStatus">
+
+<option>
+Pending
+</option>
+
+<option>
+Running
+</option>
+
+<option>
+Completed
+</option>
+
+</select>
+
+
+<button onclick="saveProjectWork()">
+Save Work
+</button>
+
+
+
+<div id="projectList"></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+FILES
+========================= -->
+
+
+<div id="filesPage" class="page">
+
+
+<button onclick="goBack()">
+← Back
+</button>
+
+
+<h1>Files</h1>
+
+
+<input id="fileInput" type="file">
+
+
+<button onclick="uploadFile()">
+Upload
+</button>
+
+
+
+<div id="folderList"></div>
+
+
+<div id="fileList"></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+AI
+========================= -->
+
+
+<div id="aiPage" class="page">
+
+
+<h1>AI Assistant</h1>
+
+
+<input id="aiInput"
+placeholder="Ask AI">
+
+
+<button onclick="runAI()">
+Ask
+</button>
+
+
+<div id="aiOutput"></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+PROFILE
+========================= -->
+
+
+<div id="profilePage" class="page">
+
+
+<h1>Profile</h1>
+
+
+<input id="profileName"
+placeholder="Name">
+
+
+<input id="profileEmail"
+placeholder="Email">
+
+
+<input id="profilePhoto"
+type="file">
+
+
+<button onclick="saveProfile()">
+Save Profile
+</button>
+
+
+
+<h3 id="showProfileName"></h3>
+
+<p id="showProfileEmail"></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+SETTINGS
+========================= -->
+
+
+<div id="settingsPage" class="page">
+
+
+<h1>Settings</h1>
+
+
+<select id="themeSelect">
+
+<option value="light">
+Light
+</option>
+
+
+<option value="dark">
+Dark
+</option>
+
+
+</select>
+
+
+
+<button onclick="saveSettings()">
+Save Settings
+</button>
+
+
+
+<button onclick="clearLocalData()">
+Clear Data
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-
-
-<!-- OmniDataPro Modules -->
-
+<!-- MODULES -->
 
 <script src="supabase.js"></script>
 
@@ -61,10 +482,7 @@
 <script src="settings.js"></script>
 
 
-<!-- Main Controller -->
-
 <script src="script.js"></script>
-
 
 
 </body>
