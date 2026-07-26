@@ -1,162 +1,835 @@
-// =====================================================================
-// OMNI DATA PRO — INDIAN MULTI-LANGUAGE MODULE (`i18n.js`)
-// =====================================================================
+/* =====================================
+   OMNI DATA PRO
+   FINAL I18N.JS
+   PART 1/3
+===================================== */
 
-export const languages = {
-    hi: {
-        dashboard: "डैशबोर्ड",
-        workspace: "वर्कस्पेस",
-        files: "फाइलें",
-        aiChat: "एआई चैट",
-        security: "सुरक्षा",
-        settings: "सेटिंग्स",
-        profile: "प्रोफाइल",
-        welcome: "ओमनी डेटा प्रो में आपका स्वागत है",
-        uploadBtn: "फाइल अपलोड करें",
-        projectBtn: "नया प्रोजेक्ट बनाएं"
-    },
-    en: {
-        dashboard: "Dashboard",
-        workspace: "Workspace",
-        files: "Files",
-        aiChat: "AI Chat",
-        security: "Security",
-        settings: "Settings",
-        profile: "Profile",
-        welcome: "Welcome to Omni Data Pro",
-        uploadBtn: "Upload File",
-        projectBtn: "Create Project"
-    },
-    bn: {
-        dashboard: "ড্যাশবোর্ড",
-        workspace: "ওয়ার্কস্পেস",
-        files: "ফাইলগুলি",
-        aiChat: "এআই চ্যাট",
-        security: "নিরাপত্তা",
-        settings: "সেটিংস",
-        profile: "প্রোফাইল",
-        welcome: "ওমনি ডেটা প্রোতে স্বাগতম",
-        uploadBtn: "ফাইল আপলোড করুন",
-        projectBtn: "প্রোজেক্ট তৈরি করুন"
-    },
-    ta: {
-        dashboard: "முகப்பு",
-        workspace: "பணிிடம்",
-        files: "கோப்புகள்",
-        aiChat: "AI அரட்டை",
-        security: "பாதுகாப்பு",
-        settings: "அமைப்புகள்",
-        profile: "சுயவிவரம்",
-        welcome: "ஒம்னி டேட்டா ப்ரோவிற்கு வரவேற்கிறோம்",
-        uploadBtn: "கோப்பை பதிவேற்றுக",
-        projectBtn: "திட்டத்தை உருவாக்குக"
-    },
-    te: {
-        dashboard: "డాష్‌బోర్డ్",
-        workspace: "వర్క్‌స్పేస్",
-        files: "ఫైళ్లు",
-        aiChat: "AI చాట్",
-        security: "భద్రత",
-        settings: "సెట్టింగ్‌లు",
-        profile: "ప్రొఫైల్",
-        welcome: "ఓమ్ని డేటా ప్రోకి స్వాగతం",
-        uploadBtn: "ఫైల్ అప్‌లోడ్ చేయండి",
-        projectBtn: "ప్రాజెక్ట్ సృష్టించండి"
-    },
-    mr: {
-        dashboard: "डॅशबोर्ड",
-        workspace: "वर्कस्पेस",
-        files: "फाइल्स",
-        aiChat: "एआय चॅट",
-        security: "सुरक्षा",
-        settings: "सेटिंग्स",
-        profile: "प्रोफाइल",
-        welcome: "ओमनी डेटा प्रो मध्ये स्वागत आहे",
-        uploadBtn: "फाइल अपलोड करा",
-        projectBtn: "प्रोजेक्ट तयार करा"
-    },
-    gu: {
-        dashboard: "ડેશબોર્ડ",
-        workspace: "વર્કસ્પેસ",
-        files: "ફાઇલો",
-        aiChat: "AI ચેટ",
-        security: "સુરક્ષા",
-        settings: "સેટિંગ્સ",
-        profile: "પ્રોફાઇલ",
-        welcome: "ઓમ્ની ડેટા પ્રો માં સ્વાગત છે",
-        uploadBtn: "ફાઇલ અપલોડ કરો",
-        projectBtn: "પ્રોજેક્ટ બનાવો"
-    },
-    pa: {
-        dashboard: "ਡैशਬੋਰਡ",
-        workspace: "ਵਰਕਸਪੇਸ",
-        files: "ਫਾਈਲਾਂ",
-        aiChat: "AI ਚੈਟ",
-        security: "ਸੁਰੱਖਿਆ",
-        settings: "ਸੈਟਿੰਗਾਂ",
-        profile: "ਪ੍ਰੋਫైल",
-        welcome: "ਓਮਨੀ ਡਾਟਾ ਪ੍ਰੋ ਵਿੱਚ ਜੀ ਆਇयां ਨੂੰ",
-        uploadBtn: "ਫાઇલ ਅੱਪਲोਡ ਕਰੋ",
-        projectBtn: "ਪ੍ਰੋਜੈקט ਬਣਾਓ"
-    },
-    kn: {
-        dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
-        workspace: "ವರ್ಕ್‌ಸ್ಪೇಸ್",
-        files: "ಫೈಲ್‌ಗಳು",
-        aiChat: "AI ಚಾಟ್",
-        security: "ಭದ್ರತೆ",
-        settings: "ಸೇಟಿಂಗ್ಸ್",
-        profile: "ಪ್ರೊಫೈಲ್",
-        welcome: "ಓಮ್ನಿ ಡೇಟಾ ಪ್ರೋಗೆ ಸ್ವಾಗತ",
-        uploadBtn: "ಫೈಲ್ ಅಪ್‌लोड ಮಾಡಿ",
-        projectBtn: "პrojeಕ್ಟ್ ರಚಿಸಿ"
-    },
-    ml: {
-        dashboard: "ഡാഷ്‌ബോർഡ്",
-        workspace: "വർക്ക്സ്പേസ്",
-        files: "ഫയലുകൾ",
-        aiChat: "AI ചാট",
-        security: "സുരക്ഷ",
-        settings: "ക്രമീകരണങ്ങൾ",
-        profile: "പ്രൊഫൈൽ",
-        welcome: "ഓമ്നി ഡാറ്റ പ്രോയിലേക്ക് സ്വാഗതം",
-        uploadBtn: "ഫയൽ അപ്‌ലോഡ് ചെയ്യുക",
-        projectBtn: "പ്രോജക്റ്റ് സൃഷ്ടിക്കുക"
-    }
+
+
+/*
+   LANGUAGE CONFIGURATION
+*/
+
+
+const LanguageSystem = {
+
+
+    current:"en",
+
+
+    initialized:false
+
+
+
 };
 
-export function setLanguage(langCode) {
-    if (!languages[langCode]) {
-        langCode = 'en';
-    }
 
-    localStorage.setItem("omni_language", langCode);
-    
-    const elements = document.querySelectorAll("[data-i18n]");
-    elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (languages[langCode][key]) {
-            el.innerText = languages[langCode][key];
-        }
-    });
+
+
+
+
+
+
+
+/*
+   TRANSLATION DATABASE
+*/
+
+
+const translations = {
+
+
+
+
+en:{
+
+
+    dashboard:"Dashboard",
+
+    ai:"AI Assistant",
+
+    files:"Files",
+
+    workspace:"Workspace",
+
+    search:"Search",
+
+    profile:"Profile",
+
+    settings:"Settings",
+
+    security:"Security",
+
+    logout:"Logout",
+
+    login:"Login",
+
+    signup:"Create Account",
+
+    forgot:"Forgot Password?",
+
+    welcome:"Welcome to Omni Data Pro"
+
+
+
+},
+
+
+
+
+
+
+
+hi:{
+
+
+    dashboard:"डैशबोर्ड",
+
+    ai:"AI सहायक",
+
+    files:"फाइलें",
+
+    workspace:"कार्य क्षेत्र",
+
+    search:"खोज",
+
+    profile:"प्रोफाइल",
+
+    settings:"सेटिंग्स",
+
+    security:"सुरक्षा",
+
+    logout:"लॉगआउट",
+
+    login:"लॉगिन",
+
+    signup:"खाता बनाएं",
+
+    forgot:"पासवर्ड भूल गए?",
+
+    welcome:"Omni Data Pro में आपका स्वागत है"
+
+
+
+},
+
+
+
+
+
+
+
+ur:{
+
+
+    dashboard:"ڈیش بورڈ",
+
+    ai:"AI معاون",
+
+    files:"فائلیں",
+
+    workspace:"ورک اسپیس",
+
+    search:"تلاش",
+
+    profile:"پروفائل",
+
+    settings:"ترتیبات",
+
+    security:"سیکیورٹی",
+
+    logout:"لاگ آؤٹ",
+
+    login:"لاگ اِن",
+
+    signup:"اکاؤنٹ بنائیں",
+
+    forgot:"پاس ورڈ بھول گئے؟",
+
+    welcome:"Omni Data Pro میں خوش آمدید"
+
+
+
+},
+
+
+
+
+
+
+
+mr:{
+
+
+    dashboard:"डॅशबोर्ड",
+
+    ai:"AI सहाय्यक",
+
+    files:"फाइल्स",
+
+    workspace:"कार्यस्थान",
+
+    search:"शोध",
+
+    profile:"प्रोफाइल",
+
+    settings:"सेटिंग्ज",
+
+    security:"सुरक्षा",
+
+    logout:"लॉगआउट",
+
+    login:"लॉगिन",
+
+    signup:"खाते तयार करा",
+
+    forgot:"पासवर्ड विसरलात?",
+
+    welcome:"Omni Data Pro मध्ये स्वागत आहे"
+
+
+
 }
 
-export function getCurrentLanguage() {
-    return localStorage.getItem("omni_language") || 'hi';
+
+
+};/* =====================================
+   OMNI DATA PRO
+   FINAL I18N.JS
+   PART 2/3
+===================================== */
+
+
+
+
+
+/*
+   MORE INDIAN LANGUAGES
+*/
+
+
+Object.assign(
+translations,
+{
+
+
+gu:{
+
+
+dashboard:"ડેશબોર્ડ",
+
+ai:"AI સહાયક",
+
+files:"ફાઇલો",
+
+workspace:"કાર્યસ્થળ",
+
+search:"શોધ",
+
+profile:"પ્રોફાઇલ",
+
+settings:"સેટિંગ્સ",
+
+security:"સુરક્ષા",
+
+logout:"લૉગઆઉટ",
+
+login:"લૉગિન",
+
+signup:"એકાઉન્ટ બનાવો",
+
+forgot:"પાસવર્ડ ભૂલી ગયા?",
+
+welcome:"Omni Data Pro માં આપનું સ્વાગત છે"
+
+
+
+},
+
+
+
+
+
+
+pa:{
+
+
+dashboard:"ਡੈਸ਼ਬੋਰਡ",
+
+ai:"AI ਸਹਾਇਕ",
+
+files:"ਫਾਈਲਾਂ",
+
+workspace:"ਵਰਕਸਪੇਸ",
+
+search:"ਖੋਜ",
+
+profile:"ਪ੍ਰੋਫਾਈਲ",
+
+settings:"ਸੈਟਿੰਗਜ਼",
+
+security:"ਸੁਰੱਖਿਆ",
+
+logout:"ਲੌਗਆਉਟ",
+
+login:"ਲੌਗਇਨ",
+
+signup:"ਖਾਤਾ ਬਣਾਓ",
+
+forgot:"ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
+
+welcome:"Omni Data Pro ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ"
+
+
+
+},
+
+
+
+
+
+
+
+bn:{
+
+
+dashboard:"ড্যাশবোর্ড",
+
+ai:"AI সহকারী",
+
+files:"ফাইল",
+
+workspace:"ওয়ার্কস্পেস",
+
+search:"অনুসন্ধান",
+
+profile:"প্রোফাইল",
+
+settings:"সেটিংস",
+
+security:"নিরাপত্তা",
+
+logout:"লগআউট",
+
+login:"লগইন",
+
+signup:"অ্যাকাউন্ট তৈরি করুন",
+
+forgot:"পাসওয়ার্ড ভুলে গেছেন?",
+
+welcome:"Omni Data Pro তে স্বাগতম"
+
+
+
+},
+
+
+
+
+
+
+
+ta:{
+
+
+dashboard:"டாஷ்போர்டு",
+
+ai:"AI உதவியாளர்",
+
+files:"கோப்புகள்",
+
+workspace:"பணியிடம்",
+
+search:"தேடல்",
+
+profile:"சுயவிவரம்",
+
+settings:"அமைப்புகள்",
+
+security:"பாதுகாப்பு",
+
+logout:"வெளியேறு",
+
+login:"உள்நுழைவு",
+
+signup:"கணக்கு உருவாக்கவும்",
+
+forgot:"கடவுச்சொல் மறந்துவிட்டதா?",
+
+welcome:"Omni Data Pro க்கு வரவேற்கிறோம்"
+
+
+
+},
+
+
+
+
+
+
+
+te:{
+
+
+dashboard:"డాష్‌బోర్డ్",
+
+ai:"AI సహాయకుడు",
+
+files:"ఫైల్స్",
+
+workspace:"వర్క్‌స్పేస్",
+
+search:"శోధన",
+
+profile:"ప్రొఫైల్",
+
+settings:"సెట్టింగ్స్",
+
+security:"భద్రత",
+
+logout:"లాగ్ అవుట్",
+
+login:"లాగిన్",
+
+signup:"ఖాతా సృష్టించండి",
+
+forgot:"పాస్‌వర్డ్ మర్చిపోయారా?",
+
+welcome:"Omni Data Pro కు స్వాగతం"
+
+
+
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const currentLang = getCurrentLanguage();
-    setLanguage(currentLang);
+});/* =====================================
+   OMNI DATA PRO
+   FINAL I18N.JS
+   PART 3/3
+===================================== */
 
-    const langSelector = document.getElementById("language-selector");
-    if (langSelector) {
-        langSelector.value = currentLang;
-        langSelector.addEventListener("change", (e) => {
-            setLanguage(e.target.value);
-        });
-    }
+
+
+
+
+/*
+   ADDITIONAL LANGUAGES
+*/
+
+
+Object.assign(
+translations,
+{
+
+
+kn:{
+
+
+dashboard:"ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+
+ai:"AI ಸಹಾಯಕ",
+
+files:"ಕಡತಗಳು",
+
+workspace:"ಕಾರ್ಯಸ್ಥಳ",
+
+search:"ಹುಡುಕಿ",
+
+profile:"ಪ್ರೊಫೈಲ್",
+
+settings:"ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+
+security:"ಭದ್ರತೆ",
+
+logout:"ಲಾಗ್ ಔಟ್",
+
+login:"ಲಾಗಿನ್",
+
+signup:"ಖಾತೆ ರಚಿಸಿ",
+
+forgot:"ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿರಾ?",
+
+welcome:"Omni Data Pro ಗೆ ಸ್ವಾಗತ"
+
+
+
+},
+
+
+
+
+
+
+
+ml:{
+
+
+dashboard:"ഡാഷ്ബോർഡ്",
+
+ai:"AI സഹായി",
+
+files:"ഫയലുകൾ",
+
+workspace:"വർക്ക്‌സ്‌പേസ്",
+
+search:"തിരയുക",
+
+profile:"പ്രൊഫൈൽ",
+
+settings:"ക്രമീകരണങ്ങൾ",
+
+security:"സുരക്ഷ",
+
+logout:"ലോഗ് ഔട്ട്",
+
+login:"ലോഗിൻ",
+
+signup:"അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+
+forgot:"പാസ്‌വേഡ് മറന്നോ?",
+
+welcome:"Omni Data Pro ലേക്ക് സ്വാഗതം"
+
+
+
+},
+
+
+
+
+
+
+
+or:{
+
+
+dashboard:"ଡ୍ୟାସବୋର୍ଡ",
+
+ai:"AI ସହାୟକ",
+
+files:"ଫାଇଲ",
+
+workspace:"କାର୍ଯ୍ୟସ୍ଥାନ",
+
+search:"ସନ୍ଧାନ",
+
+profile:"ପ୍ରୋଫାଇଲ",
+
+settings:"ସେଟିଂ",
+
+security:"ସୁରକ୍ଷା",
+
+logout:"ଲଗଆଉଟ",
+
+login:"ଲଗଇନ",
+
+signup:"ଆକାଉଣ୍ଟ ତିଆରି କରନ୍ତୁ",
+
+forgot:"ପାସୱାର୍ଡ ଭୁଲିଗଲେ?",
+
+welcome:"Omni Data Pro କୁ ସ୍ୱାଗତ"
+
+
+
+},
+
+
+
+
+
+
+
+as:{
+
+
+dashboard:"ডেশ্বব’ৰ্ড",
+
+ai:"AI সহায়ক",
+
+files:"ফাইল",
+
+workspace:"ৱৰ্কস্পেচ",
+
+search:"অনুসন্ধান",
+
+profile:"প্ৰফাইল",
+
+settings:"ছেটিংছ",
+
+security:"সুৰক্ষা",
+
+logout:"লগ আউট",
+
+login:"লগ ইন",
+
+signup:"একাউণ্ট সৃষ্টি কৰক",
+
+forgot:"পাছৱৰ্ড পাহৰিলে?",
+
+welcome:"Omni Data Pro লৈ স্বাগতম"
+
+
+
+},
+
+
+
+
+
+
+
+sa:{
+
+
+dashboard:"फलकम्",
+
+ai:"कृत्रिम बुद्धि सहायकः",
+
+files:"सञ्चिकाः",
+
+workspace:"कार्यस्थानम्",
+
+search:"अन्वेषणम्",
+
+profile:"परिचयः",
+
+settings:"व्यवस्थाः",
+
+security:"सुरक्षा",
+
+logout:"निर्गमनम्",
+
+login:"प्रवेशः",
+
+signup:"खाता निर्माणम्",
+
+forgot:"गुप्तशब्द विस्मृतः?",
+
+welcome:"Omni Data Pro मध्ये स्वागतम्"
+
+
+
+}
+
+
+
 });
 
-console.log("Multi-Language Module Loaded");
 
+
+
+
+
+
+
+
+/*
+   TRANSLATE FUNCTION
+*/
+
+
+function translate(key){
+
+
+
+    const lang =
+    translations[
+    LanguageSystem.current
+    ];
+
+
+
+    if(
+    lang &&
+    lang[key]
+    ){
+
+
+        return lang[key];
+
+
+    }
+
+
+
+    return key;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   APPLY LANGUAGE TO PAGE
+*/
+
+
+function applyLanguage(){
+
+
+
+    const elements =
+    document.querySelectorAll(
+    "[data-i18n]"
+    );
+
+
+
+    elements.forEach(
+    element=>{
+
+
+
+        const key =
+        element.dataset.i18n;
+
+
+
+        element.textContent =
+        translate(key);
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   CHANGE LANGUAGE
+*/
+
+
+function changeLanguage(lang){
+
+
+
+    if(
+    !translations[lang]
+    )
+    return;
+
+
+
+    LanguageSystem.current =
+    lang;
+
+
+
+    localStorage.setItem(
+    "omni_language",
+    lang
+    );
+
+
+
+    applyLanguage();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   LOAD SAVED LANGUAGE
+*/
+
+
+function loadLanguage(){
+
+
+
+    const saved =
+    localStorage.getItem(
+    "omni_language"
+    );
+
+
+
+    if(saved && translations[saved]){
+
+
+        LanguageSystem.current =
+        saved;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   FINAL INITIALIZATION
+*/
+
+
+function initializeLanguageSystem(){
+
+
+
+    if(
+    LanguageSystem.initialized
+    )
+    return;
+
+
+
+    LanguageSystem.initialized=true;
+
+
+
+    loadLanguage();
+
+
+    applyLanguage();
+
+
+
+}
+
+
+
+
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    initializeLanguageSystem();
+
+
+});
