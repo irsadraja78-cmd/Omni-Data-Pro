@@ -275,7 +275,335 @@ Profile
 
 Settings
 
+</button><!-- =========================
+     DASHBOARD SECTION
+========================= -->
+
+<section id="dashboard" class="page-section active">
+
+
+<div class="top-bar">
+
+
+<h1>
+Dashboard
+</h1>
+
+
+<div class="search-box">
+
+<input 
+type="search"
+placeholder="Search anything...">
+
+
+<button>
+🔍
 </button>
+
+
+</div>
+
+
+<div class="user-area">
+
+<img 
+src=""
+alt="User">
+
+
+<span>
+User
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="dashboard-grid">
+
+
+
+<div class="card">
+
+<h3>
+Total Projects
+</h3>
+
+<p id="project-count">
+0
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+Files
+</h3>
+
+<p id="file-count">
+0
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+AI Chats
+</h3>
+
+<p id="chat-count">
+0
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+Security Status
+</h3>
+
+<p>
+Protected
+</p>
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<!-- =========================
+     AI CHAT SECTION
+========================= -->
+
+
+<section id="ai" class="page-section">
+
+
+<h1>
+AI Assistant
+</h1>
+
+
+
+<div class="chat-container">
+
+
+<div 
+id="chat-history"
+class="chat-history">
+
+
+<!-- Messages Here -->
+
+
+</div>
+
+
+
+
+<div class="chat-input">
+
+
+<input
+id="ai-message"
+type="text"
+placeholder="Ask AI anything...">
+
+
+
+<button id="send-ai">
+
+Send
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+     FILE MANAGER SECTION
+========================= -->
+
+
+<section id="files" class="page-section">
+
+
+<h1>
+File Manager
+</h1>
+
+
+
+
+<div class="file-upload-box">
+
+
+<input 
+type="file"
+id="file-input">
+
+
+
+<button id="upload-file">
+
+Upload
+
+</button>
+
+
+</div>
+
+
+
+
+<div id="file-list">
+
+
+<!-- Files will load here -->
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+     WORKSPACE SECTION
+========================= -->
+
+
+<section id="workspace" class="page-section">
+
+
+<h1>
+Workspace
+</h1>
+
+
+
+
+<button id="new-project">
+
++ New Project
+
+</button>
+
+
+
+
+<div id="project-list">
+
+
+<!-- Projects -->
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =========================
+     SEARCH SECTION
+========================= -->
+
+
+<section id="search" class="page-section">
+
+
+<h1>
+Global Search
+</h1>
+
+
+
+
+<div class="search-panel">
+
+
+<input
+id="global-search"
+placeholder="Search data...">
+
+
+
+<button id="search-btn">
+
+Search
+
+</button>
+
+
+</div>
+
+
+
+<div id="search-result">
+
+
+</div>
+
+
+
+</section>
 
 
 
@@ -323,5 +651,319 @@ Logout
 
 
 </body>
+
+</html><!-- =========================
+     PROFILE SECTION
+========================= -->
+
+<section id="profile" class="page-section">
+
+
+<h1>
+User Profile
+</h1>
+
+
+<div class="profile-card">
+
+
+<div class="avatar">
+
+<img 
+id="profile-image"
+src=""
+alt="Profile">
+
+</div>
+
+
+
+<div class="profile-info">
+
+
+<label>
+Full Name
+</label>
+
+<input
+id="profile-name"
+type="text"
+placeholder="Your Name">
+
+
+
+<label>
+Email
+</label>
+
+<input
+id="profile-email"
+type="email"
+readonly>
+
+
+
+<button id="save-profile">
+
+Save Profile
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =========================
+     SETTINGS SECTION
+========================= -->
+
+<section id="settings" class="page-section">
+
+
+<h1>
+Settings
+</h1>
+
+
+
+
+<div class="settings-card">
+
+
+
+<div class="setting-item">
+
+<label>
+Dark Mode
+</label>
+
+
+<input
+type="checkbox"
+id="dark-mode">
+
+
+</div>
+
+
+
+
+<div class="setting-item">
+
+<label>
+Email Notifications
+</label>
+
+
+<input
+type="checkbox"
+id="email-notification">
+
+
+</div>
+
+
+
+
+
+<div class="setting-item">
+
+<label>
+Language
+</label>
+
+
+<select id="language">
+
+<option>
+English
+</option>
+
+<option>
+Hindi
+</option>
+
+<option>
+Urdu
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<button id="save-settings">
+
+Save Settings
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =========================
+     SECURITY SECTION
+========================= -->
+
+
+<section id="security" class="page-section">
+
+
+<h1>
+Security Center
+</h1>
+
+
+
+
+<div class="security-card">
+
+
+<div>
+
+<h3>
+Login Activity
+</h3>
+
+
+<div id="login-history">
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<h3>
+Security Logs
+</h3>
+
+
+<div id="security-list">
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =========================
+     NOTIFICATION PANEL
+========================= -->
+
+
+<section id="notifications" class="page-section">
+
+
+<h1>
+Notifications
+</h1>
+
+
+
+<div id="notification-list">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+
+<footer class="app-footer">
+
+
+<p>
+
+© 2026 Omni Data Pro
+
+</p>
+
+
+<p>
+
+Secure AI Data Management System
+
+</p>
+
+
+</footer>
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- Main JS -->
+
+<script type="module" src="script.js"></script>
+
+
+</body>
+
 
 </html>
