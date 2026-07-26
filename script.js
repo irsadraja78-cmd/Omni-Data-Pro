@@ -5,169 +5,59 @@
 ===================================== */
 
 
-console.log("Omni Data Pro JS Loaded");
+console.log("Omni Data Pro Loaded");
 
 
 
-/* =====================================
-   ELEMENT SELECTOR
-===================================== */
+/* =========================
+   ELEMENTS
+========================= */
 
 
-const authContainer = 
+const authContainer =
 document.getElementById("auth-container");
 
 
-const appContainer = 
+const appContainer =
 document.getElementById("app-container");
 
 
 
-const loginSection =
-document.getElementById("login-section");
+const loginScreen =
+document.getElementById("login-screen");
 
 
-const signupSection =
-document.getElementById("signup-section");
+const signupScreen =
+document.getElementById("signup-screen");
 
 
-const forgotSection =
-document.getElementById("forgot-section");
+const forgotScreen =
+document.getElementById("forgot-screen");
 
 
 
 
 
-/* =====================================
-   AUTH PAGE SWITCH
-===================================== */
 
 
-function showLogin(){
 
-    loginSection?.classList.remove("hidden");
+/* =========================
+   AUTH SCREEN SWITCH
+========================= */
 
-    signupSection?.classList.add("hidden");
 
-    forgotSection?.classList.add("hidden");
+function showScreen(screen){
 
-}
 
+loginScreen.classList.add("hidden");
 
+signupScreen.classList.add("hidden");
 
+forgotScreen.classList.add("hidden");
 
-function showSignup(){
 
-    loginSection?.classList.add("hidden");
 
-    signupSection?.classList.remove("hidden");
-
-    forgotSection?.classList.add("hidden");
-
-}
-
-
-
-
-function showForgot(){
-
-    loginSection?.classList.add("hidden");
-
-    signupSection?.classList.add("hidden");
-
-    forgotSection?.classList.remove("hidden");
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   AUTH LINKS
-===================================== */
-
-
-document
-.getElementById("show-signup")
-?.addEventListener("click",(e)=>{
-
-    e.preventDefault();
-
-    showSignup();
-
-});
-
-
-
-
-
-document
-.getElementById("show-login")
-?.addEventListener("click",(e)=>{
-
-    e.preventDefault();
-
-    showLogin();
-
-});
-
-
-
-
-
-document
-.getElementById("show-forgot")
-?.addEventListener("click",(e)=>{
-
-    e.preventDefault();
-
-    showForgot();
-
-});
-
-
-
-
-
-document
-.getElementById("back-login")
-?.addEventListener("click",(e)=>{
-
-    e.preventDefault();
-
-    showLogin();
-
-});
-
-
-
-
-
-
-
-
-/* =====================================
-   OPEN APP
-===================================== */
-
-
-function openApp(){
-
-
-    authContainer
-    ?.classList.add("hidden");
-
-
-
-    appContainer
-    ?.classList.remove("hidden");
-
-
-
-    openPage("dashboard");
+screen.classList.remove("hidden");
 
 
 }
@@ -179,39 +69,75 @@ function openApp(){
 
 
 
-/* =====================================
-   LOGIN BUTTON
-===================================== */
+/* =========================
+   OPEN SIGNUP
+========================= */
 
 
 document
-.getElementById("login-btn")
+.getElementById("open-signup")
 ?.addEventListener("click",()=>{
 
 
-    const email =
-    document.getElementById("login-email")?.value;
+showScreen(signupScreen);
 
 
-    const password =
-    document.getElementById("login-password")?.value;
-
+});
 
 
 
-    if(!email || !password){
-
-        alert("Enter email and password");
-
-        return;
-
-    }
 
 
 
-    // Temporary frontend login
 
-    openApp();
+
+/* =========================
+   OPEN FORGOT
+========================= */
+
+
+document
+.getElementById("open-forgot")
+?.addEventListener("click",()=>{
+
+
+showScreen(forgotScreen);
+
+
+});
+
+
+
+
+
+
+
+
+/* =========================
+   BACK LOGIN
+========================= */
+
+
+document
+.getElementById("back-login-from-signup")
+?.addEventListener("click",()=>{
+
+
+showScreen(loginScreen);
+
+
+});
+
+
+
+
+
+document
+.getElementById("back-login-from-forgot")
+?.addEventListener("click",()=>{
+
+
+showScreen(loginScreen);
 
 
 });
@@ -224,27 +150,204 @@ document
 
 
 
-/* =====================================
-   SIGNUP BUTTON
-===================================== */
+/* =========================
+   LOGIN
+========================= */
 
 
 document
-.getElementById("signup-btn")
+.getElementById("login-button")
 ?.addEventListener("click",()=>{
 
 
-    const name =
-    document.getElementById("signup-name")?.value;
+const email =
+document.getElementById("login-email").value;
 
 
-    const email =
-    document.getElementById("signup-email")?.value;
+
+const password =
+document.getElementById("login-password").value;
 
 
-    const password =
-    document.getElementById("signup-password
-                            /* =====================================
+
+
+if(!email || !password){
+
+
+alert("Please enter email and password");
+
+
+return;
+
+
+}
+
+
+
+
+openApplication();
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =========================
+   SIGNUP
+========================= */
+
+
+document
+.getElementById("signup-button")
+?.addEventListener("click",()=>{
+
+
+const name =
+document.getElementById("signup-name").value;
+
+
+
+const email =
+document.getElementById("signup-email").value;
+
+
+
+const password =
+document.getElementById("signup-password").value;
+
+
+
+
+if(!name || !email || !password){
+
+
+alert("Fill all fields");
+
+
+return;
+
+
+}
+
+
+
+alert("Account Created Successfully");
+
+
+
+openApplication();
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =========================
+   FORGOT PASSWORD
+========================= */
+
+
+document
+.getElementById("forgot-button")
+?.addEventListener("click",()=>{
+
+
+const email =
+document.getElementById("forgot-email").value;
+
+
+
+if(!email){
+
+
+alert("Enter your email");
+
+
+return;
+
+
+}
+
+
+
+alert(
+"Password reset link sent"
+);
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =========================
+   OPEN APPLICATION
+========================= */
+
+
+function openApplication(){
+
+
+authContainer.classList.add("hidden");
+
+
+appContainer.classList.remove("hidden");
+
+
+
+openPage("dashboard-page");
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+
+document
+.getElementById("logout-button")
+?.addEventListener("click",()=>{
+
+
+appContainer.classList.add("hidden");
+
+
+authContainer.classList.remove("hidden");
+
+
+showScreen(loginScreen);
+
+
+
+});/* =====================================
    OMNI DATA PRO
    FINAL SCRIPT.JS
    PART 2/3
@@ -252,88 +355,69 @@ document
 
 
 
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
 
-/* =====================================
-   AI CHAT SYSTEM
-===================================== */
-
-
-const sendAIButton =
-document.getElementById("send-ai");
-
-
-
-sendAIButton
-?.addEventListener("click",()=>{
-
-
-    const input =
-    document.getElementById("ai-message");
-
-
-    const history =
-    document.getElementById("chat-history");
+const menuButtons =
+document.querySelectorAll(".menu-item");
 
 
 
-    if(!input || !history)
-    return;
-
-
-
-    const message =
-    input.value.trim();
-
-
-
-    if(!message)
-    return;
+const pages =
+document.querySelectorAll(".app-page");
 
 
 
 
-    history.innerHTML += `
 
-    <div class="message">
+function openPage(pageID){
 
-    <b>You:</b><br>
 
-    ${message}
+pages.forEach(page=>{
 
-    </div>
+page.classList.remove("active-page");
 
-    `;
+});
 
 
 
-    setTimeout(()=>{
-
-
-        history.innerHTML += `
-
-        <div class="message">
-
-        <b>AI:</b><br>
-
-        Processing your request...
-
-        </div>
-
-        `;
-
-
-        history.scrollTop =
-        history.scrollHeight;
+const page =
+document.getElementById(pageID);
 
 
 
-    },500);
+if(page){
+
+page.classList.add("active-page");
+
+}
+
+
+}
 
 
 
 
-    input.value="";
+
+
+menuButtons.forEach(button=>{
+
+
+button.addEventListener("click",()=>{
+
+
+const page =
+button.getAttribute("data-page");
+
+
+
+openPage(page);
+
+
+
+});
 
 
 });
@@ -345,13 +429,177 @@ sendAIButton
 
 
 
-/* =====================================
-   FILE MANAGER
-===================================== */
+
+/* =========================
+   DASHBOARD COUNTERS
+========================= */
+
+
+let projectCount = 0;
+
+let fileCount = 0;
+
+let chatCount = 0;
+
+
+
+
+function updateDashboard(){
+
+
+document.getElementById(
+"project-total"
+).innerText = projectCount;
+
+
+
+document.getElementById(
+"file-total"
+).innerText = fileCount;
+
+
+
+document.getElementById(
+"chat-total"
+).innerText = chatCount;
+
+
+
+}
+
+
+
+updateDashboard();
+
+
+
+
+
+
+
+
+
+/* =========================
+   AI CHAT
+========================= */
+
+
+const aiSendButton =
+document.getElementById(
+"ai-send-button"
+);
+
+
+
+aiSendButton
+?.addEventListener("click",()=>{
+
+
+const input =
+document.getElementById(
+"ai-input"
+);
+
+
+
+const history =
+document.getElementById(
+"ai-history"
+);
+
+
+
+const text =
+input.value.trim();
+
+
+
+
+if(!text){
+
+return;
+
+}
+
+
+
+
+
+history.innerHTML += `
+
+<div class="ai-message">
+
+<b>You:</b>
+
+${text}
+
+</div>
+
+`;
+
+
+
+
+
+chatCount++;
+
+updateDashboard();
+
+
+
+
+
+setTimeout(()=>{
+
+
+history.innerHTML += `
+
+<div class="ai-message">
+
+<b>AI:</b>
+
+Your request is being processed.
+
+</div>
+
+`;
+
+
+
+history.scrollTop =
+history.scrollHeight;
+
+
+
+},500);
+
+
+
+
+
+input.value="";
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =========================
+   FILE UPLOAD
+========================= */
 
 
 const uploadButton =
-document.getElementById("upload-file");
+document.getElementById(
+"upload-button"
+);
 
 
 
@@ -361,224 +609,33 @@ uploadButton
 ?.addEventListener("click",()=>{
 
 
-    const fileInput =
-    document.getElementById("file-input");
-
-
-
-    const fileList =
-    document.getElementById("file-list");
-
-
-
-    if(!fileInput || !fileList)
-    return;
-
-
-
-
-    const file =
-    fileInput.files[0];
-
-
-
-    if(!file){
-
-
-        alert("Select a file");
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    fileList.innerHTML += `
-
-
-    <div class="file-card">
-
-
-    <h3>
-
-    ${file.name}
-
-    </h3>
-
-
-    <p>
-
-    File Added
-
-    </p>
-
-
-    </div>
-
-
-    `;
-
-
-
-
-    fileInput.value="";
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/* =====================================
-   GLOBAL SEARCH
-===================================== */
-
-
-const searchButton =
-document.getElementById("search-btn");
-
-
-
-
-
-searchButton
-?.addEventListener("click",()=>{
-
-
-    const searchInput =
-    document.getElementById("global-search");
-
-
-
-    const result =
-    document.getElementById("search-result");
-
-
-
-    if(!searchInput || !result)
-    return;
-
-
-
-
-    const value =
-    searchInput.value.trim();
-
-
-
-
-    if(!value){
-
-
-        result.innerHTML =
-
-        `<div class="card">
-        Enter something to search
-        </div>`;
-
-
-        return;
-
-    }
-
-
-
-
-    result.innerHTML = `
-
-
-    <div class="card">
-
-
-    <h3>
-
-    Search Result
-
-    </h3>
-
-
-    <p>
-
-    ${value}
-
-    </p>
-
-
-    </div>
-
-
-    `;
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/* =====================================
-   DASHBOARD COUNTERS
-===================================== */
-
-
-function updateDashboard(){
-
-
-
-const projects =
+const input =
 document.getElementById(
-"project-count"
+"upload-input"
 );
 
 
 
-const files =
+const container =
 document.getElementById(
-"file-count"
+"files-container"
 );
 
 
 
-const chats =
-document.getElementById(
-"chat-count"
-);
+const file =
+input.files[0];
 
 
 
 
-if(projects)
-
-projects.innerText="0";
+if(!file){
 
 
-
-if(files)
-
-files.innerText="0";
+alert("Select file first");
 
 
-
-if(chats)
-
-chats.innerText="0";
-
+return;
 
 
 }
@@ -586,57 +643,192 @@ chats.innerText="0";
 
 
 
+container.innerHTML += `
 
 
-
-
-/* =====================================
-   WORKSPACE
-===================================== */
-
-
-const newProject =
-document.getElementById(
-"new-project"
-);
-
-
-
-
-newProject
-?.addEventListener("click",()=>{
-
-
-const list =
-document.getElementById(
-"project-list"
-);
-
-
-
-if(!list)
-return;
-
-
-
-
-list.innerHTML += `
-
-
-<div class="project-card">
+<div class="file-item">
 
 
 <h3>
 
-New Project
+${file.name}
+
+</h3>
+
+
+
+<p>
+
+Uploaded Successfully
+
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+
+
+fileCount++;
+
+updateDashboard();
+
+
+
+
+input.value="";
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =========================
+   WORKSPACE
+========================= */
+
+
+const createProject =
+document.getElementById(
+"create-project-button"
+);
+
+
+
+
+
+createProject
+?.addEventListener("click",()=>{
+
+
+const container =
+document.getElementById(
+"workspace-container"
+);
+
+
+
+projectCount++;
+
+
+
+container.innerHTML += `
+
+
+<div class="project-item">
+
+
+<h3>
+
+Project ${projectCount}
 
 </h3>
 
 
 <p>
 
-Project created successfully
+New workspace created
 
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+updateDashboard();
+
+
+
+});/* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 3/3
+===================================== */
+
+
+
+
+
+/* =========================
+   GLOBAL SEARCH
+========================= */
+
+
+const searchButton =
+document.getElementById(
+"global-search-button"
+);
+
+
+
+searchButton
+?.addEventListener("click",()=>{
+
+
+const input =
+document.getElementById(
+"global-search-input"
+);
+
+
+
+const output =
+document.getElementById(
+"search-output"
+);
+
+
+
+const value =
+input.value.trim();
+
+
+
+
+if(!value){
+
+
+output.innerHTML =
+
+"<p>Please enter search text</p>";
+
+
+return;
+
+
+}
+
+
+
+
+output.innerHTML = `
+
+
+<div class="file-item">
+
+
+<h3>
+Search Result
+</h3>
+
+
+<p>
+${value}
 </p>
 
 
@@ -656,59 +848,47 @@ Project created successfully
 
 
 
-/* =====================================
-   INITIAL LOAD
-===================================== */
+
+/* =========================
+   PROFILE SAVE
+========================= */
 
 
-window.addEventListener(
-"load",
-()=>{
-
-
-updateDashboard();
-
-
-});/* =====================================
-   OMNI DATA PRO
-   FINAL SCRIPT.JS
-   PART 3/3
-===================================== */
-
-
-
-
-
-/* =====================================
-   PROFILE UPDATE
-===================================== */
-
-
-const saveProfile =
+const profileButton =
 document.getElementById(
-"save-profile"
+"save-profile-button"
 );
 
 
 
-saveProfile
+profileButton
 ?.addEventListener("click",()=>{
 
 
 const name =
 document.getElementById(
 "profile-name"
+).value;
+
+
+
+if(!name){
+
+
+alert(
+"Enter profile name"
 );
 
 
-
-if(!name)
 return;
+
+
+}
 
 
 
 alert(
-"Profile Updated: " + name.value
+"Profile Saved Successfully"
 );
 
 
@@ -722,34 +902,35 @@ alert(
 
 
 
-/* =====================================
-   SETTINGS SAVE
-===================================== */
+
+/* =========================
+   SETTINGS
+========================= */
 
 
-const saveSettings =
+const settingsButton =
 document.getElementById(
-"save-settings"
+"save-settings-button"
 );
 
 
 
-saveSettings
+settingsButton
 ?.addEventListener("click",()=>{
 
 
 const darkMode =
 document.getElementById(
-"dark-mode"
+"dark-mode-toggle"
 );
 
 
 
-if(darkMode?.checked){
+if(darkMode.checked){
 
 
 document.body.classList.add(
-"dark-mode"
+"dark-active"
 );
 
 
@@ -758,11 +939,13 @@ else{
 
 
 document.body.classList.remove(
-"dark-mode"
+"dark-active"
 );
 
 
 }
+
+
 
 
 
@@ -782,60 +965,9 @@ alert(
 
 
 
-/* =====================================
-   DARK MODE SUPPORT
-===================================== */
-
-
-const darkStyle = document.createElement(
-"style"
-);
-
-
-
-darkStyle.innerHTML = `
-
-
-.dark-mode {
-
-
-background:#020617 !important;
-
-
-}
-
-
-.dark-mode .card,
-.dark-mode .settings-card,
-.dark-mode .profile-card {
-
-
-background:#020617;
-
-
-}
-
-
-
-`;
-
-
-
-document.head.appendChild(
-darkStyle
-);
-
-
-
-
-
-
-
-
-
-/* =====================================
+/* =========================
    SECURITY LOGS
-===================================== */
+========================= */
 
 
 function addSecurityLog(text){
@@ -843,18 +975,73 @@ function addSecurityLog(text){
 
 const box =
 document.getElementById(
-"security-list"
+"system-logs"
 );
 
 
 
-if(!box)
-return;
-
-
+if(box){
 
 
 box.innerHTML += `
+
+
+<p>
+
+${text}
+
+</p>
+
+
+`;
+
+}
+
+
+}
+
+
+
+
+
+addSecurityLog(
+"System initialized"
+);
+
+
+
+addSecurityLog(
+"User session started"
+);
+
+
+
+
+
+
+
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+
+function addNotification(text){
+
+
+const box =
+document.getElementById(
+"notification-container"
+);
+
+
+
+if(box){
+
+
+box.innerHTML += `
+
 
 <div class="notification-item">
 
@@ -862,78 +1049,16 @@ ${text}
 
 </div>
 
+
 `;
 
+}
 
 
 }
 
 
 
-
-
-window.addEventListener(
-"load",
-()=>{
-
-
-addSecurityLog(
-"System started successfully"
-);
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/* =====================================
-   NOTIFICATIONS
-===================================== */
-
-
-function addNotification(message){
-
-
-const box =
-document.getElementById(
-"notification-list"
-);
-
-
-
-if(!box)
-return;
-
-
-
-box.innerHTML += `
-
-
-<div class="notification-item">
-
-${message}
-
-</div>
-
-
-`;
-
-
-
-}
-
-
-
-window.addEventListener(
-"load",
-()=>{
 
 
 addNotification(
@@ -942,41 +1067,11 @@ addNotification(
 
 
 
-});
-
-
-
-
-
-
-
-
-
-/* =====================================
-   BUTTON ERROR PROTECTION
-===================================== */
-
-
-document
-.querySelectorAll("button")
-.forEach(btn=>{
-
-
-btn.addEventListener(
-"click",
-()=>{
-
-
-console.log(
-"Button clicked:",
-btn.innerText
+addNotification(
+"All systems ready"
 );
 
 
-});
-
-
-});
 
 
 
@@ -984,12 +1079,20 @@ btn.innerText
 
 
 
+/* =========================
+   FINAL CHECK
+========================= */
 
-/* =====================================
-   APP READY
-===================================== */
+
+window.addEventListener(
+"load",
+()=>{
 
 
 console.log(
 "Omni Data Pro System Ready"
 );
+
+
+
+});
