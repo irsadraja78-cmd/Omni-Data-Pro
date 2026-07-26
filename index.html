@@ -2,223 +2,326 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniData Pro</title>
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
 
-    <!-- Supabase Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Omni Data Pro</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
 
+<!-- =========================
+     AUTH AREA
+========================= -->
 
-<!-- Main Application -->
-<div id="app-container">
 
-    <!-- Header -->
-    <header class="main-header">
-        <div class="logo-area">
-            <h1>OmniData Pro</h1>
-            <span>Marketing Workspace Platform</span>
-        </div>
-        <div class="user-actions">
-            <button id="notification-btn">Notifications</button>
-            <button id="logout-btn">Logout</button>
-        </div>
-    </header>
+<div id="auth-container">
 
-    <!-- Navigation -->
-    <nav class="main-navigation">
-        <button data-section="dashboard-section">Dashboard</button>
-        <button data-section="workspace-section">Workspace</button>
-        <button data-section="files-section">Files</button>
-        <button data-section="ai-section">AI Tools</button>
-        <button data-section="profile-section">Profile</button>
-        <button data-section="settings-section">Settings</button>
-    </nav>
 
-    <!-- Authentication Area -->
-    <section id="auth-section">
-        <!-- Login -->
-        <div id="login-box" class="auth-card">
-            <h2>Login</h2>
-            <input id="login-email" type="email" placeholder="Email Address">
-            <input id="login-password" type="password" placeholder="Password">
-            <button id="login-btn">Login</button>
-            <button id="show-signup-btn">Create New Account</button>
-            <button id="forgot-password-btn">Forgot Password?</button>
+    <!-- LOGIN -->
+
+    <section id="login-section" class="auth-box">
+
+
+        <div class="logo">
+
+            Omni Data Pro
+
         </div>
 
-        <!-- Signup -->
-        <div id="signup-box" class="auth-card hidden">
-            <h2>Create Account</h2>
-            <input id="signup-name" type="text" placeholder="Full Name">
-            <input id="signup-email" type="email" placeholder="Email Address">
-            <input id="signup-password" type="password" placeholder="Password">
-            <button id="signup-btn">Signup</button>
-            <button id="show-login-btn">Already have account?</button>
-        </div>
 
-        <!-- Forgot Password -->
-        <div id="forgot-box" class="auth-card hidden">
-            <h2>Reset Password</h2>
-            <input id="forgot-email" type="email" placeholder="Your Email">
-            <button id="send-reset-btn">Send Reset Link</button>
-            <button id="back-login-btn">Back To Login</button>
-        </div>
+        <h2>Login</h2>
+
+
+        <input 
+        type="email" 
+        id="login-email"
+        placeholder="Email">
+
+
+        <input 
+        type="password"
+        id="login-password"
+        placeholder="Password">
+
+
+        <button id="login-btn">
+
+            Login
+
+        </button>
+
+
+
+        <p>
+
+            <a href="#" id="show-signup">
+
+            Create Account
+
+            </a>
+
+        </p>
+
+
+        <p>
+
+            <a href="#" id="show-forgot">
+
+            Forgot Password?
+
+            </a>
+
+        </p>
+
+
     </section>
 
-    <!-- ============================= -->
-    <!-- Dashboard Section -->
-    <!-- ============================= -->
-    <section id="dashboard-section" class="app-section">
-        <div class="section-header">
-            <h2>Dashboard</h2>
-            <p>Your platform overview</p>
+
+
+
+
+    <!-- SIGNUP -->
+
+
+    <section id="signup-section" class="auth-box hidden">
+
+
+        <div class="logo">
+
+            Omni Data Pro
+
         </div>
-        <div class="dashboard-cards">
-            <div class="dashboard-card">
-                <h3>Projects</h3>
-                <span id="total-projects">0</span>
-            </div>
-            <div class="dashboard-card">
-                <h3>Files</h3>
-                <span id="total-files">0</span>
-            </div>
-            <div class="dashboard-card">
-                <h3>AI Requests</h3>
-                <span id="total-ai">0</span>
-            </div>
-        </div>
-        <div class="dashboard-panel">
-            <h3>Recent Activity</h3>
-            <div id="activity-list">No activity found</div>
-        </div>
+
+
+        <h2>Create Account</h2>
+
+
+        <input
+        type="text"
+        id="signup-name"
+        placeholder="Full Name">
+
+
+
+        <input
+        type="email"
+        id="signup-email"
+        placeholder="Email">
+
+
+
+        <input
+        type="password"
+        id="signup-password"
+        placeholder="Password">
+
+
+
+        <button id="signup-btn">
+
+            Signup
+
+        </button>
+
+
+        <p>
+
+            <a href="#" id="show-login">
+
+            Already have account?
+
+            </a>
+
+        </p>
+
+
     </section>
 
-    <!-- ============================= -->
-    <!-- Workspace Section -->
-    <!-- ============================= -->
-    <section id="workspace-section" class="app-section">
-        <div class="section-header">
-            <h2>Workspace</h2>
-            <button id="create-project-btn">Create Project</button>
-        </div>
-        <div id="workspace-list">
-            <!-- Projects will load here -->
-        </div>
+
+
+
+
+    <!-- FORGOT PASSWORD -->
+
+
+    <section id="forgot-section" class="auth-box hidden">
+
+
+        <h2>
+
+            Reset Password
+
+        </h2>
+
+
+
+        <input
+        type="email"
+        id="forgot-email"
+        placeholder="Email">
+
+
+
+        <button id="reset-btn">
+
+            Send Reset Link
+
+        </button>
+
+
+
+        <p>
+
+            <a href="#" id="back-login">
+
+            Back Login
+
+            </a>
+
+        </p>
+
+
     </section>
 
-    <!-- ============================= -->
-    <!-- File Manager Section -->
-    <!-- ============================= -->
-    <section id="files-section" class="app-section">
-        <div class="section-header">
-            <h2>File Manager</h2>
-        </div>
-        <div class="file-upload-box">
-            <input type="file" id="file-input">
-            <button id="upload-file-btn">Upload File</button>
-        </div>
-        <div id="files-list">
-            <!-- Files load here -->
-        </div>
-    </section>
 
-    <!-- ============================= -->
-    <!-- AI Tools Section -->
-    <!-- ============================= -->
-    <section id="ai-section" class="app-section">
-        <div class="section-header">
-            <h2>AI Tools</h2>
-        </div>
-        <textarea id="ai-prompt" placeholder="Write your request here..."></textarea>
-        <button id="run-ai-btn">Generate</button>
-        <div id="ai-response">AI response will appear here</div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- Profile Section -->
-    <!-- ============================= -->
-    <section id="profile-section" class="app-section">
-        <div class="section-header">
-            <h2>Profile</h2>
-        </div>
-        <div class="profile-card">
-            <div class="profile-item">
-                <label>Name</label>
-                <input id="profile-name" type="text">
-            </div>
-            <div class="profile-item">
-                <label>Email</label>
-                <input id="profile-email" type="email" disabled>
-            </div>
-            <button id="update-profile-btn">Update Profile</button>
-        </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- Security Section -->
-    <!-- ============================= -->
-    <section id="security-section" class="app-section">
-        <div class="section-header">
-            <h2>Security</h2>
-        </div>
-        <div class="security-panel">
-            <h3>Security Activity</h3>
-            <div id="security-log-list">No security logs</div>
-        </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- Settings Section -->
-    <!-- ============================= -->
-    <section id="settings-section" class="app-section">
-        <div class="section-header">
-            <h2>Settings</h2>
-        </div>
-        <div class="settings-card">
-            <div class="setting-row">
-                <label>Dark Mode</label>
-                <input id="dark-mode-toggle" type="checkbox">
-            </div>
-            <div class="setting-row">
-                <label>Email Notifications</label>
-                <input id="email-notification-toggle" type="checkbox">
-            </div>
-            <button id="save-settings-btn">Save Settings</button>
-        </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- Notification Modal -->
-    <!-- ============================= -->
-    <div id="notification-modal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Notifications</h3>
-            <div id="notification-list">No notifications</div>
-            <button id="close-notification-btn">Close</button>
-        </div>
-    </div>
-
-    <!-- ============================= -->
-    <!-- Message Box -->
-    <!-- ============================= -->
-    <div id="message-box" class="message-box hidden">
-        <p id="message-text"></p>
-    </div>
 
 </div>
 
-<!-- ============================= -->
-<!-- JavaScript -->
-<!-- ============================= -->
+
+
+
+
+<!-- =========================
+     MAIN APPLICATION
+========================= -->
+
+
+<div id="app-container" class="hidden">
+
+
+
+<!-- SIDEBAR -->
+
+
+<aside id="sidebar">
+
+
+<h2>
+
+Omni Data Pro
+
+</h2>
+
+
+
+<nav>
+
+
+<button data-page="dashboard">
+
+Dashboard
+
+</button>
+
+
+<button data-page="ai">
+
+AI Chat
+
+</button>
+
+
+<button data-page="files">
+
+Files
+
+</button>
+
+
+
+<button data-page="workspace">
+
+Workspace
+
+</button>
+
+
+
+<button data-page="search">
+
+Search
+
+</button>
+
+
+
+<button data-page="profile">
+
+Profile
+
+</button>
+
+
+
+<button data-page="settings">
+
+Settings
+
+</button>
+
+
+
+<button data-page="security">
+
+Security
+
+</button>
+
+
+<button id="logout-btn">
+
+Logout
+
+</button>
+
+
+</nav>
+
+
+</aside>
+
+
+
+
+
+<!-- MAIN CONTENT AREA -->
+
+
+<main id="main-content">
+
+
+<!-- बाकी sections Part 2 में आएंगे -->
+
+
+</main>
+
+
+
+</div>
+
+
+
 <script type="module" src="script.js"></script>
 
+
 </body>
+
 </html>
