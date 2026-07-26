@@ -1,182 +1,1216 @@
-// =====================================================================
-// OMNI DATA PRO — ENTERPRISE-GRADE CORE CONTROLLER (`script.js`)
-// =====================================================================
+/* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 1/3
+===================================== */
 
-import { supabase } from './supabase.js';
-import { setLanguage, getCurrentLanguage } from './i18n.js';
 
-// Application State Store (Centralized State Management)
-const AppState = {
+/*
+   GLOBAL APPLICATION STATE
+*/
+
+
+const OmniApp = {
+
+
     currentUser: null,
-    currentSession: null,
-    activePage: 'dashboard-page',
-    isOnline: navigator.onLine,
-    theme: localStorage.getItem("omni_dark_mode") === "true" ? "dark" : "light"
+
+
+    currentPage: "dashboard-page",
+
+
+    language: "en",
+
+
+    initialized: false
+
+
+
 };
 
-// Expose state globally for debugging if needed
-window.OmniApp = AppState;
 
-/**
- * 1. Centralized Page Routing & Dynamic View Controller
- * @param {string} pageId 
- */
-window.openPage = function(pageId) {
-    try {
-        const pages = document.querySelectorAll(".app-page");
-        if (!pages.length) return;
 
-        pages.forEach(page => page.classList.add("hidden"));
 
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.remove("hidden");
-            AppState.activePage = pageId;
-            localStorage.setItem("omni_last_page", pageId);
-        } else {
-            console.warn(`[Router] Target page not found: "${pageId}". Falling back to dashboard.`);
-            const fallbackPage = document.getElementById("dashboard-page");
-            if (fallbackPage) fallbackPage.classList.remove("hidden");
-        }
 
-        // Update Active Navigation State
-        document.querySelectorAll(".menu-item").forEach(item => {
-            item.classList.toggle("active", item.getAttribute("data-target") === pageId);
-        });
-    } catch (error) {
-        console.error("[Router Error]:", error.message);
+
+
+
+/*
+   APPLICATION START
+*/
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    initializeApp();
+
+
+});
+
+
+
+
+
+
+
+
+
+/*
+   INITIALIZE SYSTEM
+*/
+
+
+function initializeApp(){
+
+
+    if(OmniApp.initialized)
+        return;
+
+
+
+    OmniApp.initialized = true;
+
+
+
+    setupNavigation();
+
+
+    setupMobileMenu();
+
+
+    setupLanguage();
+
+
+    setupNotifications();
+
+
+    setupTheme();
+
+
+
+    checkUserSession();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   USER SESSION CHECK
+*/
+
+
+function checkUserSession(){
+
+
+    /*
+       Supabase auth state
+       will connect here
+    */
+
+
+    const savedUser =
+    localStorage.getItem(
+    "omni_user"
+    );
+
+
+
+    if(savedUser){
+
+
+        OmniApp.currentUser =
+        JSON.parse(savedUser);
+
+
+
+        openApplication();
+
+
+
     }
-};
+    else{
 
-/**
- * 2. Event Binding for Sidebar Navigation
- */
-function initializeNavigation() {
-    document.querySelectorAll(".menu-item").forEach(item => {
-        item.addEventListener("click", (event) => {
-            event.preventDefault();
-            const targetPageId = item.getAttribute("data-target");
-            if (targetPageId) {
-                window.openPage(targetPageId);
-            }
+
+        openAuthentication();
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   OPEN AUTH SCREEN
+*/
+
+
+function openAuthentication(){
+
+
+    const auth =
+    document.getElementById(
+    "auth-section"
+    );
+
+
+
+    const app =
+    document.getElementById(
+    "main-app"
+    );
+
+
+
+    if(auth)
+        auth.classList.remove(
+        "hidden"
+        );
+
+
+
+    if(app)
+        app.classList.add(
+        "hidden"
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   OPEN MAIN APPLICATION
+*/
+
+
+function openApplication(){
+
+
+    const auth =
+    document.getElementById(
+    "auth-section"
+    );
+
+
+
+    const app =
+    document.getElementById(
+    "main-app"
+    );
+
+
+
+    if(auth)
+        auth.classList.add(
+        "hidden"
+        );
+
+
+
+    if(app)
+        app.classList.remove(
+        "hidden"
+        );
+
+
+
+    loadPage(
+    "dashboard-page"
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   SIDEBAR NAVIGATION
+*/
+
+
+function setupNavigation(){
+
+
+
+    const menuButtons =
+    document.querySelectorAll(
+    ".menu-item"
+    );
+
+
+
+    menuButtons.forEach(
+    button=>{
+
+
+        button.addEventListener(
+        "click",
+        ()=>{
+
+
+            const page =
+            button.dataset.page;
+
+
+
+            loadPage(page);
+
+
+
         });
+
+
     });
+
+
+
 }
 
-/**
- * 3. Enterprise Toast Notification System
- * @param {string} message 
- * @param {'success'|'error'|'warning'|'info'} type 
- */
-window.showNotification = function(message, type = "info") {
-    const toastContainer = document.getElementById("toast-container") || createToastContainer();
-    
-    const toast = document.createElement("div");
-    toast.className = `toast-notification ${type}`;
-    toast.innerText = message;
-    
-    toastContainer.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 300);
-    }, 4000);
-};
 
-function createToastContainer() {
-    const container = document.createElement("div");
-    container.id = "toast-container";
-    container.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;";
-    document.body.appendChild(container);
-    return container;
+
+
+
+
+
+
+
+/*
+   PAGE SWITCH SYSTEM
+*/
+
+
+function loadPage(pageId){
+
+
+
+    const pages =
+    document.querySelectorAll(
+    ".app-page"
+    );
+
+
+
+    pages.forEach(
+    page=>{
+
+
+        page.classList.remove(
+        "active-page"
+        );
+
+
+    });
+
+
+
+
+
+    const target =
+    document.getElementById(
+    pageId
+    );
+
+
+
+    if(target){
+
+
+        target.classList.add(
+        "active-page"
+        );
+
+
+        OmniApp.currentPage =
+        pageId;
+
+
+
+    }
+
+
+
+
+
+    updateActiveMenu(
+    pageId
+    );
+
+
+
 }
 
-/**
- * 4. Network Status Monitors (Online/Offline Sync)
- */
-window.addEventListener('online', () => {
-    AppState.isOnline = true;
-    showNotification("Connection re-established. Syncing...", "success");
-});
 
-window.addEventListener('offline', () => {
-    AppState.isOnline = false;
-    showNotification("Network lost. Operating in offline cache mode.", "warning");
-});
 
-/**
- * 5. Global Exception Boundary (Catch Uncaught Script Errors)
- */
-window.addEventListener('error', (event) => {
-    console.error(`[Runtime Error]: ${event.message} at ${event.filename}:${event.lineno}`);
-});
 
-/**
- * 6. Authentication & Session Security Guard
- */
-async function initializeAuthGuard() {
-    const authContainer = document.getElementById("auth-container");
-    const appContainer = document.getElementById("app-container");
 
-    try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        if (error) throw error;
 
-        if (session) {
-            AppState.currentSession = session;
-            AppState.currentUser = session.user;
 
-            if (authContainer) authContainer.classList.add("hidden");
-            if (appContainer) appContainer.classList.remove("hidden");
 
-            const lastViewedPage = localStorage.getItem("omni_last_page") || "dashboard-page";
-            window.openPage(lastViewedPage);
-        } else {
-            if (authContainer) authContainer.classList.remove("hidden");
-            if (appContainer) appContainer.classList.add("hidden");
+
+/*
+   ACTIVE SIDEBAR ITEM
+*/
+
+
+function updateActiveMenu(pageId){
+
+
+
+    const buttons =
+    document.querySelectorAll(
+    ".menu-item"
+    );
+
+
+
+    buttons.forEach(
+    btn=>{
+
+
+        btn.classList.remove(
+        "active"
+        );
+
+
+
+        if(btn.dataset.page===pageId){
+
+
+            btn.classList.add(
+            "active"
+            );
+
+
         }
 
-        // Listen for Real-time Auth State Changes (Login / Logout events)
-        supabase.auth.onAuthStateChange((event, currentSession) => {
-            if (event === 'SIGNED_OUT' || !currentSession) {
-                localStorage.removeItem("omni_last_page");
-                window.location.reload();
+
+    });
+
+
+
+}/* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 2/3
+===================================== */
+
+
+
+
+
+/*
+   MOBILE SIDEBAR
+*/
+
+
+function setupMobileMenu(){
+
+
+
+    const mobileButton =
+    document.querySelector(
+    ".mobile-menu"
+    );
+
+
+
+    const sidebar =
+    document.getElementById(
+    "sidebar"
+    );
+
+
+
+    if(!mobileButton || !sidebar)
+        return;
+
+
+
+    mobileButton.addEventListener(
+    "click",
+    ()=>{
+
+
+        sidebar.classList.toggle(
+        "show"
+        );
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   LANGUAGE SYSTEM
+*/
+
+
+function setupLanguage(){
+
+
+
+    const selector =
+    document.getElementById(
+    "language-selector"
+    );
+
+
+
+    if(!selector)
+        return;
+
+
+
+    selector.addEventListener(
+    "change",
+    ()=>{
+
+
+        const lang =
+        selector.value;
+
+
+
+        OmniApp.language =
+        lang;
+
+
+
+        localStorage.setItem(
+        "omni_language",
+        lang
+        );
+
+
+
+        if(
+        typeof changeLanguage === "function"
+        ){
+
+
+            changeLanguage(lang);
+
+
+        }
+
+
+
+    });
+
+
+
+    const savedLanguage =
+    localStorage.getItem(
+    "omni_language"
+    );
+
+
+
+    if(savedLanguage){
+
+
+        selector.value =
+        savedLanguage;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   DARK MODE SYSTEM
+*/
+
+
+function setupTheme(){
+
+
+
+    const toggle =
+    document.getElementById(
+    "dark-mode-toggle"
+    );
+
+
+
+    if(!toggle)
+        return;
+
+
+
+    const savedTheme =
+    localStorage.getItem(
+    "omni_theme"
+    );
+
+
+
+    if(savedTheme==="dark"){
+
+
+        document.body.classList.add(
+        "dark-mode"
+        );
+
+
+        toggle.checked=true;
+
+
+    }
+
+
+
+
+
+    toggle.addEventListener(
+    "change",
+    ()=>{
+
+
+        if(toggle.checked){
+
+
+            document.body.classList.add(
+            "dark-mode"
+            );
+
+
+            localStorage.setItem(
+            "omni_theme",
+            "dark"
+            );
+
+
+
+        }
+        else{
+
+
+            document.body.classList.remove(
+            "dark-mode"
+            );
+
+
+            localStorage.setItem(
+            "omni_theme",
+            "light"
+            );
+
+
+        }
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   NOTIFICATION SYSTEM
+*/
+
+
+function setupNotifications(){
+
+
+
+    const button =
+    document.getElementById(
+    "notification-btn"
+    );
+
+
+
+    const panel =
+    document.getElementById(
+    "notification-panel"
+    );
+
+
+
+    if(!button || !panel)
+        return;
+
+
+
+    button.addEventListener(
+    "click",
+    ()=>{
+
+
+        panel.classList.toggle(
+        "hidden"
+        );
+
+
+    });
+
+
+
+    document.addEventListener(
+    "click",
+    (event)=>{
+
+
+        if(
+        !panel.contains(event.target)
+        &&
+        !button.contains(event.target)
+        ){
+
+
+            panel.classList.add(
+            "hidden"
+            );
+
+
+        }
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   LOGOUT SYSTEM
+*/
+
+
+document.addEventListener(
+"click",
+(event)=>{
+
+
+
+    if(
+    event.target.closest(
+    "#logout-btn"
+    )
+    ){
+
+
+
+        logoutUser();
+
+
+
+    }
+
+
+
+});
+
+
+
+
+
+
+
+
+
+function logoutUser(){
+
+
+
+    localStorage.removeItem(
+    "omni_user"
+    );
+
+
+
+    OmniApp.currentUser =
+    null;
+
+
+
+    openAuthentication();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   GLOBAL BUTTON PROTECTION
+*/
+
+
+function showMessage(
+message,
+type="info"
+){
+
+
+
+    console.log(
+    `[${type}] ${message}`
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   MODULE CONNECTOR
+*/
+
+
+function initializeModules(){
+
+
+
+    if(
+    typeof initializeDashboard==="function"
+    )
+    initializeDashboard();
+
+
+
+
+    if(
+    typeof initializeAI==="function"
+    )
+    initializeAI();
+
+
+
+
+    if(
+    typeof initializeFiles==="function"
+    )
+    initializeFiles();
+
+
+
+
+    if(
+    typeof initializeWorkspace==="function"
+    )
+    initializeWorkspace();
+
+
+
+}/* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 3/3
+===================================== */
+
+
+
+
+
+/*
+   AUTH EVENT CONNECTION
+*/
+
+
+function setupAuthConnection(){
+
+
+
+    const loginBtn =
+    document.getElementById(
+    "login-btn"
+    );
+
+
+
+    const signupBtn =
+    document.getElementById(
+    "signup-btn"
+    );
+
+
+
+    const logoutBtn =
+    document.getElementById(
+    "logout-btn"
+    );
+
+
+
+
+
+    if(loginBtn){
+
+
+        loginBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            if(
+            typeof loginUser === "function"
+            ){
+
+
+                loginUser();
+
+
             }
+
+
         });
 
-    } catch (err) {
-        console.error("[Auth Guard Error]:", err.message);
-        showNotification("Authentication synchronization failed.", "error");
+
     }
+
+
+
+
+
+
+    if(signupBtn){
+
+
+        signupBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            if(
+            typeof signupUser === "function"
+            ){
+
+
+                signupUser();
+
+
+            }
+
+
+        });
+
+
+    }
+
+
+
+
+
 }
 
-/**
- * 7. Theme Engine Initialization
- */
-function initializeTheme() {
-    if (AppState.theme === "dark") {
-        document.body.classList.add("dark-theme");
-    } else {
-        document.body.classList.remove("dark-theme");
+
+
+
+
+
+
+
+
+/*
+   MODULE STARTUP
+*/
+
+
+function startOmniSystem(){
+
+
+
+    try{
+
+
+        setupAuthConnection();
+
+
+
+        initializeModules();
+
+
+
+        console.log(
+        "Omni Data Pro Started Successfully"
+        );
+
+
+
     }
+
+    catch(error){
+
+
+
+        console.error(
+        "System Startup Error:",
+        error
+        );
+
+
+
+        showMessage(
+        "System loading error",
+        "error"
+        );
+
+
+
+    }
+
+
+
+
 }
 
-/**
- * 8. Main Entry Point (DOM Loaded Lifecycle Hook)
- */
-document.addEventListener("DOMContentLoaded", async () => {
-    console.info("%c[Omni Data Pro] Initializing Enterprise Kernel...", "color: #00ff66; background: #111; padding: 4px; font-weight: bold;");
 
-    // Initialize UI & Core Modules
-    initializeNavigation();
-    initializeTheme();
 
-    // Initialize Multi-language Engine
-    const currentLang = getCurrentLanguage();
-    setLanguage(currentLang);
 
-    // Execute Security & Session Checks
-    await initializeAuthGuard();
 
-    console.info("%c[Omni Data Pro] System Ready & Operational.", "color: #00bcd4; font-weight: bold;");
+
+
+
+
+/*
+   GLOBAL DATA STORE
+*/
+
+
+const OmniStorage = {
+
+
+
+    save(
+    key,
+    value
+    ){
+
+
+        localStorage.setItem(
+        key,
+        JSON.stringify(value)
+        );
+
+
+    },
+
+
+
+
+
+    get(
+    key
+    ){
+
+
+        const data =
+        localStorage.getItem(
+        key
+        );
+
+
+
+        return data
+        ?
+        JSON.parse(data)
+        :
+        null;
+
+
+
+    },
+
+
+
+
+
+    remove(
+    key
+    ){
+
+
+        localStorage.removeItem(
+        key
+        );
+
+
+    }
+
+
+
+};
+
+
+
+
+
+
+
+
+
+/*
+   ERROR HANDLER
+*/
+
+
+window.addEventListener(
+"error",
+(event)=>{
+
+
+
+    console.error(
+    "Omni Data Pro Error:",
+    event.error
+    );
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/*
+   NETWORK CHECK
+*/
+
+
+window.addEventListener(
+"online",
+()=>{
+
+
+    showMessage(
+    "Internet connection restored",
+    "success"
+    );
+
+
+});
+
+
+
+
+
+window.addEventListener(
+"offline",
+()=>{
+
+
+    showMessage(
+    "Internet connection lost",
+    "warning"
+    );
+
+
+});
+
+
+
+
+
+
+
+
+
+/*
+   FINAL START
+*/
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    startOmniSystem();
+
+
+
 });
