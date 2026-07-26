@@ -54,6 +54,8 @@ import {
 document.addEventListener(
     "DOMContentLoaded",
     async()=>{
+           alert("App running");
+        
 
         // Safety timeout so it never loops infinitely
         const timeoutPromise = new Promise((resolve) => 
