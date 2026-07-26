@@ -1,21 +1,24 @@
 /* =====================================
-   Omni Data Pro
-   Main JavaScript
-   Part 1/3
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 1/3
 ===================================== */
 
 
-
-// ===============================
-// ELEMENTS
-// ===============================
+console.log("Omni Data Pro JS Loaded");
 
 
-const authContainer =
+
+/* =====================================
+   ELEMENT SELECTOR
+===================================== */
+
+
+const authContainer = 
 document.getElementById("auth-container");
 
 
-const appContainer =
+const appContainer = 
 document.getElementById("app-container");
 
 
@@ -35,20 +38,18 @@ document.getElementById("forgot-section");
 
 
 
-// ===============================
-// AUTH PAGE SWITCH
-// ===============================
+/* =====================================
+   AUTH PAGE SWITCH
+===================================== */
 
 
 function showLogin(){
 
+    loginSection?.classList.remove("hidden");
 
-    loginSection.classList.remove("hidden");
+    signupSection?.classList.add("hidden");
 
-    signupSection.classList.add("hidden");
-
-    forgotSection.classList.add("hidden");
-
+    forgotSection?.classList.add("hidden");
 
 }
 
@@ -57,29 +58,24 @@ function showLogin(){
 
 function showSignup(){
 
+    loginSection?.classList.add("hidden");
 
-    loginSection.classList.add("hidden");
+    signupSection?.classList.remove("hidden");
 
-    signupSection.classList.remove("hidden");
-
-    forgotSection.classList.add("hidden");
-
+    forgotSection?.classList.add("hidden");
 
 }
-
 
 
 
 
 function showForgot(){
 
+    loginSection?.classList.add("hidden");
 
-    loginSection.classList.add("hidden");
+    signupSection?.classList.add("hidden");
 
-    signupSection.classList.add("hidden");
-
-    forgotSection.classList.remove("hidden");
-
+    forgotSection?.classList.remove("hidden");
 
 }
 
@@ -89,35 +85,32 @@ function showForgot(){
 
 
 
-// ===============================
-// BUTTON EVENTS
-// ===============================
+/* =====================================
+   AUTH LINKS
+===================================== */
 
 
 document
 .getElementById("show-signup")
-?.addEventListener(
-"click",
-(e)=>{
+?.addEventListener("click",(e)=>{
 
-e.preventDefault();
+    e.preventDefault();
 
-showSignup();
+    showSignup();
 
 });
 
 
 
 
+
 document
 .getElementById("show-login")
-?.addEventListener(
-"click",
-(e)=>{
+?.addEventListener("click",(e)=>{
 
-e.preventDefault();
+    e.preventDefault();
 
-showLogin();
+    showLogin();
 
 });
 
@@ -127,13 +120,11 @@ showLogin();
 
 document
 .getElementById("show-forgot")
-?.addEventListener(
-"click",
-(e)=>{
+?.addEventListener("click",(e)=>{
 
-e.preventDefault();
+    e.preventDefault();
 
-showForgot();
+    showForgot();
 
 });
 
@@ -143,13 +134,11 @@ showForgot();
 
 document
 .getElementById("back-login")
-?.addEventListener(
-"click",
-(e)=>{
+?.addEventListener("click",(e)=>{
 
-e.preventDefault();
+    e.preventDefault();
 
-showLogin();
+    showLogin();
 
 });
 
@@ -160,55 +149,25 @@ showLogin();
 
 
 
-// ===============================
-// TAB SYSTEM
-// ===============================
+/* =====================================
+   OPEN APP
+===================================== */
 
 
-const navButtons =
-document.querySelectorAll(
-"#sidebar button[data-page]"
-);
+function openApp(){
 
 
-
-const pages =
-document.querySelectorAll(
-".page-section"
-);
+    authContainer
+    ?.classList.add("hidden");
 
 
 
+    appContainer
+    ?.classList.remove("hidden");
 
 
 
-function openPage(pageId){
-
-
-
-pages.forEach(page=>{
-
-
-    page.classList.remove("active");
-
-
-});
-
-
-
-
-
-const target =
-document.getElementById(pageId);
-
-
-
-if(target){
-
-    target.classList.add("active");
-
-}
-
+    openPage("dashboard");
 
 
 }
@@ -218,239 +177,163 @@ if(target){
 
 
 
-navButtons.forEach(button=>{
 
 
-button.addEventListener(
-"click",
-()=>{
-
-
-const page =
-button.dataset.page;
-
-
-openPage(page);
-
-
-
-});
-
-
-});
-
-
-
-
-
-
-
-// ===============================
-// APP START
-// ===============================
-
-
-function startApp(){
-
-
-authContainer
-.classList.add("hidden");
-
-
-
-appContainer
-.classList.remove("hidden");
-
-
-
-openPage("dashboard");
-
-
-}
-
-
-
-
-
-
-// Temporary local test
-
-// बाद में Supabase Auth से replace होगा
-
-
-const demoLogin =
-document.getElementById("login-btn");
-
-
-
-demoLogin
-?.addEventListener(
-"click",
-()=>{
-
-
-startApp();
-
-
-});
-
-
-
-
-
-const demoSignup =
-document.getElementById("signup-btn");
-
-
-
-demoSignup
-?.addEventListener(
-"click",
-()=>{
-
-
-startApp();
-
-
-});
-
-
-
-
-
-
-// ===============================
-// LOGOUT
-// ===============================
+/* =====================================
+   LOGIN BUTTON
+===================================== */
 
 
 document
-.getElementById("logout-btn")
-?.addEventListener(
-"click",
-()=>{
+.getElementById("login-btn")
+?.addEventListener("click",()=>{
 
 
-appContainer
-.classList.add("hidden");
+    const email =
+    document.getElementById("login-email")?.value;
 
 
-
-authContainer
-.classList.remove("hidden");
+    const password =
+    document.getElementById("login-password")?.value;
 
 
 
-showLogin();
+
+    if(!email || !password){
+
+        alert("Enter email and password");
+
+        return;
+
+    }
 
 
-});/* =====================================
-   SUPABASE AUTH SYSTEM
-   Part 2/3
+
+    // Temporary frontend login
+
+    openApp();
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =====================================
+   SIGNUP BUTTON
+===================================== */
+
+
+document
+.getElementById("signup-btn")
+?.addEventListener("click",()=>{
+
+
+    const name =
+    document.getElementById("signup-name")?.value;
+
+
+    const email =
+    document.getElementById("signup-email")?.value;
+
+
+    const password =
+    document.getElementById("signup-password
+                            /* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 2/3
 ===================================== */
 
 
 
-// ===============================
-// SUPABASE IMPORT
-// ===============================
 
 
-import supabaseClient from "./supabase.js";
+/* =====================================
+   AI CHAT SYSTEM
+===================================== */
 
 
-
-
-
-
-
-// ===============================
-// SIGNUP
-// ===============================
-
-
-const signupButton =
-document.getElementById("signup-btn");
+const sendAIButton =
+document.getElementById("send-ai");
 
 
 
-signupButton
-?.addEventListener(
-"click",
-async ()=>{
+sendAIButton
+?.addEventListener("click",()=>{
 
 
-const name =
-document.getElementById(
-"signup-name"
-).value;
+    const input =
+    document.getElementById("ai-message");
 
 
-
-const email =
-document.getElementById(
-"signup-email"
-).value;
+    const history =
+    document.getElementById("chat-history");
 
 
 
-const password =
-document.getElementById(
-"signup-password"
-).value;
+    if(!input || !history)
+    return;
+
+
+
+    const message =
+    input.value.trim();
+
+
+
+    if(!message)
+    return;
 
 
 
 
+    history.innerHTML += `
 
-const {
-data,
-error
-} = await supabaseClient.auth.signUp({
+    <div class="message">
 
-email,
+    <b>You:</b><br>
 
-password,
+    ${message}
 
-options:{
+    </div>
 
-data:{
-
-full_name:name
-
-}
-
-}
-
-});
+    `;
 
 
 
+    setTimeout(()=>{
+
+
+        history.innerHTML += `
+
+        <div class="message">
+
+        <b>AI:</b><br>
+
+        Processing your request...
+
+        </div>
+
+        `;
+
+
+        history.scrollTop =
+        history.scrollHeight;
 
 
 
-if(error){
-
-
-alert(error.message);
-
-
-return;
-
-
-}
+    },500);
 
 
 
 
-alert(
-"Account Created Successfully"
-);
-
-
-
-startApp();
-
+    input.value="";
 
 
 });
@@ -462,53 +345,90 @@ startApp();
 
 
 
-
-// ===============================
-// LOGIN
-// ===============================
-
-
-const loginButton =
-document.getElementById("login-btn");
+/* =====================================
+   FILE MANAGER
+===================================== */
 
 
-
-loginButton
-?.addEventListener(
-"click",
-async ()=>{
-
-
-const email =
-document.getElementById(
-"login-email"
-).value;
-
-
-
-const password =
-document.getElementById(
-"login-password"
-).value;
+const uploadButton =
+document.getElementById("upload-file");
 
 
 
 
 
-const {
+uploadButton
+?.addEventListener("click",()=>{
 
-data,
 
-error
+    const fileInput =
+    document.getElementById("file-input");
 
-}
 
-=
-await supabaseClient.auth.signInWithPassword({
 
-email,
+    const fileList =
+    document.getElementById("file-list");
 
-password
+
+
+    if(!fileInput || !fileList)
+    return;
+
+
+
+
+    const file =
+    fileInput.files[0];
+
+
+
+    if(!file){
+
+
+        alert("Select a file");
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    fileList.innerHTML += `
+
+
+    <div class="file-card">
+
+
+    <h3>
+
+    ${file.name}
+
+    </h3>
+
+
+    <p>
+
+    File Added
+
+    </p>
+
+
+    </div>
+
+
+    `;
+
+
+
+
+    fileInput.value="";
+
+
 
 });
 
@@ -516,21 +436,89 @@ password
 
 
 
-if(error){
-
-
-alert(error.message);
-
-
-return;
-
-
-}
 
 
 
 
-startApp();
+/* =====================================
+   GLOBAL SEARCH
+===================================== */
+
+
+const searchButton =
+document.getElementById("search-btn");
+
+
+
+
+
+searchButton
+?.addEventListener("click",()=>{
+
+
+    const searchInput =
+    document.getElementById("global-search");
+
+
+
+    const result =
+    document.getElementById("search-result");
+
+
+
+    if(!searchInput || !result)
+    return;
+
+
+
+
+    const value =
+    searchInput.value.trim();
+
+
+
+
+    if(!value){
+
+
+        result.innerHTML =
+
+        `<div class="card">
+        Enter something to search
+        </div>`;
+
+
+        return;
+
+    }
+
+
+
+
+    result.innerHTML = `
+
+
+    <div class="card">
+
+
+    <h3>
+
+    Search Result
+
+    </h3>
+
+
+    <p>
+
+    ${value}
+
+    </p>
+
+
+    </div>
+
+
+    `;
 
 
 
@@ -544,340 +532,243 @@ startApp();
 
 
 
+/* =====================================
+   DASHBOARD COUNTERS
+===================================== */
 
-// ===============================
-// SESSION CHECK
-// ===============================
 
+function updateDashboard(){
 
-async function checkSession(){
 
 
-
-const {
-
-data
-
-}
-
-=
-await supabaseClient.auth.getSession();
-
-
-
-
-
-if(data.session){
-
-
-startApp();
-
-
-loadUserProfile();
-
-
-loadDashboard();
-
-
-}
-
-
-
-}
-
-
-
-
-
-checkSession();
-
-
-
-
-
-
-
-
-
-// ===============================
-// PROFILE LOAD
-// ===============================
-
-
-async function loadUserProfile(){
-
-
-
-const {
-
-data:
-
-{
-
-user
-
-}
-
-}
-
-=
-await supabaseClient.auth.getUser();
-
-
-
-
-
-
-if(!user)
-return;
-
-
-
-
-
-const nameInput =
-document.getElementById(
-"profile-name"
-);
-
-
-
-const emailInput =
-document.getElementById(
-"profile-email"
-);
-
-
-
-
-if(nameInput)
-
-nameInput.value =
-user.user_metadata?.full_name || "";
-
-
-
-
-
-if(emailInput)
-
-emailInput.value =
-user.email;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-// ===============================
-// DASHBOARD LOAD
-// ===============================
-
-
-async function loadDashboard(){
-
-
-
-try{
-
-
-
-const {
-
-count:
-
-projectCount
-
-}
-
-=
-await supabaseClient
-
-.from("work_projects")
-
-.select("*",
-{
-
-count:"exact",
-
-head:true
-
-});
-
-
-
-
-
-const projectBox =
+const projects =
 document.getElementById(
 "project-count"
 );
 
 
 
-if(projectBox)
-
-projectBox.innerText =
-projectCount || 0;
-
-
-
-
-
-}
-
-catch(error){
-
-
-console.log(
-"Dashboard Error",
-error
+const files =
+document.getElementById(
+"file-count"
 );
 
 
+
+const chats =
+document.getElementById(
+"chat-count"
+);
+
+
+
+
+if(projects)
+
+projects.innerText="0";
+
+
+
+if(files)
+
+files.innerText="0";
+
+
+
+if(chats)
+
+chats.innerText="0";
+
+
+
 }
 
 
 
-}/* =====================================
-   Omni Data Pro
-   Final JavaScript
-   Part 3/3
+
+
+
+
+
+/* =====================================
+   WORKSPACE
+===================================== */
+
+
+const newProject =
+document.getElementById(
+"new-project"
+);
+
+
+
+
+newProject
+?.addEventListener("click",()=>{
+
+
+const list =
+document.getElementById(
+"project-list"
+);
+
+
+
+if(!list)
+return;
+
+
+
+
+list.innerHTML += `
+
+
+<div class="project-card">
+
+
+<h3>
+
+New Project
+
+</h3>
+
+
+<p>
+
+Project created successfully
+
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   INITIAL LOAD
+===================================== */
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+updateDashboard();
+
+
+});/* =====================================
+   OMNI DATA PRO
+   FINAL SCRIPT.JS
+   PART 3/3
 ===================================== */
 
 
 
-// ===============================
-// FILE UPLOAD
-// ===============================
 
 
-const uploadButton =
+/* =====================================
+   PROFILE UPDATE
+===================================== */
+
+
+const saveProfile =
 document.getElementById(
-"upload-file"
+"save-profile"
 );
 
 
 
-uploadButton
-?.addEventListener(
-"click",
-async ()=>{
+saveProfile
+?.addEventListener("click",()=>{
 
 
-const fileInput =
+const name =
 document.getElementById(
-"file-input"
+"profile-name"
 );
 
 
 
-const file =
-fileInput.files[0];
-
-
-
-if(!file){
-
-alert(
-"Select file first"
-);
-
+if(!name)
 return;
-
-}
-
-
-
-
-
-const {
-
-data:
-
-{
-
-user
-
-}
-
-}
-
-=
-await supabaseClient.auth.getUser();
-
-
-
-
-
-if(!user)
-return;
-
-
-
-
-
-const filePath =
-`${user.user.id}/${file.name}`;
-
-
-
-
-
-const {
-
-error
-
-}
-
-=
-await supabaseClient
-.storage
-.from(
-"omnidatapro-files"
-)
-.upload(
-
-filePath,
-
-file
-
-);
-
-
-
-
-
-if(error){
-
-
-alert(error.message);
-
-
-return;
-
-
-}
-
-
 
 
 
 alert(
-"File Uploaded"
+"Profile Updated: " + name.value
 );
 
 
 
-loadFiles();
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   SETTINGS SAVE
+===================================== */
+
+
+const saveSettings =
+document.getElementById(
+"save-settings"
+);
+
+
+
+saveSettings
+?.addEventListener("click",()=>{
+
+
+const darkMode =
+document.getElementById(
+"dark-mode"
+);
+
+
+
+if(darkMode?.checked){
+
+
+document.body.classList.add(
+"dark-mode"
+);
+
+
+}
+else{
+
+
+document.body.classList.remove(
+"dark-mode"
+);
+
+
+}
+
+
+
+alert(
+"Settings Saved"
+);
 
 
 
@@ -891,71 +782,68 @@ loadFiles();
 
 
 
-// ===============================
-// LOAD FILES
-// ===============================
+/* =====================================
+   DARK MODE SUPPORT
+===================================== */
 
 
-async function loadFiles(){
+const darkStyle = document.createElement(
+"style"
+);
 
 
-const {
 
-data:
+darkStyle.innerHTML = `
 
-{
 
-user
+.dark-mode {
+
+
+background:#020617 !important;
+
 
 }
 
-}
 
-=
-await supabaseClient.auth.getUser();
-
-
+.dark-mode .card,
+.dark-mode .settings-card,
+.dark-mode .profile-card {
 
 
-if(!user)
-return;
+background:#020617;
 
-
-
-
-
-const {
-
-data,
-
-error
 
 }
 
-=
-await supabaseClient
-.storage
-.from(
-"omnidatapro-files"
-)
-.list(
-user.user.id
+
+
+`;
+
+
+
+document.head.appendChild(
+darkStyle
 );
 
 
 
 
 
-if(error)
-return;
 
 
 
+
+/* =====================================
+   SECURITY LOGS
+===================================== */
+
+
+function addSecurityLog(text){
 
 
 const box =
 document.getElementById(
-"file-list"
+"security-list"
 );
 
 
@@ -965,168 +853,10 @@ return;
 
 
 
-box.innerHTML="";
-
-
-
-
-
-data.forEach(file=>{
-
 
 box.innerHTML += `
 
-<div class="file-card">
-
-<h3>
-
-${file.name}
-
-</h3>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// AI CHAT
-// ===============================
-
-
-const sendAI =
-document.getElementById(
-"send-ai"
-);
-
-
-
-sendAI
-?.addEventListener(
-"click",
-()=>{
-
-
-const input =
-document.getElementById(
-"ai-message"
-);
-
-
-
-const history =
-document.getElementById(
-"chat-history"
-);
-
-
-
-if(!input.value)
-return;
-
-
-
-
-
-history.innerHTML += `
-
-<div class="message">
-
-<b>You:</b>
-
-${input.value}
-
-</div>
-
-`;
-
-
-
-
-
-history.innerHTML += `
-
-<div class="message">
-
-<b>AI:</b>
-
-Your request is processing...
-
-</div>
-
-`;
-
-
-
-
-
-input.value="";
-
-
-
-});
-
-
-
-
-
-
-
-
-
-// ===============================
-// GLOBAL SEARCH
-// ===============================
-
-
-document
-.getElementById(
-"search-btn"
-)
-?.addEventListener(
-"click",
-()=>{
-
-
-const text =
-document.getElementById(
-"global-search"
-).value;
-
-
-
-
-
-const result =
-document.getElementById(
-"search-result"
-);
-
-
-
-
-
-result.innerHTML = `
-
-<div class="card">
-
-Search Result:
+<div class="notification-item">
 
 ${text}
 
@@ -1136,127 +866,10 @@ ${text}
 
 
 
-});
-
-
-
-
-
-
-
-
-
-// ===============================
-// PROFILE UPDATE
-// ===============================
-
-
-document
-.getElementById(
-"save-profile"
-)
-?.addEventListener(
-"click",
-async ()=>{
-
-
-const name =
-document.getElementById(
-"profile-name"
-).value;
-
-
-
-
-
-const {
-
-data:
-
-{
-
-user
-
 }
 
-}
-
-=
-await supabaseClient.auth.getUser();
 
 
-
-
-
-if(!user)
-return;
-
-
-
-
-
-await supabaseClient.auth.updateUser({
-
-data:{
-
-full_name:name
-
-}
-
-});
-
-
-
-
-
-alert(
-"Profile Updated"
-);
-
-
-
-});
-
-
-
-
-
-
-
-
-
-// ===============================
-// SETTINGS
-// ===============================
-
-
-document
-.getElementById(
-"save-settings"
-)
-?.addEventListener(
-"click",
-()=>{
-
-
-alert(
-"Settings Saved"
-);
-
-
-});
-
-
-
-
-
-
-
-
-
-// ===============================
-// START LOADERS
-// ===============================
 
 
 window.addEventListener(
@@ -1264,8 +877,119 @@ window.addEventListener(
 ()=>{
 
 
-loadFiles();
+addSecurityLog(
+"System started successfully"
+);
 
 
 
 });
+
+
+
+
+
+
+
+
+
+/* =====================================
+   NOTIFICATIONS
+===================================== */
+
+
+function addNotification(message){
+
+
+const box =
+document.getElementById(
+"notification-list"
+);
+
+
+
+if(!box)
+return;
+
+
+
+box.innerHTML += `
+
+
+<div class="notification-item">
+
+${message}
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+addNotification(
+"Welcome to Omni Data Pro"
+);
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/* =====================================
+   BUTTON ERROR PROTECTION
+===================================== */
+
+
+document
+.querySelectorAll("button")
+.forEach(btn=>{
+
+
+btn.addEventListener(
+"click",
+()=>{
+
+
+console.log(
+"Button clicked:",
+btn.innerText
+);
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   APP READY
+===================================== */
+
+
+console.log(
+"Omni Data Pro System Ready"
+);
