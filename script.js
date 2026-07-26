@@ -55,6 +55,7 @@ document.addEventListener(
     "DOMContentLoaded",
     async()=>{
            alert("App running");
+        document.getElementById("app-loader").classList.add("hidden");
         
 
         // Safety timeout so it never loops infinitely
