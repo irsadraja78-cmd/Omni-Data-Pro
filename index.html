@@ -1,118 +1,1987 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni Data Pro — Enterprise Core</title>
-    <!-- Master Stylesheet Link -->
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Omni Data Pro</title>
+
+
+<meta name="description"
+content="Omni Data Pro - AI Powered Data Management Platform">
+
+
+<meta name="theme-color" content="#0f172a">
+
+
+<!-- Main CSS -->
+
+<link rel="stylesheet" href="style.css">
+
+
+<!-- Icons -->
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 </head>
+
+
 <body>
 
-    <!-- 1. Authentication Screen (Visible when user is logged out) -->
-    <div id="auth-container" class="hidden">
-        <div class="auth-card">
-            <h2 style="margin-bottom: 20px; color: var(--primary-color);" data-i18n="welcome">ओमनी डेटा प्रो में आपका स्वागत है</h2>
-            
-            <!-- Login Form -->
-            <form id="login-form">
-                <input type="email" id="login-email" class="form-control" placeholder="Email Address" required>
-                <input type="password" id="login-password" class="form-control" placeholder="Password" required>
-                <button type="submit" class="btn" style="width: 100%;">Login</button>
-            </form>
-        </div>
-    </div>
 
-    <!-- 2. Main Application Container (Visible when user is logged in) -->
-    <div id="app-container" class="hidden">
-        
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-top">
-                <div class="sidebar-brand">
-                    <h2>Omni Data Pro</h2>
-                </div>
-                <ul class="sidebar-menu">
-                    <li class="menu-item active" data-target="dashboard-page" data-i18n="dashboard">डैशबोर्ड</li>
-                    <li class="menu-item" data-target="workspace-page" data-i18n="workspace">वर्कस्पेस</li>
-                    <li class="menu-item" data-target="files-page" data-i18n="files">फाइलें</li>
-                    <li class="menu-item" data-target="ai-page" data-i18n="aiChat">एआई चैट</li>
-                    <li class="menu-item" data-target="security-page" data-i18n="security">सुरक्षा</li>
-                    <li class="menu-item" data-target="settings-page" data-i18n="settings">सेटिंग्स</li>
-                    <li class="menu-item" data-target="profile-page" data-i18n="profile">प्रोफाइल</li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-bottom">
-                <button id="logout-button" class="btn" style="width: 100%; background-color: var(--danger-color);">Logout</button>
-            </div>
-        </aside>
+<!-- ===========================
+     APPLICATION ROOT
+=========================== -->
 
-        <!-- Dynamic Main Content Area -->
-        <main class="main-content">
-            
-            <!-- Dashboard Page -->
-            <div id="dashboard-page" class="app-page">
-                <h1 data-i18n="dashboard">डैशबोर्ड</h1>
-                <p style="margin-top: 10px; color: var(--text-muted);">Welcome to your enterprise management command center.</p>
-            </div>
 
-            <!-- Workspace Page -->
-            <div id="workspace-page" class="app-page hidden">
-                <h1 data-i18n="workspace">वर्कस्पेस</h1>
-            </div>
+<div id="app-root">
 
-            <!-- Files Page -->
-            <div id="files-page" class="app-page hidden">
-                <h1 data-i18n="files">फाइलें</h1>
-                <button class="btn" style="margin-top: 15px;" data-i18n="uploadBtn">फाइल अपलोड करें</button>
-            </div>
 
-            <!-- AI Chat Page -->
-            <div id="ai-page" class="app-page hidden">
-                <h1 data-i18n="aiChat">एआई चैट</h1>
-            </div>
 
-            <!-- Security Page -->
-            <div id="security-page" class="app-page hidden">
-                <h1 data-i18n="security">सुरक्षा</h1>
-            </div>
 
-            <!-- Settings Page (With Indian Multi-Language Dropdown) -->
-            <div id="settings-page" class="app-page hidden">
-                <h1 data-i18n="settings">सेटिंग्स</h1>
-                <div style="margin-top: 20px; max-width: 400px;">
-                    <label for="language-selector" style="display: block; margin-bottom: 8px; font-weight: 500;">भाषा चुनें / Select Language:</label>
-                    <select id="language-selector" class="form-control">
-                        <option value="hi">हिंदी (Hindi)</option>
-                        <option value="en">English</option>
-                        <option value="bn">বাংলা (Bengali)</option>
-                        <option value="ta">தமிழ் (Tamil)</option>
-                        <option value="te">తెలుగు (Telugu)</option>
-                        <option value="mr">मराठी (Marathi)</option>
-                        <option value="gu">ગુજરાતી (Gujarati)</option>
-                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-                        <option value="kn">ಕನ್ನಡ (Kannada)</option>
-                        <option value="ml">മലയാളം (Malayalam)</option>
-                    </select>
-                </div>
-            </div>
 
-            <!-- Profile Page -->
-            <div id="profile-page" class="app-page hidden">
-                <h1 data-i18n="profile">प्रोफाइल</h1>
-            </div>
 
-        </main>
-    </div>
+<!-- ===========================
+     AUTHENTICATION SECTION
+=========================== -->
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container"></div>
 
-    <!-- Master Scripts Initialization (Modular ES6 Scripts) -->
-    <script type="module" src="supabase.js"></script>
-    <script type="module" src="i18n.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="script.js"></script>
+<section id="auth-section">
+
+
+
+<!-- LOGIN -->
+
+<div class="auth-card" id="login-box">
+
+
+<div class="brand">
+
+<h1>
+Omni Data Pro
+</h1>
+
+
+<p>
+AI Powered Data Platform
+</p>
+
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input 
+type="email"
+id="login-email"
+placeholder="Enter email">
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input 
+type="password"
+id="login-password"
+placeholder="Enter password">
+
+</div>
+
+
+
+
+
+<button 
+id="login-btn"
+class="primary-btn">
+
+Login
+
+</button>
+
+
+
+
+
+<div class="auth-links">
+
+
+<button id="show-signup"
+class="link-btn">
+
+Create Account
+
+</button>
+
+
+
+<button id="show-forgot"
+class="link-btn">
+
+Forgot Password?
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- SIGNUP -->
+
+<div class="auth-card hidden"
+id="signup-box">
+
+
+<h2>
+Create Account
+</h2>
+
+
+
+
+<div class="input-group">
+
+<label>Name</label>
+
+<input
+type="text"
+id="signup-name"
+placeholder="Full Name">
+
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="signup-email"
+placeholder="Email">
+
+
+</div>
+
+
+
+
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="signup-password"
+placeholder="Password">
+
+
+</div>
+
+
+
+
+
+<button
+id="signup-btn"
+class="primary-btn">
+
+Signup
+
+</button>
+
+
+
+
+<button
+id="back-login-from-signup"
+class="link-btn">
+
+Back To Login
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- FORGOT PASSWORD -->
+
+
+<div class="auth-card hidden"
+id="forgot-box">
+
+
+<h2>
+
+Reset Password
+
+</h2>
+
+
+
+
+<div class="input-group">
+
+
+<label>Email</label>
+
+
+<input
+type="email"
+id="forgot-email"
+placeholder="Enter registered email">
+
+
+</div>
+
+
+
+
+
+
+<button
+id="forgot-btn"
+class="primary-btn">
+
+Send Reset Link
+
+</button>
+
+
+
+
+
+
+<button
+id="back-login-from-forgot"
+class="link-btn">
+
+Back To Login
+
+</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+<!-- ===========================
+     MAIN APPLICATION
+=========================== -->
+
+
+<section id="main-app"
+class="hidden">
+
+
+
+<!-- Dashboard modules आगे आएंगे -->
+
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- JavaScript Files -->
+
+<script src="supabase.js"></script>
+
+<script src="auth.js"></script>
+
+<script src="i18n.js"></script>
+
+<script src="script.js"></script>
+
+
 </body>
+
+</html><!-- ===========================
+     MAIN APPLICATION LAYOUT
+=========================== -->
+
+
+<section id="main-app" class="hidden">
+
+
+
+<!-- SIDEBAR -->
+
+<aside id="sidebar">
+
+
+<div class="sidebar-brand">
+
+
+<div class="logo-box">
+
+<i class="fa-solid fa-cube"></i>
+
+</div>
+
+
+
+<div>
+
+<h2>
+Omni Data Pro
+</h2>
+
+<span>
+AI Data Platform
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<nav class="sidebar-menu">
+
+
+
+<button 
+class="menu-item active"
+data-page="dashboard-page">
+
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>
+Dashboard
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="ai-page">
+
+
+<i class="fa-solid fa-robot"></i>
+
+<span>
+AI Assistant
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="files-page">
+
+
+<i class="fa-solid fa-folder"></i>
+
+<span>
+Files
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="workspace-page">
+
+
+<i class="fa-solid fa-layer-group"></i>
+
+<span>
+Workspace
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="search-page">
+
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<span>
+Search
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="profile-page">
+
+
+<i class="fa-solid fa-user"></i>
+
+<span>
+Profile
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="settings-page">
+
+
+<i class="fa-solid fa-gear"></i>
+
+<span>
+Settings
+</span>
+
+
+</button>
+
+
+
+
+
+<button
+class="menu-item"
+data-page="security-page">
+
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>
+Security
+</span>
+
+
+</button>
+
+
+
+</nav>
+
+
+
+
+
+
+
+<div class="sidebar-bottom">
+
+
+<button
+id="logout-btn"
+class="logout-btn">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+
+Logout
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+<!-- MAIN CONTENT AREA -->
+
+
+<div id="content-area">
+
+
+
+
+
+
+
+<!-- TOP NAVBAR -->
+
+
+<header id="top-navbar">
+
+
+
+<div class="mobile-menu">
+
+<i class="fa-solid fa-bars"></i>
+
+</div>
+
+
+
+
+
+<div class="search-box">
+
+
+<i class="fa-solid fa-search"></i>
+
+
+<input
+id="global-search"
+type="search"
+placeholder="Search anything...">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="navbar-actions">
+
+
+
+
+
+<!-- LANGUAGE -->
+
+
+<select id="language-selector">
+
+
+<option value="en">
+English
+</option>
+
+
+<option value="hi">
+हिंदी
+</option>
+
+
+<option value="ur">
+اردو
+</option>
+
+
+<option value="mr">
+मराठी
+</option>
+
+
+<option value="gu">
+ગુજરાતી
+</option>
+
+
+<option value="pa">
+ਪੰਜਾਬੀ
+</option>
+
+
+<option value="bn">
+বাংলা
+</option>
+
+
+<option value="ta">
+தமிழ்
+</option>
+
+
+<option value="te">
+తెలుగు
+</option>
+
+
+<option value="kn">
+ಕನ್ನಡ
+</option>
+
+
+<option value="ml">
+മലയാളം
+</option>
+
+
+<option value="or">
+ଓଡ଼ିଆ
+</option>
+
+
+<option value="as">
+অসমীয়া
+</option>
+
+
+<option value="sa">
+संस्कृत
+</option>
+
+
+</select>
+
+
+
+
+
+
+
+<!-- NOTIFICATION -->
+
+
+<button
+id="notification-btn"
+class="icon-btn">
+
+
+<i class="fa-solid fa-bell"></i>
+
+
+<span id="notification-count">
+
+0
+
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+<!-- PROFILE -->
+
+
+<div class="user-mini-profile">
+
+
+
+<img
+id="nav-avatar"
+src="assets/default-avatar.png"
+alt="User">
+
+
+
+<div>
+
+
+<strong id="nav-user-name">
+
+User
+
+</strong>
+
+
+<small>
+
+Account
+
+</small>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+<!-- PAGE CONTENT WILL LOAD HERE -->
+
+
+
+<main id="page-container">
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</section><!-- ===========================
+     DASHBOARD PAGE
+=========================== -->
+
+
+<section 
+class="app-page active-page"
+id="dashboard-page">
+
+
+
+<div class="page-header">
+
+<div>
+
+<h1>
+Dashboard
+</h1>
+
+
+<p>
+Welcome to Omni Data Pro
+</p>
+
+
+</div>
+
+
+
+<button class="primary-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Project
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- STAT CARDS -->
+
+
+<div class="stats-grid">
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-folder"></i>
+
+</div>
+
+
+<div>
+
+<h3 id="total-projects">
+
+0
+
+</h3>
+
+
+<p>
+Projects
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-file"></i>
+
+</div>
+
+
+
+<div>
+
+<h3 id="total-files">
+
+0
+
+</h3>
+
+
+<p>
+Files
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-message"></i>
+
+</div>
+
+
+<div>
+
+<h3 id="total-messages">
+
+0
+
+</h3>
+
+
+<p>
+AI Chats
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-chart-simple"></i>
+
+</div>
+
+
+<div>
+
+<h3>
+
+98%
+
+</h3>
+
+
+<p>
+System Health
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ANALYTICS AREA -->
+
+
+<div class="dashboard-grid">
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<h2>
+
+Analytics
+
+</h2>
+
+
+
+<div id="analytics-chart">
+
+<!-- Chart will load here -->
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<h2>
+
+Recent Activity
+
+</h2>
+
+
+
+<div id="activity-list">
+
+
+<div class="activity-item">
+
+System Started
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     AI ASSISTANT PAGE
+=========================== -->
+
+
+<section
+class="app-page"
+id="ai-page">
+
+
+
+
+
+<div class="page-header">
+
+
+<div>
+
+
+<h1>
+AI Assistant
+</h1>
+
+
+<p>
+Smart Data Assistant
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="ai-container">
+
+
+
+
+
+<div 
+id="chat-history"
+class="chat-history">
+
+
+
+<div class="ai-message">
+
+Hello, how can I help you?
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="chat-input-area">
+
+
+
+<input
+
+id="ai-message-input"
+
+type="text"
+
+placeholder="Ask AI anything...">
+
+
+<button
+
+id="ai-send-btn"
+
+class="primary-btn">
+
+
+Send
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     FILE MANAGER PAGE
+=========================== -->
+
+
+<section
+
+class="app-page"
+
+id="files-page">
+
+
+
+
+
+
+<div class="page-header">
+
+
+<div>
+
+
+<h1>
+
+File Manager
+
+</h1>
+
+
+<p>
+
+Manage your files
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="file-actions">
+
+
+<input
+
+id="file-upload"
+
+type="file">
+
+
+
+<button
+
+id="upload-file-btn"
+
+class="primary-btn">
+
+
+<i class="fa-solid fa-upload"></i>
+
+Upload
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div
+
+id="file-list"
+
+class="file-list">
+
+
+
+
+
+<!-- Uploaded files appear here -->
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section><!-- ===========================
+     WORKSPACE PAGE
+=========================== -->
+
+
+<section
+class="app-page"
+id="workspace-page">
+
+
+
+<div class="page-header">
+
+<div>
+
+<h1>
+Workspace
+</h1>
+
+<p>
+Manage your projects and tasks
+</p>
+
+
+</div>
+
+
+
+<button
+id="create-workspace-btn"
+class="primary-btn">
+
+
+<i class="fa-solid fa-plus"></i>
+
+Create Workspace
+
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div
+id="workspace-list"
+class="workspace-grid">
+
+
+<!-- Workspace cards load here -->
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     SEARCH PAGE
+=========================== -->
+
+
+<section
+
+class="app-page"
+
+id="search-page">
+
+
+
+<div class="page-header">
+
+<div>
+
+
+<h1>
+
+Global Search
+
+</h1>
+
+
+<p>
+
+Search files, projects and data
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="search-panel">
+
+
+
+<input
+
+id="search-input"
+
+type="search"
+
+placeholder="Search Omni Data Pro...">
+
+
+
+
+
+<button
+
+id="search-btn"
+
+class="primary-btn">
+
+
+Search
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div
+
+id="search-results">
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     PROFILE PAGE
+=========================== -->
+
+
+<section
+
+class="app-page"
+
+id="profile-page">
+
+
+
+
+
+
+<div class="page-header">
+
+
+<h1>
+
+Profile
+
+</h1>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="profile-card">
+
+
+
+<img
+
+id="profile-image"
+
+src="assets/default-avatar.png"
+
+alt="Profile">
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Name
+
+</label>
+
+
+<input
+
+id="profile-name"
+
+type="text">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="input-group">
+
+
+<label>
+
+Email
+
+</label>
+
+
+<input
+
+id="profile-email"
+
+type="email">
+
+
+</div>
+
+
+
+
+
+
+
+<button
+
+id="save-profile-btn"
+
+class="primary-btn">
+
+
+Save Profile
+
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     SETTINGS PAGE
+=========================== -->
+
+
+<section
+
+class="app-page"
+
+id="settings-page">
+
+
+
+
+
+<div class="page-header">
+
+
+<h1>
+
+Settings
+
+</h1>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="settings-card">
+
+
+
+
+
+<div class="setting-row">
+
+
+<span>
+
+Dark Mode
+
+</span>
+
+
+
+<input
+
+id="dark-mode-toggle"
+
+type="checkbox">
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="setting-row">
+
+
+<span>
+
+Notifications
+
+</span>
+
+
+<input
+
+id="notification-toggle"
+
+type="checkbox"
+
+checked>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="setting-row">
+
+
+<span>
+
+Language
+
+</span>
+
+
+
+<select
+
+id="settings-language">
+
+
+<option>
+
+English
+
+</option>
+
+
+<option>
+
+हिंदी
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+<button
+
+id="save-settings-btn"
+
+class="primary-btn">
+
+
+Save Settings
+
+
+</button>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     SECURITY PAGE
+=========================== -->
+
+
+<section
+
+class="app-page"
+
+id="security-page">
+
+
+
+
+
+<div class="page-header">
+
+
+<h1>
+
+Security Center
+
+</h1>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="security-card">
+
+
+
+
+
+<h3>
+
+Login Activity
+
+</h3>
+
+
+
+
+
+<div
+
+id="security-logs">
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     NOTIFICATION PANEL
+=========================== -->
+
+
+<div
+
+id="notification-panel"
+
+class="notification-panel hidden">
+
+
+
+<h3>
+
+Notifications
+
+</h3>
+
+
+
+<div
+
+id="notification-list">
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     JAVASCRIPT MODULES
+=========================== -->
+
+
+<script src="supabase.js"></script>
+
+<script src="auth.js"></script>
+
+<script src="i18n.js"></script>
+
+<script src="dashboard.js"></script>
+
+<script src="AI.js"></script>
+
+<script src="file.js"></script>
+
+<script src="workspaces.js"></script>
+
+<script src="profile.js"></script>
+
+<script src="setting.js"></script>
+
+<script src="security.js"></script>
+
+<script src="script.js"></script>
+
+
+
+</body>
+
 </html>
