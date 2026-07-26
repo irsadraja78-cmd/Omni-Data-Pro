@@ -1,1255 +1,186 @@
-/* =====================================
-   OMNI DATA PRO
-   FINAL STYLE.CSS
-   PART 1/3
-===================================== */
-
-
-/* =========================
-   GLOBAL RESET
-========================= */
-
-
-*{
-
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-}
-
-
-
-body{
-
-    min-height:100vh;
-    background:#020617;
-    color:#ffffff;
-
-}
-
-
-
-
-button{
-
-    cursor:pointer;
-    border:none;
-    outline:none;
-
-}
-
-
-
-
-input{
-
-    width:100%;
-    padding:14px;
-
-    margin-bottom:15px;
-
-    border-radius:10px;
-
-    border:1px solid #334155;
-
-    background:#111827;
-
-    color:white;
-
-    font-size:15px;
-
-}
-
-
-
-
-input:focus{
-
-    border-color:#38bdf8;
-
-}
-
-
-
-
-
-
-
-/* =========================
-   COMMON
-========================= */
-
-
-.hidden{
-
-    display:none !important;
-
-}
-
-
-
-.active-page{
-
-    display:block !important;
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   AUTH AREA
-========================= */
-
-
-#auth-container{
-
-    width:100%;
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:
-
-    radial-gradient(
-    circle at top,
-    #1d4ed8,
-    #020617 60%
-    );
-
-}
-
-
-
-
-.auth-screen{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-
-
-
-
-.auth-card{
-
-    width:380px;
-
-    padding:35px;
-
-    background:#111827;
-
-    border-radius:20px;
-
-    box-shadow:
-
-    0 20px 50px rgba(0,0,0,.5);
-
-}
-
-
-
-
-.brand{
-
-    text-align:center;
-
-    color:#38bdf8;
-
-    margin-bottom:25px;
-
-    font-size:30px;
-
-}
-
-
-
-
-
-.auth-card h2{
-
-    text-align:center;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-
-.auth-card button{
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    background:#2563eb;
-
-    color:white;
-
-    font-size:16px;
-
-    margin-bottom:12px;
-
-}
-
-
-
-.auth-card button:hover{
-
-    background:#0ea5e9;
-
-}
-
-
-
-
-
-
-
-.auth-links{
-
-    margin-top:15px;
-
-}
-
-
-
-
-
-
-
-/* =========================
-   APPLICATION
-========================= */
-
-
-#app-container{
-
-    min-height:100vh;
-
-    display:flex;
-
-}
-
-
-
-
-
-
-/* =========================
-   SIDEBAR
-========================= */
-
-
-#sidebar{
-
-    width:260px;
-
-    height:100vh;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    background:#0f172a;
-
-    padding:25px;
-
-    border-right:1px solid #334155;
-
-}
-
-
-
-
-.sidebar-logo{
-
-    text-align:center;
-
-    color:#38bdf8;
-
-    font-size:24px;
-
-    font-weight:700;
-
-    margin-bottom:35px;
-
-}
-
-
-
-
-
-.menu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-
-
-
-.menu-item,
-#logout-button{
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    background:#1e293b;
-
-    color:white;
-
-    text-align:left;
-
-    font-size:15px;
-
-}
-
-
-
-
-
-.menu-item:hover,
-#logout-button:hover{
-
-    background:#2563eb;
-
-}/* =====================================
-   MAIN AREA
-===================================== */
-
-
-#main-area{
-
-    margin-left:260px;
-
-    width:calc(100% - 260px);
-
-    padding:30px;
-
-}
-
-
-
-
-
-
-/* =========================
-   APP PAGES
-========================= */
-
-
-.app-page{
-
-    display:none;
-
-    animation:fade .3s ease;
-
-}
-
-
-
-@keyframes fade{
-
-from{
-
-    opacity:0;
-
-    transform:translateY(10px);
-
-}
-
-
-to{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   HEADER
-========================= */
-
-
-.header-bar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:30px;
-
-    gap:20px;
-
-}
-
-
-
-.header-bar h1{
-
-    font-size:30px;
-
-}
-
-
-
-
-
-.header-search{
-
-    display:flex;
-
-    gap:10px;
-
-}
-
-
-
-.header-search input{
-
-    margin:0;
-
-}
-
-
-
-.header-search button{
-
-    padding:0 20px;
-
-    background:#0ea5e9;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-.user-box{
-
-    background:#1e293b;
-
-    padding:12px 20px;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   DASHBOARD CARDS
-========================= */
-
-
-.stats-container{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
-
-}
-
-
-
-
-
-.stat-card{
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-    transition:.3s;
-
-}
-
-
-
-
-.stat-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:#38bdf8;
-
-}
-
-
-
-
-
-.stat-card h3{
-
-    color:#94a3b8;
-
-    margin-bottom:15px;
-
-}
-
-
-
-
-.stat-card strong{
-
-    font-size:35px;
-
-    color:#38bdf8;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   AI CHAT
-========================= */
-
-
-.ai-box{
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-
-.ai-history{
-
-    height:420px;
-
-    overflow-y:auto;
-
-    background:#020617;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    margin-bottom:15px;
-
-}
-
-
-
-
-.ai-message{
-
-    background:#1e293b;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    margin-bottom:10px;
-
-}
-
-
-
-
-
-.ai-input-area{
-
-    display:flex;
-
-    gap:10px;
-
-}
-
-
-
-.ai-input-area button{
-
-    padding:0 25px;
-
-    background:#2563eb;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   FILE MANAGER
-========================= */
-
-
-.upload-box{
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-
-.upload-box button{
-
-    padding:13px 25px;
-
-    background:#22c55e;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-#files-container{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
-
-}
-
-
-
-
-
-.file-item{
-
-    background:#1e293b;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   WORKSPACE
-========================= */
-
-
-#create-project-button{
-
-    padding:14px 25px;
-
-    background:#8b5cf6;
-
-    color:white;
-
-    border-radius:10px;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-.project-item{
-
-    background:#111827;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    border:1px solid #334155;
-
-    margin-bottom:15px;
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   SEARCH
-========================= */
-
-
-.search-area{
-
-    display:flex;
-
-    gap:10px;
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-}
-
-
-
-.search-area input{
-
-    margin:0;
-
-}
-
-
-
-.search-area button{
-
-    padding:0 25px;
-
-    background:#0ea5e9;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-#search-output{
-
-    margin-top:20px;
-
-}/* =====================================
-   PROFILE
-===================================== */
-
-
-.profile-container{
-
-    display:flex;
-
-    gap:30px;
-
-    align-items:center;
-
-    background:#111827;
-
-    padding:30px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-.profile-image img{
-
-    width:130px;
-
-    height:130px;
-
-    border-radius:50%;
-
-    background:#334155;
-
-    object-fit:cover;
-
-}
-
-
-
-
-
-.profile-details{
-
-    flex:1;
-
-}
-
-
-
-.profile-details label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#94a3b8;
-
-}
-
-
-
-
-
-#save-profile-button{
-
-    padding:13px 25px;
-
-    background:#2563eb;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-
-.settings-container{
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-
-
-.setting-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:18px 0;
-
-    border-bottom:1px solid #334155;
-
-}
-
-
-
-
-
-.setting-row input{
-
-    width:22px;
-
-    height:22px;
-
-}
-
-
-
-
-
-#save-settings-button{
-
-    margin-top:20px;
-
-    padding:13px 25px;
-
-    background:#0ea5e9;
-
-    color:white;
-
-    border-radius:10px;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   SECURITY
-========================= */
-
-
-.security-container{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:20px;
-
-}
-
-
-
-
-
-.security-card{
-
-    background:#111827;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-
-
-.security-card h3{
-
-    color:#38bdf8;
-
-    margin-bottom:15px;
-
-}
-
-
-
-
-
-#system-logs,
-#login-activity{
-
-    color:#cbd5e1;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   NOTIFICATION
-========================= */
-
-
-#notification-container{
-
-    background:#111827;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    border:1px solid #334155;
-
-}
-
-
-
-
-
-.notification-item{
-
-    padding:15px;
-
-    border-bottom:1px solid #334155;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   FOOTER
-========================= */
-
-
-.app-footer{
-
-    text-align:center;
-
-    padding:30px;
-
-    color:#64748b;
-
-    margin-top:40px;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   SCROLL BAR
-========================= */
-
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-
-::-webkit-scrollbar-track{
-
-    background:#020617;
-
-}
-
-
-::-webkit-scrollbar-thumb{
-
-    background:#2563eb;
-
-    border-radius:20px;
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-
-@media(max-width:900px){
-
-
-#sidebar{
-
-    width:80px;
-
-    padding:15px 8px;
-
-}
-
-
-
-.sidebar-logo{
-
-    font-size:14px;
-
-}
-
-
-
-.menu-item,
-#logout-button{
-
-    font-size:0;
-
-    text-align:center;
-
-}
-
-
-
-#main-area{
-
-    margin-left:80px;
-
-    width:calc(100% - 80px);
-
-    padding:15px;
-
-}
-
-
-
-
-.header-bar{
-
-    flex-direction:column;
-
-    align-items:stretch;
-
-}
-
-
-
-
-.profile-container{
-
-    flex-direction:column;
-
-    text-align:center;
-
-}
-
-
-
-.ai-history{
-
-    height:300px;
-
-}
-
-
-
-
-}
-
-
-
-@media(max-width:500px){
-
-
-.auth-card{
-
-    width:90%;
-
-    padding:25px;
-
-}
-
-
-
-.stats-container{
-
-    grid-template-columns:1fr;
-
-}
-
-
-
-.ai-input-area,
-.search-area{
-
-    flex-direction:column;
-
-}
-
-
-
+/* =====================================================================
+// OMNI DATA PRO — MASTER STYLESHEET (`style.css`)
+// ===================================================================== */
+
+:root {
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --text-muted: #6c757d;
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --border-color: #dee2e6;
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #333333;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+}
+
+body.dark-theme {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #f1f1f1;
+    --text-muted: #aaaaaa;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --border-color: #2d2d2d;
+    --sidebar-bg: #181818;
+    --sidebar-text: #f1f1f1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* App Container Layout */
+#app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar-brand h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-item {
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--sidebar-text);
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu-item:hover, .menu-item.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.app-page {
+    padding: 30px;
+    flex: 1;
+}
+
+/* Form Controls & Buttons */
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Toast Notification Styles */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast-notification {
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: fadeInOut 4s ease forwards;
+}
+
+.toast-notification.success { background-color: var(--success-color); }
+.toast-notification.error { background-color: var(--danger-color); }
+.toast-notification.warning { background-color: var(--warning-color); color: #333; }
+.toast-notification.info { background-color: var(--primary-color); }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Auth Container (Login / Signup Screen) */
+#auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--bg-color);
+}
+
+.auth-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
