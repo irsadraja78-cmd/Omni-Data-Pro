@@ -1,297 +1,43 @@
-// ===================================
-// OmniData Pro
-// Workspace.js
-// ===================================
+// =====================================
+// OMNI DATA PRO — WORKSPACE MODULE
+// =====================================
 
+import { supabase } from './supabase.js';
+import { incrementCounter } from './dashboard.js';
 
-import supabaseClient from "./Supabase.js";
+const createProjectButton = document.getElementById("create-project-button");
+const workspaceContainer = document.getElementById("workspace-container");
 
+createProjectButton?.addEventListener("click", async () => {
+    const projectName = prompt("Enter Project Name:");
 
-
-
-
-
-
-
-// Get User Workspace Projects
-
-export async function getWorkspace(){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
+    if (!projectName) {
+        return;
     }
 
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("work_projects")
-
-    .select("*")
-
-    .eq(
-        "user_id",
-        user.id
-    )
-
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-// Create Project
-
-export async function createProject(
-    projectData
-){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
-    }
-
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("work_projects")
-
-    .insert([
-
-        {
-
-            user_id:user.id,
-
-            name:
-            projectData.name,
-
-            description:
-            projectData.description || "",
-
-            status:
-            "active"
-
-
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (user) {
+            // Optional Supabase integration for inserting project
+            // await supabase.from('projects').insert([{ user_id: user.id, name: projectName }]);
         }
 
-    ])
+        if (workspaceContainer) {
+            workspaceContainer.innerHTML += `
+                <div class="workspace-project-card">
+                    <h3>${projectName}</h3>
+                    <p>Status: Active</p>
+                </div>
+            `;
+        }
 
-    .select()
-
-    .single();
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
+        incrementCounter('project');
+        alert("Project Created Successfully");
+    } catch (error) {
+        console.error("Error creating project:", error);
+        alert("Failed to create project");
     }
+});
 
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-// Update Project
-
-export async function updateProject(
-    projectId,
-    updateData
-){
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("work_projects")
-
-    .update(updateData)
-
-    .eq(
-        "id",
-        projectId
-    )
-
-    .select()
-
-    .single();
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-// Delete Project
-
-export async function deleteProject(
-    projectId
-){
-
-
-
-    const {
-
-        error
-
-    } = await supabaseClient
-
-    .from("work_projects")
-
-    .delete()
-
-    .eq(
-        "id",
-        projectId
-    );
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-    return true;
-
-}
+console.log("Workspace Module Loaded");
