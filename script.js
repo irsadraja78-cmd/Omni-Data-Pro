@@ -50,17 +50,27 @@ import {
 
 
 
-
-// App Start
-
+// App Start with Safety Timeout
 document.addEventListener(
     "DOMContentLoaded",
     async()=>{
 
-        try {
-            const session = await getSession();
+        // Safety timeout so it never loops infinitely
+        const timeoutPromise = new Promise((resolve) => 
+            setTimeout(() => resolve("timeout"), 3000)
+        );
 
-            if(session){
+        try {
+            const sessionPromise = getSession();
+            const result = await Promise.race([sessionPromise, timeoutPromise]);
+
+            if (result === "timeout") {
+                console.warn("Session check timed out, showing auth.");
+                showAuth();
+                return;
+            }
+
+            if(result){
                 showApp();
                 await initializeDashboard();
             } else {
@@ -73,6 +83,8 @@ document.addEventListener(
 
     }
 );
+
+        
 
 
 
