@@ -1,234 +1,44 @@
-// ===================================
-// OmniData Pro
-// Setting.js
-// ===================================
+// =====================================
+// OMNI DATA PRO — SETTINGS MODULE
+// =====================================
 
+import { supabase } from './supabase.js';
 
-import supabaseClient from "./Supabase.js";
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+const notificationToggle = document.getElementById("notification-toggle");
+const saveSettingsButton = document.getElementById("save-settings-button");
 
+// Load settings from localStorage or Supabase user preferences
+function loadSettings() {
+    const darkMode = localStorage.getItem("omni_dark_mode") === "true";
+    const notifications = localStorage.getItem("omni_notifications") !== "false";
 
+    if (darkModeToggle) darkModeToggle.checked = darkMode;
+    if (notificationToggle) notificationToggle.checked = notifications;
 
-
-
-
-
-
-// Get User Settings
-
-export async function getSettings(){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
+    if (darkMode) {
+        document.body.classList.add("dark-theme");
     }
-
-
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("profiles")
-
-    .select(
-
-        "settings"
-
-    )
-
-    .eq(
-
-        "id",
-
-        user.id
-
-    )
-
-    .single();
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-
-    return data.settings || {};
-
 }
 
+saveSettingsButton?.addEventListener("click", () => {
+    const isDarkMode = darkModeToggle ? darkModeToggle.checked : false;
+    const isNotifications = notificationToggle ? notificationToggle.checked : true;
 
+    localStorage.setItem("omni_dark_mode", isDarkMode);
+    localStorage.setItem("omni_notifications", isNotifications);
 
-
-
-
-
-
-
-
-
-// Update Settings
-
-export async function updateSettings(
-    settingsData
-){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
+    if (isDarkMode) {
+        document.body.classList.add("dark-theme");
+    } else {
+        document.body.classList.remove("dark-theme");
     }
 
+    alert("Settings Saved Successfully");
+});
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadSettings();
+});
 
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("profiles")
-
-    .update({
-
-        settings: settingsData
-
-    })
-
-    .eq(
-
-        "id",
-
-        user.id
-
-    )
-
-    .select()
-
-    .single();
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-// Save Single Setting
-
-export async function saveSetting(
-    key,
-    value
-){
-
-
-
-    const currentSettings =
-    await getSettings();
-
-
-
-
-
-    currentSettings[key] = value;
-
-
-
-
-
-    return await updateSettings(
-        currentSettings
-    );
-
-}
+console.log("Settings Module Loaded");
