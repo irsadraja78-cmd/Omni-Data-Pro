@@ -1,59 +1,1271 @@
-// ===================================
-// OmniData Pro - script.js
-// ===================================
+/* =====================================
+   Omni Data Pro
+   Main JavaScript
+   Part 1/3
+===================================== */
 
-import { getSession } from "./Auth.js";
 
-// App Start
-document.addEventListener("DOMContentLoaded", async () => {
-    
-    // 1. नेविगेशन टैब स्विचिंग लॉजिक
-    const navButtons = document.querySelectorAll(".main-navigation button");
-    const sections = document.querySelectorAll(".app-section, #auth-section");
 
-    navButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const targetId = button.getAttribute("data-section");
-            
-            // सभी सेक्शंस से active क्लास हटाएं
-            sections.forEach(sec => sec.classList.remove("active"));
-            
-            // सिर्फ क्लिक किए गए सेक्शन को active करें
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.add("active");
-            }
-        });
-    });
+// ===============================
+// ELEMENTS
+// ===============================
 
-    // 2. सेशन चेक और व्यू कंट्रोल
-    try {
-        const session = await getSession();
-        if (session) {
-            showApp();
-        } else {
-            showAuth();
-        }
-    } catch (error) {
-        console.error("Session error:", error);
-        showAuth();
-    }
+
+const authContainer =
+document.getElementById("auth-container");
+
+
+const appContainer =
+document.getElementById("app-container");
+
+
+
+const loginSection =
+document.getElementById("login-section");
+
+
+const signupSection =
+document.getElementById("signup-section");
+
+
+const forgotSection =
+document.getElementById("forgot-section");
+
+
+
+
+
+// ===============================
+// AUTH PAGE SWITCH
+// ===============================
+
+
+function showLogin(){
+
+
+    loginSection.classList.remove("hidden");
+
+    signupSection.classList.add("hidden");
+
+    forgotSection.classList.add("hidden");
+
+
+}
+
+
+
+
+function showSignup(){
+
+
+    loginSection.classList.add("hidden");
+
+    signupSection.classList.remove("hidden");
+
+    forgotSection.classList.add("hidden");
+
+
+}
+
+
+
+
+
+function showForgot(){
+
+
+    loginSection.classList.add("hidden");
+
+    signupSection.classList.add("hidden");
+
+    forgotSection.classList.remove("hidden");
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// BUTTON EVENTS
+// ===============================
+
+
+document
+.getElementById("show-signup")
+?.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+showSignup();
+
 });
 
-// ऐप व्यू दिखाने के लिए (डैशबोर्ड बाय डिफॉल्ट खुलेगा)
-function showApp() {
-    const authSection = document.getElementById("auth-section");
-    if (authSection) authSection.classList.remove("active");
 
-    const dashboardSection = document.getElementById("dashboard-section");
-    if (dashboardSection) dashboardSection.classList.add("active");
+
+
+document
+.getElementById("show-login")
+?.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+showLogin();
+
+});
+
+
+
+
+
+document
+.getElementById("show-forgot")
+?.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+showForgot();
+
+});
+
+
+
+
+
+document
+.getElementById("back-login")
+?.addEventListener(
+"click",
+(e)=>{
+
+e.preventDefault();
+
+showLogin();
+
+});
+
+
+
+
+
+
+
+
+// ===============================
+// TAB SYSTEM
+// ===============================
+
+
+const navButtons =
+document.querySelectorAll(
+"#sidebar button[data-page]"
+);
+
+
+
+const pages =
+document.querySelectorAll(
+".page-section"
+);
+
+
+
+
+
+
+function openPage(pageId){
+
+
+
+pages.forEach(page=>{
+
+
+    page.classList.remove("active");
+
+
+});
+
+
+
+
+
+const target =
+document.getElementById(pageId);
+
+
+
+if(target){
+
+    target.classList.add("active");
+
 }
 
-// ऑथेंटिकेशन (लॉगिन) व्यू दिखाने के लिए
-function showAuth() {
-    const authSection = document.getElementById("auth-section");
-    if (authSection) authSection.classList.add("active");
 
-    const dashboardSection = document.getElementById("dashboard-section");
-    if (dashboardSection) dashboardSection.classList.remove("active");
+
 }
+
+
+
+
+
+
+navButtons.forEach(button=>{
+
+
+button.addEventListener(
+"click",
+()=>{
+
+
+const page =
+button.dataset.page;
+
+
+openPage(page);
+
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// APP START
+// ===============================
+
+
+function startApp(){
+
+
+authContainer
+.classList.add("hidden");
+
+
+
+appContainer
+.classList.remove("hidden");
+
+
+
+openPage("dashboard");
+
+
+}
+
+
+
+
+
+
+// Temporary local test
+
+// बाद में Supabase Auth से replace होगा
+
+
+const demoLogin =
+document.getElementById("login-btn");
+
+
+
+demoLogin
+?.addEventListener(
+"click",
+()=>{
+
+
+startApp();
+
+
+});
+
+
+
+
+
+const demoSignup =
+document.getElementById("signup-btn");
+
+
+
+demoSignup
+?.addEventListener(
+"click",
+()=>{
+
+
+startApp();
+
+
+});
+
+
+
+
+
+
+// ===============================
+// LOGOUT
+// ===============================
+
+
+document
+.getElementById("logout-btn")
+?.addEventListener(
+"click",
+()=>{
+
+
+appContainer
+.classList.add("hidden");
+
+
+
+authContainer
+.classList.remove("hidden");
+
+
+
+showLogin();
+
+
+});/* =====================================
+   SUPABASE AUTH SYSTEM
+   Part 2/3
+===================================== */
+
+
+
+// ===============================
+// SUPABASE IMPORT
+// ===============================
+
+
+import supabaseClient from "./supabase.js";
+
+
+
+
+
+
+
+// ===============================
+// SIGNUP
+// ===============================
+
+
+const signupButton =
+document.getElementById("signup-btn");
+
+
+
+signupButton
+?.addEventListener(
+"click",
+async ()=>{
+
+
+const name =
+document.getElementById(
+"signup-name"
+).value;
+
+
+
+const email =
+document.getElementById(
+"signup-email"
+).value;
+
+
+
+const password =
+document.getElementById(
+"signup-password"
+).value;
+
+
+
+
+
+const {
+data,
+error
+} = await supabaseClient.auth.signUp({
+
+email,
+
+password,
+
+options:{
+
+data:{
+
+full_name:name
+
+}
+
+}
+
+});
+
+
+
+
+
+
+if(error){
+
+
+alert(error.message);
+
+
+return;
+
+
+}
+
+
+
+
+alert(
+"Account Created Successfully"
+);
+
+
+
+startApp();
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// LOGIN
+// ===============================
+
+
+const loginButton =
+document.getElementById("login-btn");
+
+
+
+loginButton
+?.addEventListener(
+"click",
+async ()=>{
+
+
+const email =
+document.getElementById(
+"login-email"
+).value;
+
+
+
+const password =
+document.getElementById(
+"login-password"
+).value;
+
+
+
+
+
+const {
+
+data,
+
+error
+
+}
+
+=
+await supabaseClient.auth.signInWithPassword({
+
+email,
+
+password
+
+});
+
+
+
+
+
+if(error){
+
+
+alert(error.message);
+
+
+return;
+
+
+}
+
+
+
+
+startApp();
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// SESSION CHECK
+// ===============================
+
+
+async function checkSession(){
+
+
+
+const {
+
+data
+
+}
+
+=
+await supabaseClient.auth.getSession();
+
+
+
+
+
+if(data.session){
+
+
+startApp();
+
+
+loadUserProfile();
+
+
+loadDashboard();
+
+
+}
+
+
+
+}
+
+
+
+
+
+checkSession();
+
+
+
+
+
+
+
+
+
+// ===============================
+// PROFILE LOAD
+// ===============================
+
+
+async function loadUserProfile(){
+
+
+
+const {
+
+data:
+
+{
+
+user
+
+}
+
+}
+
+=
+await supabaseClient.auth.getUser();
+
+
+
+
+
+
+if(!user)
+return;
+
+
+
+
+
+const nameInput =
+document.getElementById(
+"profile-name"
+);
+
+
+
+const emailInput =
+document.getElementById(
+"profile-email"
+);
+
+
+
+
+if(nameInput)
+
+nameInput.value =
+user.user_metadata?.full_name || "";
+
+
+
+
+
+if(emailInput)
+
+emailInput.value =
+user.email;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// DASHBOARD LOAD
+// ===============================
+
+
+async function loadDashboard(){
+
+
+
+try{
+
+
+
+const {
+
+count:
+
+projectCount
+
+}
+
+=
+await supabaseClient
+
+.from("work_projects")
+
+.select("*",
+{
+
+count:"exact",
+
+head:true
+
+});
+
+
+
+
+
+const projectBox =
+document.getElementById(
+"project-count"
+);
+
+
+
+if(projectBox)
+
+projectBox.innerText =
+projectCount || 0;
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Dashboard Error",
+error
+);
+
+
+}
+
+
+
+}/* =====================================
+   Omni Data Pro
+   Final JavaScript
+   Part 3/3
+===================================== */
+
+
+
+// ===============================
+// FILE UPLOAD
+// ===============================
+
+
+const uploadButton =
+document.getElementById(
+"upload-file"
+);
+
+
+
+uploadButton
+?.addEventListener(
+"click",
+async ()=>{
+
+
+const fileInput =
+document.getElementById(
+"file-input"
+);
+
+
+
+const file =
+fileInput.files[0];
+
+
+
+if(!file){
+
+alert(
+"Select file first"
+);
+
+return;
+
+}
+
+
+
+
+
+const {
+
+data:
+
+{
+
+user
+
+}
+
+}
+
+=
+await supabaseClient.auth.getUser();
+
+
+
+
+
+if(!user)
+return;
+
+
+
+
+
+const filePath =
+`${user.user.id}/${file.name}`;
+
+
+
+
+
+const {
+
+error
+
+}
+
+=
+await supabaseClient
+.storage
+.from(
+"omnidatapro-files"
+)
+.upload(
+
+filePath,
+
+file
+
+);
+
+
+
+
+
+if(error){
+
+
+alert(error.message);
+
+
+return;
+
+
+}
+
+
+
+
+
+alert(
+"File Uploaded"
+);
+
+
+
+loadFiles();
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// LOAD FILES
+// ===============================
+
+
+async function loadFiles(){
+
+
+const {
+
+data:
+
+{
+
+user
+
+}
+
+}
+
+=
+await supabaseClient.auth.getUser();
+
+
+
+
+if(!user)
+return;
+
+
+
+
+
+const {
+
+data,
+
+error
+
+}
+
+=
+await supabaseClient
+.storage
+.from(
+"omnidatapro-files"
+)
+.list(
+user.user.id
+);
+
+
+
+
+
+if(error)
+return;
+
+
+
+
+
+const box =
+document.getElementById(
+"file-list"
+);
+
+
+
+if(!box)
+return;
+
+
+
+box.innerHTML="";
+
+
+
+
+
+data.forEach(file=>{
+
+
+box.innerHTML += `
+
+<div class="file-card">
+
+<h3>
+
+${file.name}
+
+</h3>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// AI CHAT
+// ===============================
+
+
+const sendAI =
+document.getElementById(
+"send-ai"
+);
+
+
+
+sendAI
+?.addEventListener(
+"click",
+()=>{
+
+
+const input =
+document.getElementById(
+"ai-message"
+);
+
+
+
+const history =
+document.getElementById(
+"chat-history"
+);
+
+
+
+if(!input.value)
+return;
+
+
+
+
+
+history.innerHTML += `
+
+<div class="message">
+
+<b>You:</b>
+
+${input.value}
+
+</div>
+
+`;
+
+
+
+
+
+history.innerHTML += `
+
+<div class="message">
+
+<b>AI:</b>
+
+Your request is processing...
+
+</div>
+
+`;
+
+
+
+
+
+input.value="";
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// GLOBAL SEARCH
+// ===============================
+
+
+document
+.getElementById(
+"search-btn"
+)
+?.addEventListener(
+"click",
+()=>{
+
+
+const text =
+document.getElementById(
+"global-search"
+).value;
+
+
+
+
+
+const result =
+document.getElementById(
+"search-result"
+);
+
+
+
+
+
+result.innerHTML = `
+
+<div class="card">
+
+Search Result:
+
+${text}
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// PROFILE UPDATE
+// ===============================
+
+
+document
+.getElementById(
+"save-profile"
+)
+?.addEventListener(
+"click",
+async ()=>{
+
+
+const name =
+document.getElementById(
+"profile-name"
+).value;
+
+
+
+
+
+const {
+
+data:
+
+{
+
+user
+
+}
+
+}
+
+=
+await supabaseClient.auth.getUser();
+
+
+
+
+
+if(!user)
+return;
+
+
+
+
+
+await supabaseClient.auth.updateUser({
+
+data:{
+
+full_name:name
+
+}
+
+});
+
+
+
+
+
+alert(
+"Profile Updated"
+);
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// SETTINGS
+// ===============================
+
+
+document
+.getElementById(
+"save-settings"
+)
+?.addEventListener(
+"click",
+()=>{
+
+
+alert(
+"Settings Saved"
+);
+
+
+});
+
+
+
+
+
+
+
+
+
+// ===============================
+// START LOADERS
+// ===============================
+
+
+window.addEventListener(
+"load",
+()=>{
+
+
+loadFiles();
+
+
+
+});
