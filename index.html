@@ -1,1016 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="hi">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Omni Data Pro</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Data Pro — Enterprise Core</title>
+    <!-- Master Stylesheet Link -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
 
-
-<!-- =========================
-     AUTH AREA
-========================= -->
-
-
-<div id="auth-container">
-
-
-<!-- LOGIN -->
-
-<section id="login-screen" class="auth-screen">
-
-
-<div class="auth-card">
-
-
-<h1 class="brand">
-Omni Data Pro
-</h1>
-
-
-<h2>
-Login
-</h2>
-
-
-
-<input 
-id="login-email"
-type="email"
-placeholder="Email">
-
-
-
-<input
-id="login-password"
-type="password"
-placeholder="Password">
-
-
-
-<button id="login-button">
-Login
-</button>
-
-
-
-<div class="auth-links">
-
-
-<button id="open-signup">
-Create Account
-</button>
-
-
-
-<button id="open-forgot">
-Forgot Password?
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- SIGNUP -->
-
-<section 
-id="signup-screen"
-class="auth-screen hidden">
-
-
-<div class="auth-card">
-
-
-<h1 class="brand">
-Omni Data Pro
-</h1>
-
-
-<h2>
-Create Account
-</h2>
-
-
-
-
-<input
-id="signup-name"
-type="text"
-placeholder="Full Name">
-
-
-
-<input
-id="signup-email"
-type="email"
-placeholder="Email">
-
-
-
-<input
-id="signup-password"
-type="password"
-placeholder="Password">
-
-
-
-
-
-<button id="signup-button">
-
-Signup
-
-</button>
-
-
-
-
-<button id="back-login-from-signup">
-
-Back To Login
-
-</button>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- FORGOT PASSWORD -->
-
-
-<section 
-id="forgot-screen"
-class="auth-screen hidden">
-
-
-<div class="auth-card">
-
-
-<h1 class="brand">
-Omni Data Pro
-</h1>
-
-
-<h2>
-Reset Password
-</h2>
-
-
-
-
-<input
-id="forgot-email"
-type="email"
-placeholder="Email">
-
-
-
-
-
-<button id="forgot-button">
-
-Send Reset Link
-
-</button>
-
-
-
-<button id="back-login-from-forgot">
-
-Back To Login
-
-</button>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-</div>
-
-
-
-
-
-<!-- =========================
-     APPLICATION AREA
-========================= -->
-
-
-<div id="app-container" class="hidden">
-
-
-
-<!-- =========================
-     SIDEBAR
-========================= -->
-
-
-<aside id="sidebar">
-
-
-<div class="sidebar-logo">
-
-Omni Data Pro
-
-</div>
-
-
-
-
-<nav class="menu">
-
-
-<button class="menu-item" data-page="dashboard-page">
-
-🏠 Dashboard
-
-</button>
-
-
-
-<button class="menu-item" data-page="ai-page">
-
-🤖 AI Chat
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="files-page">
-
-📁 Files
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="workspace-page">
-
-🚀 Workspace
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="search-page">
-
-🔍 Search
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="profile-page">
-
-👤 Profile
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="settings-page">
-
-⚙ Settings
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="security-page">
-
-🔐 Security
-
-</button>
-
-
-
-
-<button class="menu-item" data-page="notification-page">
-
-🔔 Notifications
-
-</button>
-
-
-
-
-<button id="logout-button">
-
-Logout
-
-</button>
-
-
-
-</nav>
-
-
-</aside>
-
-
-
-
-
-
-
-
-<!-- =========================
-     MAIN AREA
-========================= -->
-
-
-<main id="main-area">
-
-
-
-
-
-
-
-<!-- DASHBOARD -->
-
-<section 
-id="dashboard-page"
-class="app-page active-page">
-
-
-
-<div class="header-bar">
-
-
-<h1>
-Dashboard
-</h1>
-
-
-
-<div class="header-search">
-
-
-<input
-placeholder="Search...">
-
-
-<button>
-
-🔍
-
-</button>
-
-
-</div>
-
-
-
-
-<div class="user-box">
-
-User
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="stats-container">
-
-
-
-<div class="stat-card">
-
-<h3>
-Projects
-</h3>
-
-<strong id="project-total">
-0
-</strong>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h3>
-Files
-</h3>
-
-<strong id="file-total">
-0
-</strong>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h3>
-AI Chats
-</h3>
-
-<strong id="chat-total">
-0
-</strong>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- AI CHAT -->
-
-
-<section
-id="ai-page"
-class="app-page">
-
-
-<h1>
-AI Assistant
-</h1>
-
-
-
-
-<div class="ai-box">
-
-
-<div 
-id="ai-history"
-class="ai-history">
-
-</div>
-
-
-
-
-
-<div class="ai-input-area">
-
-
-<input
-id="ai-input"
-placeholder="Write message...">
-
-
-
-<button id="ai-send-button">
-
-Send
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- FILES -->
-
-
-<section
-id="files-page"
-class="app-page">
-
-
-<h1>
-File Manager
-</h1>
-
-
-
-<div class="upload-box">
-
-
-<input
-type="file"
-id="upload-input">
-
-
-
-<button id="upload-button">
-
-Upload
-
-</button>
-
-
-
-</div>
-
-
-
-
-<div id="files-container">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- WORKSPACE -->
-
-
-<section
-id="workspace-page"
-class="app-page">
-
-
-<h1>
-Workspace
-</h1>
-
-
-
-
-<button id="create-project-button">
-
-+ Create Project
-
-</button>
-
-
-
-
-<div id="workspace-container">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- SEARCH -->
-
-
-<section
-id="search-page"
-class="app-page">
-
-
-<h1>
-Global Search
-</h1>
-
-
-
-<div class="search-area">
-
-
-<input
-id="global-search-input"
-placeholder="Search data">
-
-
-
-<button id="global-search-button">
-
-Search
-
-</button>
-
-
-
-</div>
-
-
-
-<div id="search-output">
-
-
-</div>
-
-
-
-</section>
-
-<!-- =========================
-     PROFILE
-========================= -->
-
-
-<section
-id="profile-page"
-class="app-page">
-
-
-<h1>
-Profile
-</h1>
-
-
-
-
-<div class="profile-container">
-
-
-<div class="profile-image">
-
-<img 
-id="profile-avatar"
-src=""
-alt="Profile">
-
-
-</div>
-
-
-
-
-
-<div class="profile-details">
-
-
-<label>
-Name
-</label>
-
-
-<input
-id="profile-name"
-placeholder="Full Name">
-
-
-
-
-
-<label>
-Email
-</label>
-
-
-<input
-id="profile-email"
-placeholder="Email"
-readonly>
-
-
-
-
-
-<button id="save-profile-button">
-
-Save Profile
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     SETTINGS
-========================= -->
-
-
-<section
-id="settings-page"
-class="app-page">
-
-
-<h1>
-Settings
-</h1>
-
-
-
-
-
-<div class="settings-container">
-
-
-
-<div class="setting-row">
-
-
-<span>
-Dark Mode
-</span>
-
-
-<input
-id="dark-mode-toggle"
-type="checkbox">
-
-
-</div>
-
-
-
-
-
-<div class="setting-row">
-
-
-<span>
-Notifications
-</span>
-
-
-<input
-id="notification-toggle"
-type="checkbox">
-
-
-</div>
-
-
-
-
-
-<button id="save-settings-button">
-
-Save Settings
-
-</button>
-
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     SECURITY
-========================= -->
-
-
-<section
-id="security-page"
-class="app-page">
-
-
-<h1>
-Security Center
-</h1>
-
-
-
-
-<div class="security-container">
-
-
-<div class="security-card">
-
-
-<h3>
-Login Activity
-</h3>
-
-
-
-<div id="login-activity">
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="security-card">
-
-
-<h3>
-System Logs
-</h3>
-
-
-
-<div id="system-logs">
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     NOTIFICATIONS
-========================= -->
-
-
-<section
-id="notification-page"
-class="app-page">
-
-
-<h1>
-Notifications
-</h1>
-
-
-
-
-<div id="notification-container">
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-
-<footer class="app-footer">
-
-
-<p>
-© 2026 Omni Data Pro
-</p>
-
-
-<p>
-Professional AI Data Management System
-</p>
-
-
-</footer>
-
-
-
-
-
-
-</main>
-
-
-</div>
-
-
-
-
-
-
-
-<script src="script.js"></script>
-
-
+    <!-- 1. Authentication Screen (Visible when user is logged out) -->
+    <div id="auth-container" class="hidden">
+        <div class="auth-card">
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);" data-i18n="welcome">ओमनी डेटा प्रो में आपका स्वागत है</h2>
+            
+            <!-- Login Form -->
+            <form id="login-form">
+                <input type="email" id="login-email" class="form-control" placeholder="Email Address" required>
+                <input type="password" id="login-password" class="form-control" placeholder="Password" required>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Main Application Container (Visible when user is logged in) -->
+    <div id="app-container" class="hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-brand">
+                    <h2>Omni Data Pro</h2>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item active" data-target="dashboard-page" data-i18n="dashboard">डैशबोर्ड</li>
+                    <li class="menu-item" data-target="workspace-page" data-i18n="workspace">वर्कस्पेस</li>
+                    <li class="menu-item" data-target="files-page" data-i18n="files">फाइलें</li>
+                    <li class="menu-item" data-target="ai-page" data-i18n="aiChat">एआई चैट</li>
+                    <li class="menu-item" data-target="security-page" data-i18n="security">सुरक्षा</li>
+                    <li class="menu-item" data-target="settings-page" data-i18n="settings">सेटिंग्स</li>
+                    <li class="menu-item" data-target="profile-page" data-i18n="profile">प्रोफाइल</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-bottom">
+                <button id="logout-button" class="btn" style="width: 100%; background-color: var(--danger-color);">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Dynamic Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Page -->
+            <div id="dashboard-page" class="app-page">
+                <h1 data-i18n="dashboard">डैशबोर्ड</h1>
+                <p style="margin-top: 10px; color: var(--text-muted);">Welcome to your enterprise management command center.</p>
+            </div>
+
+            <!-- Workspace Page -->
+            <div id="workspace-page" class="app-page hidden">
+                <h1 data-i18n="workspace">वर्कस्पेस</h1>
+            </div>
+
+            <!-- Files Page -->
+            <div id="files-page" class="app-page hidden">
+                <h1 data-i18n="files">फाइलें</h1>
+                <button class="btn" style="margin-top: 15px;" data-i18n="uploadBtn">फाइल अपलोड करें</button>
+            </div>
+
+            <!-- AI Chat Page -->
+            <div id="ai-page" class="app-page hidden">
+                <h1 data-i18n="aiChat">एआई चैट</h1>
+            </div>
+
+            <!-- Security Page -->
+            <div id="security-page" class="app-page hidden">
+                <h1 data-i18n="security">सुरक्षा</h1>
+            </div>
+
+            <!-- Settings Page (With Indian Multi-Language Dropdown) -->
+            <div id="settings-page" class="app-page hidden">
+                <h1 data-i18n="settings">सेटिंग्स</h1>
+                <div style="margin-top: 20px; max-width: 400px;">
+                    <label for="language-selector" style="display: block; margin-bottom: 8px; font-weight: 500;">भाषा चुनें / Select Language:</label>
+                    <select id="language-selector" class="form-control">
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="en">English</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="mr">मराठी (Marathi)</option>
+                        <option value="gu">ગુજરાતી (Gujarati)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                        <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                        <option value="ml">മലയാളം (Malayalam)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile-page" class="app-page hidden">
+                <h1 data-i18n="profile">प्रोफाइल</h1>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Master Scripts Initialization (Modular ES6 Scripts) -->
+    <script type="module" src="supabase.js"></script>
+    <script type="module" src="i18n.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
-
 </html>
