@@ -487,6 +487,25 @@ button=>{
 
 
     });
+    document.getElementById("app-container").classList.remove("hidden");
+    const authSection = document.getElementById("auth-section");
+    if(authSection) authSection.classList.add("hidden");
+}
+
+function showAuth() {
+    const authSection = document.getElementById("auth-section");
+    if(authSection) authSection.classList.remove("hidden");
+    const appContainer = document.getElementById("app-container");
+    if(appContainer) appContainer.classList.add("hidden");
+}
+
+async function initializeDashboard() {
+    try {
+        await loadDashboard();
+    } catch (e) {
+        console.error("Dashboard init error:", e);
+    }
+}
 
 
 });
