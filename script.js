@@ -1,528 +1,59 @@
 // ===================================
-// OmniData Pro
-// Script.js
+// OmniData Pro - script.js
 // ===================================
 
+import { getSession } from "./Auth.js";
 
-import {
-    login,
-    signup,
-    logout,
-    forgotPassword,
-    getSession
-} from "./Auth.js";
+// App Start
+document.addEventListener("DOMContentLoaded", async () => {
+    
+    // 1. नेविगेशन टैब स्विचिंग लॉजिक
+    const navButtons = document.querySelectorAll(".main-navigation button");
+    const sections = document.querySelectorAll(".app-section, #auth-section");
 
-
-import {
-    loadDashboard
-} from "./Dashboard.js";
-
-
-import {
-    getWorkspace,
-    createProject
-} from "./Workspace.js";
-
-
-import {
-    uploadFile,
-    getFiles
-} from "./File.js";
-
-
-import {
-    runAI
-} from "./AI.js";
-
-
-import {
-    getProfile,
-    updateProfile
-} from "./Profile.js";
-
-
-import {
-    getSettings,
-    saveSetting
-} from "./Setting.js";
-
-
-
-
-
-// App Start with Safety Timeout
-document.addEventListener(
-    "DOMContentLoaded",
-    async()=>{
-           alert("App running");
-        document.getElementById("app-loader").classList.add("hidden");
-        
-
-        // Safety timeout so it never loops infinitely
-        const timeoutPromise = new Promise((resolve) => 
-            setTimeout(() => resolve("timeout"), 3000)
-        );
-
-        try {
-            const sessionPromise = getSession();
-            const result = await Promise.race([sessionPromise, timeoutPromise]);
-
-            if (result === "timeout") {
-                console.warn("Session check timed out, showing auth.");
-                showAuth();
-                return;
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const targetId = button.getAttribute("data-section");
+            
+            // सभी सेक्शंस से active क्लास हटाएं
+            sections.forEach(sec => sec.classList.remove("active"));
+            
+            // सिर्फ क्लिक किए गए सेक्शन को active करें
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add("active");
             }
+        });
+    });
 
-            if(result){
-                showApp();
-                await initializeDashboard();
-            } else {
-                showAuth();
-            }
-        } catch (error) {
-            console.error("Auth session error:", error);
+    // 2. सेशन चेक और व्यू कंट्रोल
+    try {
+        const session = await getSession();
+        if (session) {
+            showApp();
+        } else {
             showAuth();
         }
-
+    } catch (error) {
+        console.error("Session error:", error);
+        showAuth();
     }
-);
-
-        
-
-
-
-
-
-
-
-
-// Show Application
-
-function showApp(){
-
-
-    document
-    .getElementById(
-        "auth-section"
-    )
-    .classList
-    .add("hidden");
-
-
-}
-
-
-
-
-
-
-
-// Show Login
-
-function showAuth(){
-
-
-    document
-    .getElementById(
-        "auth-section"
-    )
-    .classList
-    .remove("hidden");
-
-
-}
-
-
-
-
-
-
-
-
-
-// Login
-
-document
-.getElementById(
-    "login-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const email =
-    document.getElementById(
-        "login-email"
-    ).value;
-
-
-
-    const password =
-    document.getElementById(
-        "login-password"
-    ).value;
-
-
-
-
-    await login(
-        email,
-        password
-    );
-
-
-
-    location.reload();
-
-
 });
 
-
-
-
-
-
-
-
-
-// Signup
-
-document
-.getElementById(
-    "signup-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const name =
-    document.getElementById(
-        "signup-name"
-    ).value;
-
-
-
-    const email =
-    document.getElementById(
-        "signup-email"
-    ).value;
-
-
-
-    const password =
-    document.getElementById(
-        "signup-password"
-    ).value;
-
-
-
-
-    await signup(
-        name,
-        email,
-        password
-    );
-
-
-
-});
-
-
-
-
-
-
-
-
-
-// Logout
-
-document
-.getElementById(
-    "logout-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    await logout();
-
-
-    location.reload();
-
-
-});
-
-
-
-
-
-
-
-
-
-// Forgot Password
-
-document
-.getElementById(
-    "send-reset-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const email =
-    document.getElementById(
-        "forgot-email"
-    ).value;
-
-
-
-    await forgotPassword(
-        email
-    );
-
-
-});
-
-
-
-
-
-
-
-
-
-// Dashboard
-
-async function initializeDashboard(){
-
-
-    const data =
-    await loadDashboard();
-
-
-
-    console.log(
-        "Dashboard:",
-        data
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-// Create Project
-
-document
-.getElementById(
-    "create-project-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const name =
-    prompt(
-        "Project Name"
-    );
-
-
-    if(name){
-
-
-        await createProject({
-
-            name:name,
-
-            description:""
-
-        });
-
-
-        location.reload();
-
-
-    }
-
-
-});
-
-
-
-
-
-
-
-
-
-// Upload File
-
-document
-.getElementById(
-    "upload-file-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const file =
-    document
-    .getElementById(
-        "file-input"
-    )
-    .files[0];
-
-
-
-    if(file){
-
-        await uploadFile(
-            file
-        );
-
-    }
-
-
-});
-
-
-
-
-
-
-
-
-
-// Run AI
-
-document
-.getElementById(
-    "run-ai-btn"
-)
-?.addEventListener(
-"click",
-async()=>{
-
-
-    const prompt =
-    document
-    .getElementById(
-        "ai-prompt"
-    )
-    .value;
-
-
-
-    const response =
-    await runAI(
-        prompt
-    );
-
-
-    document
-    .getElementById(
-        "ai-response"
-    )
-    .innerText =
-    response;
-
-
-
-});
-
-
-
-
-
-
-
-
-// Navigation
-
-document
-.querySelectorAll(
-    "[data-section]"
-)
-.forEach(
-button=>{
-
-
-    button.addEventListener(
-    "click",
-    ()=>{
-
-
-        document
-        .querySelectorAll(
-            ".app-section"
-        )
-        .forEach(
-        section=>{
-
-            section.style.display =
-            "none";
-
-        });
-
-
-        document
-        .getElementById(
-            button.dataset.section
-        )
-        .style.display =
-        "block";
-
-
-    });
-    document.getElementById("app-container").classList.remove("hidden");
+// ऐप व्यू दिखाने के लिए (डैशबोर्ड बाय डिफॉल्ट खुलेगा)
+function showApp() {
     const authSection = document.getElementById("auth-section");
-    if(authSection) authSection.classList.add("hidden");
+    if (authSection) authSection.classList.remove("active");
+
+    const dashboardSection = document.getElementById("dashboard-section");
+    if (dashboardSection) dashboardSection.classList.add("active");
 }
 
+// ऑथेंटिकेशन (लॉगिन) व्यू दिखाने के लिए
 function showAuth() {
     const authSection = document.getElementById("auth-section");
-    if(authSection) authSection.classList.remove("hidden");
-    const appContainer = document.getElementById("app-container");
-    if(appContainer) appContainer.classList.add("hidden");
+    if (authSection) authSection.classList.add("active");
+
+    const dashboardSection = document.getElementById("dashboard-section");
+    if (dashboardSection) dashboardSection.classList.remove("active");
 }
-
-async function initializeDashboard() {
-    try {
-        await loadDashboard();
-    } catch (e) {
-        console.error("Dashboard init error:", e);
-    }
-}
-document.querySelectorAll(".main-navigation button").forEach(button => {
-    button.addEventListener("click", () => {
-        const targetId = button.getAttribute("data-section");
-        
-        // सारे सेक्शंस को छिपाएं
-        document.querySelectorAll(".app-section").forEach(sec => {
-            sec.classList.remove("active");
-        });
-        
-        // सिर्फ क्लिक किए गए सेक्शन को दिखाएं
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-            targetSection.classList.add("active");
-        }
-    });
-});
-
-
-});
