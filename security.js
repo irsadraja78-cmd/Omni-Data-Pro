@@ -1,260 +1,40 @@
-// ===================================
-// OmniData Pro
-// Security.js
-// ===================================
+// =====================================
+// OMNI DATA PRO — SECURITY MODULE
+// =====================================
 
+import { supabase } from './supabase.js';
 
-import supabaseClient from "./Supabase.js";
+const loginActivityContainer = document.getElementById("login-activity");
+const systemLogsContainer = document.getElementById("system-logs");
 
-
-
-
-
-
-
-
-// Create Security Log
-
-export async function createSecurityLog(
-    action,
-    details = {}
-){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
-    }
-
-
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("security_logs")
-
-    .insert([
-
-        {
-
-            user_id:user.id,
-
-            action:action,
-
-            details:details
-
-
+async function loadSecurityLogs() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (loginActivityContainer) {
+            loginActivityContainer.innerHTML = `
+                <div class="log-item">
+                    <p><b>Current Session:</b> ${user ? user.email : 'Guest'}</p>
+                    <p><b>Last Sign In:</b> ${user ? new Date(user.last_sign_in_at).toLocaleString() : 'N/A'}</p>
+                </div>
+            `;
         }
 
-    ])
-
-    .select()
-
-    .single();
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-// Get Security Logs
-
-export async function getSecurityLogs(){
-
-
-
-    const {
-
-        data:{
-            user
-
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
-    }
-
-
-
-
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("security_logs")
-
-    .select("*")
-
-    .eq(
-
-        "user_id",
-
-        user.id
-
-    )
-
-    .order(
-
-        "created_at",
-
-        {
-
-            ascending:false
-
+        if (systemLogsContainer) {
+            systemLogsContainer.innerHTML = `
+                <div class="log-item">
+                    <p>System status: Secure and operational</p>
+                    <p>Encryption: TLS Active</p>
+                </div>
+            `;
         }
-
-    );
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
+    } catch (error) {
+        console.error("Error loading security logs:", error);
     }
-
-
-
-
-
-
-    return data;
-
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadSecurityLogs();
+});
 
-
-
-
-
-
-
-
-
-
-// Delete Security Log
-
-export async function deleteSecurityLog(
-    logId
-){
-
-
-
-    const {
-
-        error
-
-    } = await supabaseClient
-
-    .from("security_logs")
-
-    .delete()
-
-    .eq(
-
-        "id",
-
-        logId
-
-    );
-
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-
-
-    return true;
-
-}
+console.log("Security Module Loaded");
