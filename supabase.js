@@ -16,11 +16,11 @@ const SUPABASE_CONFIG = {
 
 
     url:
-    "YOUR_SUPABASE_URL",
+    "https://qvmywidjilwwkqvstglo.supabase.co",
 
 
     key:
-    "YOUR_SUPABASE_ANON_KEY"
+    "sb_publishable_4HhTJOl3003RLkW_DQR6-w_Kg01Vh5U"
 
 
 
