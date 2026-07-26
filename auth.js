@@ -1,6 +1,6 @@
 /* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS
+   FINAL AUTH.JS (UPGRADED)
    PART 1/3
 ===================================== */
 
@@ -313,7 +313,7 @@ function switchAuthBox(id){
 
 
 /*
-   LOGIN
+   LOGIN (Upgraded with Supabase)
 */
 
 
@@ -361,17 +361,24 @@ async function loginUser(){
 
 
 
-        /*
-          Supabase login connection
-          will execute here
-        */
+        if(typeof supabaseClient === "undefined"){
+            throw new Error("Supabase client not initialized");
+        }
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if(error) throw error;
 
 
 
         const user={
 
 
-            email:email,
+            email: data.user.email,
+            id: data.user.id,
 
 
             loginTime:
@@ -395,6 +402,8 @@ async function loginUser(){
 
 
 
+        showMessage("Login successful", "success");
+
         openApplication();
 
 
@@ -410,7 +419,7 @@ async function loginUser(){
 
 
         showMessage(
-        "Login failed",
+        error.message || "Login failed",
         "error"
         );
 
@@ -430,7 +439,7 @@ async function loginUser(){
 
 }/* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS
+   FINAL AUTH.JS (UPGRADED)
    PART 2/3
 ===================================== */
 
@@ -439,7 +448,7 @@ async function loginUser(){
 
 
 /*
-   SIGNUP SYSTEM
+   SIGNUP SYSTEM (Upgraded with Supabase)
 */
 
 
@@ -514,10 +523,28 @@ async function signupUser(){
 
 
 
-        /*
-          Supabase signup API
-          will connect here
-        */
+        if(typeof supabaseClient === "undefined"){
+            throw new Error("Supabase client not initialized");
+        }
+
+        const { data, error } = await supabaseClient.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: { full_name: name }
+            }
+        });
+
+        if(error) throw error;
+
+        if(data && data.user){
+            await supabaseClient.from("profiles").insert([{
+                id: data.user.id,
+                name: name,
+                email: email,
+                created_at: new Date().toISOString()
+            }]);
+        }
 
 
 
@@ -562,7 +589,7 @@ async function signupUser(){
 
 
 
-        openApplication();
+        switchAuthBox("login-box");
 
 
 
@@ -579,7 +606,7 @@ async function signupUser(){
 
 
         showMessage(
-        "Signup failed",
+        error.message || "Signup failed",
         "error"
         );
 
@@ -650,10 +677,9 @@ async function resetPassword(){
 
 
 
-        /*
-          Supabase reset password
-          connection will come here
-        */
+        if(typeof supabaseClient !== "undefined"){
+            await supabaseClient.auth.resetPasswordForEmail(email);
+        }
 
 
 
@@ -680,7 +706,7 @@ async function resetPassword(){
 
 
         showMessage(
-        "Reset password failed",
+        error.message || "Reset password failed",
         "error"
         );
 
@@ -846,7 +872,7 @@ function updateUserData(data){
 
 }/* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS
+   FINAL AUTH.JS (UPGRADED)
    PART 3/3
 ===================================== */
 
@@ -864,12 +890,6 @@ async function initializeSupabaseAuth(){
 
 
     try{
-
-
-        /*
-          Real Supabase client
-          will connect from supabase.js
-        */
 
 
 
