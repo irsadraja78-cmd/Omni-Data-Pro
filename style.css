@@ -1,10 +1,6 @@
 /* ===================================
    OmniData Pro - style.css
-   Part 1
 =================================== */
-
-
-/* Reset */
 
 * {
     margin: 0;
@@ -12,1031 +8,310 @@
     box-sizing: border-box;
 }
 
-
-
 body {
-
     font-family: "Segoe UI", Arial, sans-serif;
-
     background: #f4f7fb;
-
     color: #1f2937;
-
     min-height: 100vh;
-
 }
-
-
-
-/* Hidden */
 
 .hidden {
-
     display: none !important;
-
 }
-
-
-
-
-/* Loader */
-
-.loader-screen {
-
-    position: fixed;
-
-    inset: 0;
-
-    background: #ffffff;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    z-index: 9999;
-
-}
-
-
-
-.loader-box {
-
-    text-align: center;
-
-}
-
-
-
-.loader {
-
-    width: 45px;
-
-    height: 45px;
-
-    border: 5px solid #e5e7eb;
-
-    border-top-color: #2563eb;
-
-    border-radius: 50%;
-
-    animation: rotate 1s linear infinite;
-
-    margin: auto;
-
-}
-
-
-
-@keyframes rotate {
-
-    to {
-
-        transform: rotate(360deg);
-
-    }
-
-}
-
-
-
-
-
 
 /* Header */
-
 .main-header {
-
     width: 100%;
-
     background: #111827;
-
     color: white;
-
     padding: 18px 30px;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
 }
-
-
 
 .logo-area h1 {
-
     font-size: 26px;
-
 }
-
-
 
 .logo-area span {
-
     font-size: 13px;
-
     color: #cbd5e1;
-
 }
-
-
-
-
 
 .user-actions {
-
     display: flex;
-
     gap: 12px;
-
 }
-
-
-
-
 
 button {
-
     border: none;
-
     padding: 11px 18px;
-
     border-radius: 8px;
-
     background: #2563eb;
-
     color: white;
-
     cursor: pointer;
-
     font-size: 14px;
-
 }
-
-
 
 button:hover {
-
     opacity: 0.9;
-
 }
-
-
 
 #logout-btn {
-
     background: #dc2626;
-
 }
-
-
-
-
-
 
 /* Navigation */
-
 .main-navigation {
-
     background: white;
-
     padding: 15px;
-
     display: flex;
-
     gap: 10px;
-
     flex-wrap: wrap;
-
     border-bottom: 1px solid #e5e7eb;
-
 }
-
-
 
 .main-navigation button {
-
     background: #f1f5f9;
-
     color: #334155;
-
 }
-
-
 
 .main-navigation button:hover {
-
     background: #2563eb;
-
     color: white;
-
 }
 
-
-
-
-
-
-
-/* Main Container */
-
+/* Main Container & Sections */
 #app-container {
-
     width: 100%;
-
 }
 
-
-
-
-
-.app-section {
-
+/* डिफ़ॉल्ट रूप से सभी सेक्शंस छिपे रहेंगे */
+.app-section, #auth-section {
+    display: none;
     max-width: 1200px;
-
     margin: 25px auto;
-
     padding: 20px;
-
 }
 
-
-
-
-
-
+/* जो सेक्शन एक्टिव होगा, सिर्फ वही दिखेगा */
+.app-section.active, #auth-section.active {
+    display: block;
+}
 
 /* Authentication */
-
 #auth-section {
-
     max-width: 450px;
-
     margin: 50px auto;
-
 }
-
-
 
 .auth-card {
-
     background: white;
-
     padding: 30px;
-
     border-radius: 15px;
-
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-
 }
-
-
 
 .auth-card h2 {
-
     margin-bottom: 20px;
-
 }
-
-
-
 
 input,
 textarea {
-
     width: 100%;
-
     padding: 13px;
-
     margin-bottom: 15px;
-
     border: 1px solid #d1d5db;
-
     border-radius: 8px;
-
     outline: none;
-
 }
-
-
 
 input:focus,
 textarea:focus {
-
     border-color: #2563eb;
-
-}/* ===================================
-   Dashboard Design
-=================================== */
-
-
-.section-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 20px;
-
 }
 
-
+/* Dashboard Design */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
 .section-header h2 {
-
     font-size: 24px;
-
     color: #111827;
-
 }
-
-
 
 .section-header p {
-
     color: #64748b;
-
 }
-
-
-
-
-
-
-/* Dashboard Cards */
-
 
 .dashboard-cards {
-
     display: grid;
-
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(220px, 1fr)
-    );
-
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-
 }
-
-
 
 .dashboard-card {
-
     background: white;
-
     padding: 25px;
-
     border-radius: 15px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,0.08);
-
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
-
-
 
 .dashboard-card h3 {
-
     color: #475569;
-
     margin-bottom: 15px;
-
 }
-
-
 
 .dashboard-card span {
-
     font-size: 32px;
-
     font-weight: bold;
-
     color: #2563eb;
-
 }
-
-
-
-
 
 .dashboard-panel {
-
     background: white;
-
     margin-top: 25px;
-
     padding: 25px;
-
     border-radius: 15px;
-
 }
-
-
-
-
-
-
 
 /* Workspace */
-
-
 #create-project-btn {
-
     background: #16a34a;
-
 }
-
-
 
 #workspace-list {
-
     display: grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-
 }
-
-
 
 .project-card {
-
     background: white;
-
     padding: 20px;
-
     border-radius: 12px;
-
     border: 1px solid #e5e7eb;
-
 }
-
-
-
-
-
-
 
 /* Files */
-
-
 .file-upload-box {
-
     background: white;
-
     padding: 20px;
-
     border-radius: 12px;
-
     margin-bottom: 20px;
-
 }
-
-
 
 #files-list {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 12px;
-
 }
-
-
-
-.file-item {
-
-    background: white;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-}
-
-
-
-
-
-
 
 /* AI Section */
-
-
 #ai-section textarea {
-
     min-height: 150px;
-
     resize: vertical;
-
 }
-
-
 
 #ai-response {
-
     background: white;
-
     padding: 20px;
-
     margin-top: 20px;
-
     border-radius: 12px;
-
     min-height: 100px;
-
 }
 
-
-
-
-
-
-
-/* Profile */
-
-
+/* Profile & Settings */
 .profile-card,
 .security-panel,
 .settings-card {
-
     background: white;
-
     padding: 25px;
-
     border-radius: 15px;
-
 }
-
-
 
 .profile-item {
-
     margin-bottom: 15px;
-
 }
-
-
 
 .profile-item label {
-
     display: block;
-
     margin-bottom: 8px;
-
     font-weight: 600;
-
 }
-
-
-
-
-
-
-
-/* Security */
-
-
-#security-log-list {
-
-    background: #f8fafc;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-}
-
-
-
-
-
-
-
-/* Settings */
-
 
 .setting-row {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding: 15px 0;
-
     border-bottom: 1px solid #e5e7eb;
-
 }
-
-
 
 .setting-row input {
-
     width: auto;
-
 }
 
-
-
-
-
-
-/* Notification Modal */
-
-
+/* Modal & Message Box */
 .modal {
-
     position: fixed;
-
     inset: 0;
-
-    background:
-    rgba(0,0,0,0.5);
-
+    background: rgba(0,0,0,0.5);
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
 }
-
-
 
 .modal-content {
-
     background: white;
-
     padding: 30px;
-
     border-radius: 15px;
-
     width: 90%;
-
     max-width: 400px;
-
 }
-
-
-
-
-
-
-/* Message Box */
-
 
 .message-box {
-
     position: fixed;
-
     bottom: 25px;
-
     right: 25px;
-
     background: #111827;
-
     color: white;
-
     padding: 15px 20px;
-
     border-radius: 10px;
-
-}/* ===================================
-   Responsive Design
-=================================== */
-
-
-@media (max-width: 900px) {
-
-
-    .main-header {
-
-        flex-direction: column;
-
-        gap: 15px;
-
-        text-align: center;
-
-    }
-
-
-
-    .user-actions {
-
-        width: 100%;
-
-        justify-content: center;
-
-    }
-
-
-
-    .main-navigation {
-
-        justify-content: center;
-
-    }
-
-
-
-    .dashboard-cards {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
 }
 
-
-
-
-
-
-
-@media (max-width: 600px) {
-
-
-    .app-section {
-
-        padding: 15px;
-
-        margin: 15px auto;
-
-    }
-
-
-
-    .section-header {
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 15px;
-
-    }
-
-
-
-    .section-header button {
-
-        width: 100%;
-
-    }
-
-
-
-    .logo-area h1 {
-
-        font-size: 22px;
-
-    }
-
-
-
-    .auth-card {
-
-        padding: 20px;
-
-    }
-
-
-
-    button {
-
-        width: 100%;
-
-    }
-
-
-
-    .user-actions {
-
-        flex-direction: column;
-
-    }
-
-
-
-    .main-navigation button {
-
-        width: 100%;
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-/* ===================================
-   Dark Mode
-=================================== */
-
-
+/* Dark Mode */
 body.dark-mode {
-
-
     background: #020617;
-
     color: #e5e7eb;
-
 }
-
-
 
 body.dark-mode .main-header {
-
     background: #020617;
-
 }
-
-
 
 body.dark-mode .main-navigation,
-
 body.dark-mode .auth-card,
-
 body.dark-mode .dashboard-card,
-
 body.dark-mode .dashboard-panel,
-
 body.dark-mode .project-card,
-
 body.dark-mode .file-upload-box,
-
-body.dark-mode .file-item,
-
 body.dark-mode .profile-card,
-
 body.dark-mode .security-panel,
-
 body.dark-mode .settings-card,
-
 body.dark-mode #ai-response {
-
-
     background: #111827;
-
     color: #e5e7eb;
-
 }
-
-
 
 body.dark-mode input,
-
 body.dark-mode textarea {
-
-
     background: #1e293b;
-
     color: white;
-
     border-color: #334155;
-
 }
-
-
-
-
-
-
-
-/* ===================================
-   Animations
-=================================== */
-
-
-.app-section {
-
-
-    animation: fadeIn 0.3s ease-in-out;
-
-
-}
-
-
-
-@keyframes fadeIn {
-
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(10px);
-
-    }
-
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
-}
-
-
-
-
-
-
-
-/* Disabled State */
-
-
-button:disabled {
-
-    opacity: 0.5;
-
-    cursor: not-allowed;
-
-}
-
-
-
-
-
-
-/* Scrollbar */
-
-
-::-webkit-scrollbar {
-
-    width: 8px;
-
-}
-
-
-
-::-webkit-scrollbar-track {
-
-    background: #e5e7eb;
-
-}
-
-
-
-::-webkit-scrollbar-thumb {
-
-    background: #2563eb;
-
-    border-radius: 10px;
-
-}
-
-
-
-
-
-
-/* Final Utility */
-
-
-.text-center {
-
-    text-align: center;
-
-}
-
-
-
-.mt-20 {
-
-    margin-top: 20px;
-
-}
-
-
-
-.mb-20 {
-
-    margin-bottom: 20px
