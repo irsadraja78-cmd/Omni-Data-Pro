@@ -1,273 +1,55 @@
-// ===================================
-// OmniData Pro
-// Profile.js
-// ===================================
+// =====================================
+// OMNI DATA PRO — PROFILE MODULE
+// =====================================
 
+import { supabase } from './supabase.js';
 
-import supabaseClient from "./Supabase.js";
+const profileButton = document.getElementById("save-profile-button");
+const profileNameInput = document.getElementById("profile-name");
+const profileEmailInput = document.getElementById("profile-email");
 
-
-
-
-
-// Get Current User Profile
-
-export async function getProfile(){
-
-
-    const {
-        data:{
-            user
-        },
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-    if(userError){
-
-        throw userError;
-
+// Load user profile data on load
+async function loadProfile() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+            if (profileEmailInput) profileEmailInput.value = user.email || "";
+            if (profileNameInput && user.user_metadata?.full_name) {
+                profileNameInput.value = user.user_metadata.full_name;
+            }
+        }
+    } catch (error) {
+        console.error("Error loading profile:", error);
     }
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("profiles")
-
-    .select("*")
-
-    .eq(
-        "id",
-        user.id
-    )
-
-    .single();
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-    return data;
-
 }
 
+profileButton?.addEventListener("click", async () => {
+    const name = profileNameInput?.value.trim();
 
-
-
-
-
-
-
-
-// Create Profile
-
-export async function createProfile(
-    profileData
-){
-
-
-
-    const {
-
-        data:{
-            user
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
+    if (!name) {
+        alert("Enter profile name");
+        return;
     }
 
+    try {
+        const { error } = await supabase.auth.updateUser({
+            data: { full_name: name }
+        });
 
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("profiles")
-
-    .insert([
-
-        {
-
-            id:user.id,
-
-            ...profileData
-
+        if (error) {
+            alert(error.message);
+            return;
         }
 
-    ])
-
-    .select()
-
-    .single();
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
+        alert("Profile Saved Successfully");
+    } catch (err) {
+        console.error("Profile update error:", err);
+        alert("Failed to save profile");
     }
+});
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadProfile();
+});
 
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-
-// Update Profile
-
-export async function updateProfile(
-    profileData
-){
-
-
-
-    const {
-
-        data:{
-            user
-        },
-
-        error:userError
-
-    } = await supabaseClient.auth.getUser();
-
-
-
-
-
-    if(userError){
-
-        throw userError;
-
-    }
-
-
-
-
-
-    const {
-
-        data,
-
-        error
-
-    } = await supabaseClient
-
-    .from("profiles")
-
-    .update(profileData)
-
-    .eq(
-        "id",
-        user.id
-    )
-
-    .select()
-
-    .single();
-
-
-
-
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-
-
-
-    return data;
-
-}
-
-
-
-
-
-
-
-
-// Check Profile Exists
-
-export async function checkProfile(){
-
-
-    try{
-
-
-        const profile =
-        await getProfile();
-
-
-
-        return !!profile;
-
-
-
-    }catch(error){
-
-
-        return false;
-
-
-    }
-
-}
+console.log("Profile Module Loaded");
