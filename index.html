@@ -17,179 +17,226 @@
 <body>
 
 
-<!-- =========================
-     AUTH AREA
-========================= -->
+<!-- ==========================
+     AUTH SYSTEM
+========================== -->
 
 
 <div id="auth-container">
 
 
-    <!-- LOGIN -->
 
-    <section id="login-section" class="auth-box">
+<!-- LOGIN SCREEN -->
 
+<section id="login-section" class="auth-box">
 
-        <div class="logo">
 
-            Omni Data Pro
+<h1 class="logo">
+Omni Data Pro
+</h1>
 
-        </div>
 
+<h2>
+Login
+</h2>
 
-        <h2>Login</h2>
 
 
-        <input 
-        type="email" 
-        id="login-email"
-        placeholder="Email">
+<input 
+type="email"
+id="login-email"
+placeholder="Enter Email">
 
 
-        <input 
-        type="password"
-        id="login-password"
-        placeholder="Password">
 
+<input
+type="password"
+id="login-password"
+placeholder="Enter Password">
 
-        <button id="login-btn">
 
-            Login
 
-        </button>
+<button id="login-btn">
 
+Login
 
+</button>
 
-        <p>
 
-            <a href="#" id="show-signup">
 
-            Create Account
+<p>
 
-            </a>
+<button 
+type="button"
+id="show-signup">
 
-        </p>
+Create New Account
 
+</button>
 
-        <p>
+</p>
 
-            <a href="#" id="show-forgot">
 
-            Forgot Password?
 
-            </a>
 
-        </p>
+<p>
 
+<button 
+type="button"
+id="show-forgot">
 
-    </section>
+Forgot Password?
 
+</button>
 
+</p>
 
 
 
-    <!-- SIGNUP -->
+</section>
 
 
-    <section id="signup-section" class="auth-box hidden">
 
 
-        <div class="logo">
 
-            Omni Data Pro
 
-        </div>
 
+<!-- SIGNUP SCREEN -->
 
-        <h2>Create Account</h2>
 
+<section 
+id="signup-section"
+class="auth-box hidden">
 
-        <input
-        type="text"
-        id="signup-name"
-        placeholder="Full Name">
 
 
+<h1 class="logo">
+Omni Data Pro
+</h1>
 
-        <input
-        type="email"
-        id="signup-email"
-        placeholder="Email">
 
 
+<h2>
+Create Account
+</h2>
 
-        <input
-        type="password"
-        id="signup-password"
-        placeholder="Password">
 
 
 
-        <button id="signup-btn">
+<input
+type="text"
+id="signup-name"
+placeholder="Full Name">
 
-            Signup
 
-        </button>
 
+<input
+type="email"
+id="signup-email"
+placeholder="Email">
 
-        <p>
 
-            <a href="#" id="show-login">
 
-            Already have account?
+<input
+type="password"
+id="signup-password"
+placeholder="Password">
 
-            </a>
 
-        </p>
 
 
-    </section>
 
+<button id="signup-btn">
 
+Signup
 
+</button>
 
 
-    <!-- FORGOT PASSWORD -->
 
 
-    <section id="forgot-section" class="auth-box hidden">
 
+<p>
 
-        <h2>
+<button
+type="button"
+id="show-login">
 
-            Reset Password
+Already have account? Login
 
-        </h2>
+</button>
 
 
+</p>
 
-        <input
-        type="email"
-        id="forgot-email"
-        placeholder="Email">
 
 
+</section>
 
-        <button id="reset-btn">
 
-            Send Reset Link
 
-        </button>
 
 
 
-        <p>
 
-            <a href="#" id="back-login">
 
-            Back Login
+<!-- FORGOT PASSWORD SCREEN -->
 
-            </a>
 
-        </p>
+<section
+id="forgot-section"
+class="auth-box hidden">
 
 
-    </section>
+
+<h1 class="logo">
+Omni Data Pro
+</h1>
+
+
+
+<h2>
+Reset Password
+</h2>
+
+
+
+<input
+type="email"
+id="forgot-email"
+placeholder="Enter Email">
+
+
+
+
+
+<button id="reset-btn">
+
+Send Reset Link
+
+</button>
+
+
+
+
+
+<p>
+
+<button
+type="button"
+id="back-login">
+
+Back To Login
+
+</button>
+
+
+</p>
+
+
+
+</section>
+
 
 
 
@@ -199,25 +246,40 @@
 
 
 
-<!-- =========================
-     MAIN APPLICATION
-========================= -->
+<!-- ==========================
+     MAIN APP
+========================== -->
 
 
 <div id="app-container" class="hidden">
 
 
 
-<!-- SIDEBAR -->
+<!-- बाकी App Part 2 और Part 3 में आएगा -->
+
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html><!-- ==========================
+     SIDEBAR
+========================== -->
 
 
 <aside id="sidebar">
 
 
 <h2>
-
 Omni Data Pro
-
 </h2>
 
 
@@ -227,100 +289,158 @@ Omni Data Pro
 
 <button data-page="dashboard">
 
-Dashboard
+🏠 Dashboard
 
 </button>
+
 
 
 <button data-page="ai">
 
-AI Chat
+🤖 AI Chat
 
 </button>
+
+
 
 
 <button data-page="files">
 
-Files
+📁 Files
 
 </button>
+
 
 
 
 <button data-page="workspace">
 
-Workspace
+🚀 Workspace
 
 </button>
+
 
 
 
 <button data-page="search">
 
-Search
+🔍 Search
 
 </button>
+
 
 
 
 <button data-page="profile">
 
-Profile
+👤 Profile
 
 </button>
 
 
 
+
 <button data-page="settings">
 
-Settings
+⚙ Settings
 
-</button><!-- =========================
-     DASHBOARD SECTION
-========================= -->
+</button>
 
-<section id="dashboard" class="page-section active">
+
+
+
+<button data-page="security">
+
+🔐 Security
+
+</button>
+
+
+
+<button id="logout-btn">
+
+Logout
+
+</button>
+
+
+
+</nav>
+
+
+</aside>
+
+
+
+
+
+
+
+<!-- ==========================
+     MAIN CONTENT
+========================== -->
+
+
+<main id="main-content">
+
+
+
+
+
+
+
+<!-- DASHBOARD -->
+
+
+<section 
+id="dashboard"
+class="page-section active">
+
 
 
 <div class="top-bar">
 
 
 <h1>
+
 Dashboard
+
 </h1>
+
 
 
 <div class="search-box">
 
-<input 
-type="search"
-placeholder="Search anything...">
+<input
+placeholder="Search...">
 
 
 <button>
+
 🔍
+
 </button>
 
 
 </div>
 
 
+
 <div class="user-area">
 
-<img 
-src=""
-alt="User">
-
-
 <span>
+
 User
+
 </span>
 
+</div>
+
+
 
 </div>
 
 
-</div>
 
 
 
@@ -333,14 +453,17 @@ User
 <div class="card">
 
 <h3>
-Total Projects
+Projects
 </h3>
+
 
 <p id="project-count">
 0
 </p>
 
+
 </div>
+
 
 
 
@@ -351,9 +474,11 @@ Total Projects
 Files
 </h3>
 
+
 <p id="file-count">
 0
 </p>
+
 
 </div>
 
@@ -367,27 +492,16 @@ Files
 AI Chats
 </h3>
 
+
 <p id="chat-count">
 0
 </p>
 
-</div>
-
-
-
-
-
-<div class="card">
-
-<h3>
-Security Status
-</h3>
-
-<p>
-Protected
-</p>
 
 </div>
+
+
+
 
 
 </div>
@@ -401,12 +515,15 @@ Protected
 
 
 
-<!-- =========================
-     AI CHAT SECTION
-========================= -->
 
 
-<section id="ai" class="page-section">
+
+<!-- AI CHAT -->
+
+
+<section
+id="ai"
+class="page-section">
 
 
 <h1>
@@ -418,13 +535,10 @@ AI Assistant
 <div class="chat-container">
 
 
+
 <div 
 id="chat-history"
 class="chat-history">
-
-
-<!-- Messages Here -->
-
 
 </div>
 
@@ -436,8 +550,7 @@ class="chat-history">
 
 <input
 id="ai-message"
-type="text"
-placeholder="Ask AI anything...">
+placeholder="Ask AI...">
 
 
 
@@ -465,12 +578,14 @@ Send
 
 
 
-<!-- =========================
-     FILE MANAGER SECTION
-========================= -->
 
 
-<section id="files" class="page-section">
+<!-- FILE MANAGER -->
+
+
+<section
+id="files"
+class="page-section">
 
 
 <h1>
@@ -483,7 +598,7 @@ File Manager
 <div class="file-upload-box">
 
 
-<input 
+<input
 type="file"
 id="file-input">
 
@@ -496,15 +611,13 @@ Upload
 </button>
 
 
+
 </div>
 
 
 
 
 <div id="file-list">
-
-
-<!-- Files will load here -->
 
 
 </div>
@@ -519,12 +632,14 @@ Upload
 
 
 
-<!-- =========================
-     WORKSPACE SECTION
-========================= -->
 
 
-<section id="workspace" class="page-section">
+<!-- WORKSPACE -->
+
+
+<section
+id="workspace"
+class="page-section">
 
 
 <h1>
@@ -546,8 +661,6 @@ Workspace
 <div id="project-list">
 
 
-<!-- Projects -->
-
 </div>
 
 
@@ -561,12 +674,13 @@ Workspace
 
 
 
-<!-- =========================
-     SEARCH SECTION
-========================= -->
+
+<!-- SEARCH -->
 
 
-<section id="search" class="page-section">
+<section
+id="search"
+class="page-section">
 
 
 <h1>
@@ -575,13 +689,12 @@ Global Search
 
 
 
-
 <div class="search-panel">
 
 
 <input
 id="global-search"
-placeholder="Search data...">
+placeholder="Search data">
 
 
 
@@ -592,76 +705,32 @@ Search
 </button>
 
 
+
 </div>
+
 
 
 
 <div id="search-result">
 
-
 </div>
 
 
 
-</section>
+</section><!-- ==========================
+     PROFILE
+========================== -->
 
 
-
-<button data-page="security">
-
-Security
-
-</button>
-
-
-<button id="logout-btn">
-
-Logout
-
-</button>
-
-
-</nav>
-
-
-</aside>
-
-
-
-
-
-<!-- MAIN CONTENT AREA -->
-
-
-<main id="main-content">
-
-
-<!-- बाकी sections Part 2 में आएंगे -->
-
-
-</main>
-
-
-
-</div>
-
-
-
-<script type="module" src="script.js"></script>
-
-
-</body>
-
-</html><!-- =========================
-     PROFILE SECTION
-========================= -->
-
-<section id="profile" class="page-section">
+<section
+id="profile"
+class="page-section">
 
 
 <h1>
-User Profile
+Profile
 </h1>
+
 
 
 <div class="profile-card">
@@ -669,12 +738,14 @@ User Profile
 
 <div class="avatar">
 
-<img 
+<img
 id="profile-image"
 src=""
 alt="Profile">
 
+
 </div>
+
 
 
 
@@ -682,12 +753,12 @@ alt="Profile">
 
 
 <label>
-Full Name
+Name
 </label>
+
 
 <input
 id="profile-name"
-type="text"
 placeholder="Your Name">
 
 
@@ -696,10 +767,11 @@ placeholder="Your Name">
 Email
 </label>
 
+
 <input
 id="profile-email"
-type="email"
 readonly>
+
 
 
 
@@ -714,7 +786,9 @@ Save Profile
 </div>
 
 
+
 </div>
+
 
 
 </section>
@@ -726,11 +800,15 @@ Save Profile
 
 
 
-<!-- =========================
-     SETTINGS SECTION
-========================= -->
 
-<section id="settings" class="page-section">
+<!-- ==========================
+     SETTINGS
+========================== -->
+
+
+<section
+id="settings"
+class="page-section">
 
 
 <h1>
@@ -747,7 +825,9 @@ Settings
 <div class="setting-item">
 
 <label>
+
 Dark Mode
+
 </label>
 
 
@@ -761,10 +841,13 @@ id="dark-mode">
 
 
 
+
 <div class="setting-item">
 
 <label>
-Email Notifications
+
+Notifications
+
 </label>
 
 
@@ -775,36 +858,6 @@ id="email-notification">
 
 </div>
 
-
-
-
-
-<div class="setting-item">
-
-<label>
-Language
-</label>
-
-
-<select id="language">
-
-<option>
-English
-</option>
-
-<option>
-Hindi
-</option>
-
-<option>
-Urdu
-</option>
-
-
-</select>
-
-
-</div>
 
 
 
@@ -830,12 +883,15 @@ Save Settings
 
 
 
-<!-- =========================
-     SECURITY SECTION
-========================= -->
+
+<!-- ==========================
+     SECURITY
+========================== -->
 
 
-<section id="security" class="page-section">
+<section
+id="security"
+class="page-section">
 
 
 <h1>
@@ -844,11 +900,12 @@ Security Center
 
 
 
-
 <div class="security-card">
 
 
+
 <div>
+
 
 <h3>
 Login Activity
@@ -868,6 +925,7 @@ Login Activity
 
 <div>
 
+
 <h3>
 Security Logs
 </h3>
@@ -879,6 +937,7 @@ Security Logs
 
 
 </div>
+
 
 
 
@@ -895,12 +954,15 @@ Security Logs
 
 
 
-<!-- =========================
-     NOTIFICATION PANEL
-========================= -->
+
+<!-- ==========================
+     NOTIFICATIONS
+========================== -->
 
 
-<section id="notifications" class="page-section">
+<section
+id="notifications"
+class="page-section">
 
 
 <h1>
@@ -924,29 +986,31 @@ Notifications
 
 
 
-<!-- =========================
+
+
+<!-- ==========================
      FOOTER
-========================= -->
+========================== -->
 
 
 <footer class="app-footer">
 
 
 <p>
-
 © 2026 Omni Data Pro
-
 </p>
+
 
 
 <p>
-
-Secure AI Data Management System
-
+AI Data Management Platform
 </p>
 
 
+
 </footer>
+
+
 
 
 
@@ -958,9 +1022,10 @@ Secure AI Data Management System
 
 
 
-<!-- Main JS -->
 
-<script type="module" src="script.js"></script>
+
+
+<script src="script.js"></script>
 
 
 </body>
