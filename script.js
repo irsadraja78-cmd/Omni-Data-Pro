@@ -507,6 +507,22 @@ async function initializeDashboard() {
         console.error("Dashboard init error:", e);
     }
 }
+document.querySelectorAll(".main-navigation button").forEach(button => {
+    button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-section");
+        
+        // सारे सेक्शंस को छिपाएं
+        document.querySelectorAll(".app-section").forEach(sec => {
+            sec.classList.remove("active");
+        });
+        
+        // सिर्फ क्लिक किए गए सेक्शन को दिखाएं
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.add("active");
+        }
+    });
+});
 
 
 });
