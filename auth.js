@@ -1,6 +1,6 @@
 /* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS (UPGRADED)
+   FINAL AUTH.JS (UPGRADED & FIXED)
    PART 1/3
 ===================================== */
 
@@ -439,7 +439,7 @@ async function loginUser(){
 
 }/* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS (UPGRADED)
+   FINAL AUTH.JS (UPGRADED & FIXED)
    PART 2/3
 ===================================== */
 
@@ -538,12 +538,16 @@ async function signupUser(){
         if(error) throw error;
 
         if(data && data.user){
-            await supabaseClient.from("profiles").insert([{
+            const { error: profileError } = await supabaseClient.from("profiles").insert([{
                 id: data.user.id,
                 name: name,
                 email: email,
                 created_at: new Date().toISOString()
             }]);
+            
+            if(profileError) {
+                console.warn("Profile table insert warning:", profileError.message);
+            }
         }
 
 
@@ -678,7 +682,8 @@ async function resetPassword(){
 
 
         if(typeof supabaseClient !== "undefined"){
-            await supabaseClient.auth.resetPasswordForEmail(email);
+            const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+            if(error) throw error;
         }
 
 
@@ -757,8 +762,9 @@ function checkAuthSession(){
 
 
 
-            OmniApp.currentUser =
-            AuthSystem.user;
+            if(typeof OmniApp !== "undefined") {
+                OmniApp.currentUser = AuthSystem.user;
+            }
 
 
 
@@ -872,7 +878,7 @@ function updateUserData(data){
 
 }/* =====================================
    OMNI DATA PRO
-   FINAL AUTH.JS (UPGRADED)
+   FINAL AUTH.JS (UPGRADED & FIXED)
    PART 3/3
 ===================================== */
 
@@ -917,8 +923,9 @@ async function initializeSupabaseAuth(){
 
 
 
-                OmniApp.currentUser =
-                AuthSystem.user;
+                if(typeof OmniApp !== "undefined") {
+                    OmniApp.currentUser = AuthSystem.user;
+                }
 
 
 
@@ -1027,7 +1034,7 @@ function setupAuthListener(){
 
         }
 
-        else{
+else{
 
 
             AuthSystem.user=null;
