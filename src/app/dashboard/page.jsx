@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null);
@@ -23,15 +25,32 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1>Omni Data Pro Dashboard</h1>
+      <Sidebar />
 
-      {user && (
-        <p>
-          Welcome {user.email}
-        </p>
-      )}
+      <main>
+        <Navbar />
 
-      <h2>Freelancer Workspace</h2>
+        <section>
+          <h1>
+            Welcome to Omni Data Pro
+          </h1>
+
+          {user && (
+            <p>
+              Logged in: {user.email}
+            </p>
+          )}
+
+          <div>
+            <h2>Freelancer Workspace</h2>
+
+            <p>
+              Start your work from here.
+            </p>
+          </div>
+        </section>
+
+      </main>
     </div>
   );
 }
