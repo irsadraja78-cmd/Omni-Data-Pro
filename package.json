@@ -1,1 +1,9 @@
+{
+  "name": "omni-data-pro",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.8"
+  }
+}
 
