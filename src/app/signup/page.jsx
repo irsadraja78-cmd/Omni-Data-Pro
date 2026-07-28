@@ -27,6 +27,22 @@ export default function SignupPage() {
       return;
     }
 
+    if (data.user) {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .insert({
+          user_id: data.user.id,
+          full_name: name,
+          role_id: "2d3feb4a-a87e-477e-a8d6-351526dab706",
+          status: "active",
+        });
+
+      if (profileError) {
+        setMessage(profileError.message);
+        return;
+      }
+    }
+
     setMessage("Account created successfully. Please check your email.");
   }
 
